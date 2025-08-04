@@ -1,22 +1,16 @@
+## What is <strong style="color: #daa520;">Deep Learning</strong>?
 
-Deep Learning is:
+<br> 
 
-- an approach to Artifical Intelligence
-- a type of Machine Learning based on artificial neural networks
+. . . 
 
-. . .
+<text style="color: #daa520;">Deep Learning</text> is:
 
-
-Deep Learning achieves great power and flexibility by:
-
-1. Gathering knowledge from experience
-2. Being compositional
-
-
+- an approach to <strong style="color: blue;">Artifical Intelligence</strong>
+- a type of <strong style="color: #32cd32;">Machine Learning</strong> that uses artificial neural networks
 
 ::: {.notes}
 Before we dive into the deep learning, let's start with some key definitions.
-
 
 We are going to go through each of the statements that relate these concepts that
 often go together.
@@ -25,34 +19,43 @@ Deep Learning is an approach to Artificial Intelligence.
 
 Deep Learning is a type of Machine Learning based on artificial neural networks.
 - ML enables computers to improve with experience and data
+:::
 
+## Why is it so popular?
+
+<br> 
+
+. . . 
+
+<text style="color: #daa520;">Deep Learning</text> achieves great power and flexibility by:
+
+- gathering **knowledge from experience**
+- being **compositional**
+
+
+
+::: {.notes}
 Deep Learning achieves great power and flexbility by:
 1. Gathering knowledge from experience --> humans don’t formally specify the required knowledge
 2. Being compositional --> representing the world as a nested hierarchy of concepts [many layers, “Deep”]
+
+We are going to go through each of the statements that relate these concepts that
+often go together.
 :::
 
 ----
 
-Deep Learning is:
+## What is <strong style="color: blue;">Artifical Intelligence</strong>?
 
-:::{.nonincremental}
-- **an approach to Artifical Intelligence**
-- a type of Machine Learning based on artificial neural networks
-:::
-Deep Learning achieves great power and flexibility by:
+<br>
 
-:::{.nonincremental}
-1. Gathering knowledge from experience
-2. Being compositional
-:::
+. . .
 
-## What is AI?
+From [_Wikipedia_](https://en.wikipedia.org/wiki/Artificial_intelligence):
 
-From Wikipedia:
-
-- _Intelligence demonstrated by machines_
+- _Intelligence demonstrated by **machines**_
 - _The study of **intelligent agents**_
-- _AI describes machines that mimic **human cognitive functions**_
+- _Machines that mimic **human cognitive functions**_
 
 ::: {.notes}
 - Intelligence demonstrated by machines, in contrast to the natural
@@ -62,11 +65,36 @@ its chance of successfully achieving its goals
 - human cognitive functions such as such as "learning" and "problem solving".
 :::
 
-## What is AI?
+## What is <strong style="color: blue;">Artifical Intelligence</strong>?
+
+<br>
 
 Tesler's theorem:
 
 > "AI is whatever hasn't been done yet."
+
+. . .
+
+
+::: {.columns .incremental}
+
+::: {.column style="text-align: center; width: 50%; font-size: 0.3em; "}
+![](../img/basics/ocr-example.png){width=50%}
+
+Figure from [stackoverflow.com](https://stackoverflow.com/questions/55864694/ocr-replace-recognized-text-with-its-translation-like-google-translate)
+
+:::
+
+
+::: {.column style="text-align: center; width: 50%; font-size: 0.3em;"}
+::: {.fragment .fade-in}
+![](../img/basics/waymo.jpg){width=100%}
+
+Figure from [Waymo](https://www.waymo.com)
+:::
+:::
+:::
+
 
 ::: {.notes}
 From Wikipedia
@@ -82,31 +110,22 @@ autonomously operating cars, intelligent routing in content delivery networks, a
 
 
 <!-- ------- -->
-## DL as an approach to AI
+## <strong style="color: #daa520;">Deep Learning</strong> as an approach to <strong style="color: blue;">Artifical Intelligence</strong>
 
-- Early AI rapidly tackled and solved problems that were intellectually challenging for humans, but 
-easy for computers.
-- True challenge: tasks that are easy for humans to perform but hard to describe formally
-- Deep learning has proven very powerful in solving these **intuitive problems** within AI.
+<br>
+
+. . .
 
 
-----
+- **Early** <strong style="color: blue;">AI</strong> tackled problems that were intellectually challenging for humans, but easy for computers
+- **True challenge**: tasks that are easy for humans to perform but hard to describe formally
+- <strong style="color: #daa520;">Deep learning</strong> has proven very powerful in solving these **_intuitive problems_** within <strong style="color: blue;">AI</strong>.
 
-Deep Learning is:
 
-::: {.nonincremental}
-- an approach to Artifical Intelligence
-- **a type of Machine Learning** based on artificial neural networks
+::: {.notes}
+
 :::
 
-Deep Learning achieves great power and flexibility by:
-
-::: {.nonincremental}
-1. Gathering knowledge from experience
-2. Being compositional
-::: 
-
-----
 
 ## DL is a type of ML
 
@@ -209,10 +228,19 @@ described by a different layer of the network
 - This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow, I., Bengio, Y., Courville, A., & Bengio, Y. (2016)
 - On the strengths of deep learning: https://youtu.be/RTTQctLuTVk?t=507
 - Early AI: 
-    <!-- - http://www2.psych.utoronto.ca/users/reingold/courses/ai/early.html -->
+    - https://web.archive.org/web/20200814051610/http://www2.psych.utoronto.ca/users/reingold/courses/ai/early.html
     - https://en.wikipedia.org/wiki/Logic_Theorist
 
 - On the challenge of more intuitive tasks: 
     - The Summer Vision Project http://people.csail.mit.edu/brooks/idocs/AIM‐100.pdf
     - Check Dr. Fei‐Fei Li’s lecture on this: https://youtu.be/vT1JzLTH4G4?list=PL3FW7Lu3i5JvHM8ljYj‐zLfQRF3EO8sYv&t=855
+
+- Deep Learning for Computer Vision (University of Michigan)
+    - Winter 2019 https://youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r&si=a74CaQT_KGKz2rbP
+    - Winter 2022 (no public videos) https://web.eecs.umich.edu/~justincj/teaching/eecs498/WI2022/
+
+- CS231n: Convolutional Neural Networks for Visual Recognition (Stanford University)
+    - Winter 2017 https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv
+    - Spring 2025 (no public videos) https://cs231n.stanford.edu/
+
 :::
