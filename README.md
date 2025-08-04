@@ -1,4 +1,4 @@
-# quarto-presentation-template
+# slides-dl-for-cv-primer
 
 ## Prerequisites
 
@@ -6,24 +6,21 @@ You only need to do these once locally.
 * Install [Quarto](https://quarto.org/docs/get-started/)
 * Install the [VS Code Quarto extension](https://quarto.org/docs/get-started/hello/vscode.html)
 
-## Create a new presentation
-
-* Click on "Use this template" -> "Create a new repository"
-* Choose a repository name that starts with `slides-` (this should help us spot quarto presentation repositories at a glance, especially important if they proliferate)
-* Clone the newly created repository and navigate to its root folder
-* Create a conda environment with `conda create -n quarto python=3.11`
-* Activate the environment with `conda activate quarto`
-* `pip install -r requirements.txt`
-* If you have additional requirements for your execution environment (e.g. your Python package) add them to `requirements.txt`
-* Edit the `index.qmd` file to your liking, using the example slides as a guide.
-
 ## Build the presentation locally
 
-You can either:
-* Use the VS Code extension's GUI ("Render" button)
-* Use the command line:
-  * `quarto render index.qmd --to revealjs` for reveal.js slides
-  * `quarto render index.qmd --to html` for a standalone HTML page with embedded resources.
+These slides use include directives to split the content into smaller files.
+
+To render the presentation locally and update any changes live, run the following command from the root folder of the repository:
+
+```sh
+quarto preview --to revealjs
+```
+
+In subsequent runs, remember to remove the generated `_site` folder.
+```
+rm -r _site/ && quarto preview --to revealjs
+```
+
 
 ## Deploy the presentation on GitHub Pages
 For the first deployment:

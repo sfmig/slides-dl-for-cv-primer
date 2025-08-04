@@ -2,3 +2,53 @@ project:
   type: website
 resources:
   - slides/
+
+title: Deep learning for computer vision
+subtitle: A primer for the animal behaviour scientist
+author: Sofía Miñano
+execute: 
+  enabled: true
+format:
+    revealjs:
+        theme: [default, niu-light.scss]
+        logo: img/logo_niu_light.png
+        footer: "animals-in-motion.neuroinformatics.dev | 2025"
+        slide-number: c
+        menu:
+            numbers: true
+        chalkboard: true
+        scrollable: true
+        preview-links: false
+        view-distance: 10
+        mobile-view-distance: 10
+        auto-animate: true
+        auto-play-media: true
+        code-overflow: wrap
+        highlight-style: atom-one
+        mermaid: 
+          theme: neutral
+          fontFamily: arial
+          curve: linear
+        title-slide-attributes: 
+          data-background-color: "#ffffff"
+          data-background-image: "img/background.png" 
+          data-background-size: "cover"
+          data-background-position: "center"
+          data-background-opacity: "0.5"
+        incremental: true
+    html:
+        theme: [default, niu-light.scss]
+        logo: img/logo_niu_light.png
+        date: "2025-08-12"
+        toc: true
+        code-overflow: scroll
+        highlight-style: atom-one
+        mermaid: 
+          theme: neutral
+          fontFamily: arial
+          curve: linear
+          margin-left: 0
+        embed-resources: true
+        page-layout: full
+my-custom-stuff:
+   my-reuseable-variable: "I can use this wherever I want in the markdown, and change it in only once place :)"
