@@ -1,20 +1,60 @@
 ## Overview
 
-<br>
+<!-- <br> -->
 
+
+<!-- ------ -->
 ::: {.columns}
+
 ::: {.column style="text-align: center; width: 50%;"}
 <div style="font-size: 0.6em;">Vanilla neural network</div>
 ![](../img/overview/vanilla-nn.png){width=90%}
+
 :::
 
 ::: {.column style="text-align: center; width: 50%;"}
-<div style="font-size: 0.6em;">Convolutional neural network</div>
-![](../img/overview/cnn-diagram-1.png){width=90%}
+
 :::
 :::
 
+
+<!-- ------- -->
+## Overview
+
 ::: {.columns}
+
+::: {.column style="text-align: center; width: 50%;"}
+<div style="font-size: 0.6em;">Vanilla neural network</div>
+![](../img/overview/vanilla-nn.png){width=90%}
+
+:::
+::: {.column style="text-align: center; width: 50%;"}
+<div style="font-size: 0.6em;">Convolutional neural network</div>
+![](../img/overview/cnn-diagram-1.png){width=90%}
+
+:::
+:::
+
+
+<!-- ------- -->
+## Overview
+
+::: {.columns}
+
+::: {.column style="text-align: center; width: 50%;"}
+<div style="font-size: 0.6em;">Vanilla neural network</div>
+![](../img/overview/vanilla-nn.png){width=90%}
+
+:::
+::: {.column style="text-align: center; width: 50%;"}
+<div style="font-size: 0.6em;">Convolutional neural network</div>
+![](../img/overview/cnn-diagram-1.png){width=90%}
+
+:::
+:::
+
+
+
 ::: {.columns}
 ::: {.column style="text-align: center; width: 30%;"}
 
@@ -30,7 +70,7 @@
 :::
 :::
 
-<div style="position: absolute; bottom: -30px; right: -150px; font-size: 0.3em; color: #666;">Figures from <a href="https://cs231n.github.io/convolutional-networks" target="_blank">cs231n.github.io/convolutional-networks</a> and <a href="https://movement.neuroinformatics.dev" target="_blank">movement.neuroinformatics.dev</a></div>
+<div style="position: absolute; bottom: 0px; right: 0px; font-size: 0.3em; color: #666;">Figures from <a href="https://cs231n.github.io/convolutional-networks" target="_blank">cs231n.github.io/convolutional-networks</a> and <a href="https://movement.neuroinformatics.dev" target="_blank">movement.neuroinformatics.dev</a></div>
 
 ::: {.notes}
 Hi everyone, my name is Sofía Miñano, and I'm an RSE in the Neuroinformatics Unit, developing tools
