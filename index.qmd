@@ -16,7 +16,7 @@
 ---
 
 ::: aside
-This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow, I., Bengio, Y., Courville, A., & Bengio, Y. (2016)
+This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow _et al_. (2016), available for free at [deeplearningbook.org](https://www.deeplearningbook.org/)
 :::
 
 ---
