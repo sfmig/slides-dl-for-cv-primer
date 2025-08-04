@@ -1,6 +1,6 @@
 ---
 title: Deep learning for computer vision
-subtitle: A primer for the animal behaviour scientist!
+subtitle: A primer for the animal behaviour scientist
 author: Sofía Miñano
 execute: 
   enabled: true
@@ -8,7 +8,7 @@ format:
     revealjs:
         theme: [default, niu-light.scss]
         logo: img/logo_niu_light.png
-        footer: "Animals in Motion | 2025-08-12"
+        footer: "animals-in-motion.neuroinformatics.dev | 2025"
         slide-number: c
         menu:
             numbers: true
@@ -25,6 +25,13 @@ format:
           theme: neutral
           fontFamily: arial
           curve: linear
+        title-slide-attributes: 
+          data-background-color: "#ffffff"
+          data-background-image: "img/background.png" 
+          data-background-size: "cover"
+          data-background-position: "center"
+          data-background-opacity: "0.5"
+        incremental: true
     html:
         theme: [default, niu-light.scss]
         logo: img/logo_niu_light.png
@@ -39,30 +46,31 @@ format:
           margin-left: 0
         embed-resources: true
         page-layout: full
-# my-custom-stuff:
-#    my-reuseable-variable: "I can use this wherever I want in the markdown, and change it in only once place :)"
+my-custom-stuff:
+   my-reuseable-variable: "I can use this wherever I want in the markdown, and change it in only once place :)"
 ---
 
-## Slide with speaker notes
 
-Slide content
+<!-- ########################################### -->
+<!-- Overview and goals of the session -->
 
-::: {.notes}
-Speaker notes go here.
-:::
+{{< include slides/00_overview.qmd >}}
 
 
-## Slide Title
+<!-- ########################################### -->
+<!-- Some basic definitions -->
+# Some basics
 
-- Green ^[A footnote]
-- Brown
-- Purple
+<!-- ::: aside
+This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow, I., Bengio, Y., Courville, A., & Bengio, Y. (2016)
+, with some additions from 
+::: -->
+---
 
-::: aside
-Some additional commentary of more peripheral interest.
-:::
+{{< include slides/01_basics.qmd >}}
 
 
+<!-- ########################################### -->
 ## An example image
 
 Include an image:
@@ -82,3 +90,5 @@ Variables defined in the metadata is re-useable anywhere
 
 * {{< meta my-custom-stuff.my-reuseable-variable >}}
 * {{< meta my-custom-stuff.my-reuseable-variable >}}
+
+

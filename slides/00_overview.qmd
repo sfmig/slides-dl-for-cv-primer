@@ -1,0 +1,51 @@
+## Overview
+
+<br>
+
+::: {.columns}
+::: {.column style="text-align: center; width: 50%;"}
+<div style="font-size: 0.6em;">Vanilla neural network</div>
+![](../img/overview/vanilla-nn.png){width=90%}
+:::
+
+::: {.column style="text-align: center; width: 50%;"}
+<div style="font-size: 0.6em;">Convolutional neural network</div>
+![](../img/overview/cnn-diagram-1.png){width=90%}
+:::
+:::
+
+::: {.columns}
+::: {.columns}
+::: {.column style="text-align: center; width: 30%;"}
+
+:::
+::: {.column style="text-align: center; width: 40%;"}
+
+<div style="font-size: 0.6em;">Pose estimation</div>
+![](../img/overview/pose-estimation.png){width=40%}
+
+:::
+::: {.column style="text-align: center; width: 20%;"}
+
+:::
+:::
+
+<div style="position: absolute; bottom: -30px; right: -150px; font-size: 0.3em; color: #666;">Figures from <a href="https://cs231n.github.io/convolutional-networks" target="_blank">cs231n.github.io/convolutional-networks</a> and <a href="https://movement.neuroinformatics.dev" target="_blank">movement.neuroinformatics.dev</a></div>
+
+::: {.notes}
+Hi everyone, my name is Sofía Miñano, and I'm an RSE in the Neuroinformatics Unit, developing tools
+for animal behaviour research.
+
+
+The main objective of this session is to give a general and not-too-hand-wavy intuition of the main 
+concepts behind how neural networks are used in computer vision applications for animal behaviour.
+
+We will start from the basics of neural networks, then expand to convolutional neural networks and 
+finally focus on how these tools are used in animal behaviour research.
+
+The goal is that you understand a bit better what is happening under the hood when you use these tools, to help you use and debug them efficiently.
+
+The content of the slides is based on a few different resources, I will link to them as we go along.
+
+So let's dive in!
+:::
