@@ -36,6 +36,8 @@ format:
           data-background-position: "center"
           data-background-opacity: "0.5"
         incremental: true
+        math:
+          engine: mathjax
     html:
         theme: [default, niu-light.scss]
         logo: img/logo_niu_light.png
