@@ -23,21 +23,17 @@ This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow _et a
 
 
 <!-- ########################################### -->
-## Neural networks
+## A vanilla neural network
 
-- Structure
-  - Single neuron
-  - MLP (layers)
-- Forward pass
-  - transformations across layers (weights and biases)
-  - matrix notation
-- Training and backwards pass
-  - intuition
-  - loss function
-  - gradient descent and backpropagation
+---
 
-<!-- 
-  In machine learning, backpropagation is a gradient computation method commonly used for training a neural network in computing parameter updates. It is an efficient application of the chain rule to neural networks.  -->
+::: aside
+This section is largely based on the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
+:::
+
+
+{{< include slides/02_vanilla_nn.qmd >}}
+
 
 
 

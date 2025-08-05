@@ -1,0 +1,312 @@
+<!-- ## A vanilla neural network
+
+- Structure
+  - Single neuron
+  - MLP (layers)
+- Forward pass
+  - transformations across layers (weights and biases)
+  - matrix notation
+- Training and backwards pass
+  - intuition
+  - loss function
+  - gradient descent and backpropagation -->
+
+<!-- 
+  In machine learning, backpropagation is a gradient computation method commonly used for training a neural network in computing parameter updates. It is an efficient application of the chain rule to neural networks.  -->
+
+## What is a <text style="color:rgb(147, 32, 218);">neural network</text>?
+
+<br>
+
+- <text style="color: #daa520;">Deep learning</text> and <text style="color:rgb(147, 32, 218);">neural networks</text>
+
+- Digit recognition task as an **_intuitive_ problem**
+
+- Multilayer perceptron
+
+
+
+::: {.notes}
+
+We have mentioned that Deep learning is a typeof ML based on artificial neural networks, and we have hinted at deep learning relying on many stacked layers of abstraction. 
+
+We will see in this section that these layers of abstractions and transformations are formalised as NN, which are basically stacks of linear transformations, with nonlinear
+layers in between.
+
+<!-- We will also see how these NNs are trained using a process called backpropagation, which is a method to compute the gradients of the loss function with respect to the parameters of the network. -->
+
+For the sake of clarity we are going to focus on the problem of digit recognition, a 
+classic example for neural network applications
+
+Digit recognition is one of those intuitive tasks that we've talked about (easy to 
+humans, hard to formalise). We'll use this example to introduce the multilayer perceptron, the simplest type of NN.
+
+Note that we focus on the classification task (but NN can also address regression and 
+many other kinds of tasks)
+
+:::
+
+<!-- ------------- -->
+
+## Our task
+
+::: {.center}
+![](../img/vanilla-nn/digit-recognition-task.png){width=65% style="display: block; margin: 0 auto;"}
+
+<div style="position: absolute; bottom: 50px; right: 180px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/aircAruvnKk?si=frXeACs-x0A0JGRl&t=65" target="_blank">
+But what is a neural network? | Deep learning chapter 1</a></div>
+
+:::
+
+
+::: {.notes}
+More specifically, the challenge is to write a program that taxes a grid of 28x28 pixels and outputs a single number between 0 and 9.
+:::
+
+
+
+<!-- ------------- -->
+
+# Structure of a neural network
+
+----
+
+
+<!-- ------------- -->
+
+## A single neuron
+
+::: {.fragment .fade-in}
+Neurons in a network are organised in **layers**
+:::
+
+::: {.fragment .fade-in}
+
+<div style="text-align: center; width: 100%;">
+
+```{dot}
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+
+    node [shape=circle, style=filled, fontname="Arial", fontsize=16, width=.7, height=.7];
+    edge [color=lightblue];
+    
+    x1 [fillcolor=lightblue, fontcolor=black, label="x₁"];
+    x2 [fillcolor=lightblue, fontcolor=black, label="x₂"];
+    x3 [fillcolor=lightblue, fontcolor=black, label="x₃"];
+    f [fillcolor=royalblue, fontcolor=royalblue, label="f"];
+    
+    x1 -> f;
+    x2 -> f;
+    x3 -> f;
+}
+```
+</div>
+
+:::
+
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 350px; right: 50px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
+  Activation function
+  <br>
+  f(x₁, x₂, x₃, ...)
+</div>
+
+:::
+
+::: {.notes}
+Neurons in a neural network are organised in **layers** (remember the hierarchy of concepts characteristic of DL). 
+
+In this simple case we have an initial layer of 3 neurons and a second layer with only one neuron. 
+
+We can visualise each neuron as holding a number. 
+- The initial layer holds the input values. 
+- The neuron in the second layer holds the output of a certain function, that takes as input the output of all the neurons in the previous layer
+- This function is called '**activation function**'. There are different types of activation function and we will go into detail later
+
+<!-- This simple structure is called a ** single-layer perceptron**.
+
+https://en.wikipedia.org/wiki/Multilayer_perceptron:
+MLPs grew out of an effort to improve single-layer perceptrons, which could only be applied to linearly separable data. A perceptron traditionally used a Heaviside step function as its nonlinear activation function. However, the backpropagation algorithm requires that modern MLPs use continuous activation functions such as sigmoid or ReLU.[8]
+
+ -->
+
+:::
+
+## A multi-layer perceptron
+
+- An extension to more neurons and more layers
+- Minimum one layer between the first and the last layer
+
+
+
+::: {.fragment .fade-in}
+![](../img/vanilla-nn/mlp-cs231n-diagrams.png){width=90% fig-align="center"}
+
+<div style="position: absolute; bottom: 120px; right: 80px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://cs231n.github.io/neural-networks-1/" target="_blank">
+CS231n lecture notes: neural networks</a></div>
+
+:::
+
+::: {.fragment .fade-in}
+
+<div style="text-align: center; width: 100%; font-size: 0.8em;">
+Also known as **fully‐connected** or **feed-forward** networks
+</div>
+:::
+
+::: {.notes}
+A multi‐layer perceptron (MLP) is an extension of this to more neurons and more layers
+- MLPs have at least one layer between the first and the last layer, each of which with
+a relatively large number of neurons
+- The number of layers and neurons varies per application and it often based on what has worked well in the past (there are methods for comparing performance across different
+architectures to make choices).
+
+
+Every neuron behaves exactly as we saw in the simple case: 
+- at each layer after the input layer, each neuron receives as input all the neurons in the previous layer, computes a certain function, and outputs a value. 
+- This is carried out at every layer until the output layer. 
+- These networks are also called **fully‐connected**, since all the neurons in one layer are connected to all previous ones
+
+:::
+
+
+## A multi-layer perceptron
+
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 350px; left: 0px; font-size: 24px; text-align: left;">
+  Input
+  <br>
+  -------->
+  <br>
+  e.g. a greyscale image
+</div>
+
+:::
+
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 350px; right: 00px; font-size: 24px; text-align: left;">
+  Output
+  <br>
+  -------->
+  <br>
+  e.g. a class (0-9)
+</div>
+
+:::
+
+::: {.notes}
+In our example case, let's assume we use this MLP to classify handwritten digits.
+
+:::
+
+
+
+## Layers
+
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+
+
+<!-- Input layer -->
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 350px; left: 100px; font-size: 24px; text-align: left; font-weight: bold; color:rgb(174, 9, 9);">
+  Input layer
+</div>
+
+<!-- Rectangle input layer -->
+<div style="width: 50px; height: 595px; background-color: transparent; border: 4px solid rgb(174, 9, 9); position: absolute; top: 85px; left: 275px;">
+</div>
+
+:::
+
+<!-- Output layer -->
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 350px; right: 100px; font-size: 24px; text-align: left; font-weight: bold; color: rgb(103, 152, 205);">
+  Output layer
+</div>
+
+<!-- Rectangle output layer -->
+<div style="width: 50px; height: 330px; background-color: transparent; border: 4px solid rgb(103, 152, 205); position: absolute; top: 220px; right: 275px;">
+</div>
+
+:::
+
+<!-- Hidden layers -->
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 40px; right: 440px; font-size: 24px; text-align: left; font-weight: bold; color: rgb(207, 161, 13);">
+  Hidden layers
+</div>
+
+<!-- Rectangle hidden layers -->
+<div style="width: 200px; height: 550px; background-color: transparent; border: 4px solid rgb(207, 161, 13); position: absolute; top: 110px; right: 420px;">
+</div>
+
+:::
+
+::: {.notes}
+From this description of the workflow we can already see there are three types of 
+layers
+- The Input layer, that hold the input values
+- Some hidden layers, where subsequent transformations occur
+- Output layer, which hold the classification decision
+
+We will address first the input and output layers before going into detail about what’s
+going on in the hidden layers. For now, it’s sufficient to know that these are 
+transformations analogous to the one we’ve seen for a neuron but extended to many
+many neurons.
+:::
+
+
+## Layers: input layer
+
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+
+::: {.notes}
+The input layer simply holds the input values. 
+We have seen that for our problem the input image is a greyscale image of size 28x28. 
+That means that we have an array of numbers organised in 28 rows and 28 columns, 
+each of which with a value between 0 and 1, where 0 is black and 1 is white.
+The first layer in our neural network will hold these values, stretched out in 784 
+different neurons (we reshape the 2D array as a vector)
+
+
+:::
+
+## Layers: output layer
+
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+
+::: {.notes}
+As we mentioned at the output layer we would like to have the classification decision. 
+What digit is represented in the image? 
+- A convenient way to output this decision is to have as many neurons as classes we are considering. 
+- In this case any input image can be 1 in 10 classes, corresponding to the digits from 0 to 9.
+
+Therefore in the output layer, each of the neurons would hold a number that represents how much the model thinks that the input image represents the corresponding class (digits in our case). [In an image classification task, it could be whether or not a cat, dog, car is present in the image]
+
+:::
+
+
+# Forward pass
+
+
+
+
+
+
+
+
+## Additional references
+::: {.nonincremental style="font-size: 0.6em;"}
+- On the single and multi-layer perceptron:
+    - [Deep Learning book](https://www.deeplearningbook.org/) sections 1.2.1 and 6.6
+    - [Brains, Minds and Machines summer school 2017 - Deep learning tutorial](https://youtu.be/RTTQctLuTVk?t=136)
+
+- On the network's architecture
+    - [CS231n - Neural networks](https://cs231n.github.io/neural-networks-1/)
+    - [Deep Learning book](https://www.deeplearningbook.org/contents/mlp.html) chapter 6, especially section 6.4
+:::

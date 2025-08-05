@@ -138,8 +138,8 @@ autonomously operating cars, intelligent routing in content delivery networks, a
 :::
 
 
-::: {.column style="text-align: right; width: 35%; font-size: 0.3em;"}
-![](../img/basics/dl-as-ml-type-part-1.png){width=100% .fragment .fade-in}
+::: {.column .fragment .fade-in style="text-align: right; width: 35%; font-size: 0.3em;"}
+![](../img/basics/dl-as-ml-type-part-1.png){width=100%}
 
 Figure from [Deep Learning book](https://www.deeplearningbook.org/)
 :::
