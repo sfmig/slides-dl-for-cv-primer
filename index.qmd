@@ -4,8 +4,6 @@
 
 # Overview
 
----
-
 {{< include slides/00_overview.qmd >}}
 
 
@@ -19,30 +17,47 @@
 This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow _et al_. (2016), available for free at [deeplearningbook.org](https://www.deeplearningbook.org/)
 :::
 
----
+
 
 {{< include slides/01_basics.qmd >}}
 
 
 <!-- ########################################### -->
-## An example image
+## Neural networks
 
-Include an image:
+- Structure
+  - Single neuron
+  - MLP (layers)
+- Forward pass
+  - transformations across layers (weights and biases)
+  - matrix notation
+- Training and backwards pass
+  - intuition
+  - loss function
+  - gradient descent and backpropagation
 
-![](img/bg_logo_wide.png){width=900 fig-align=center}
+<!-- 
+  In machine learning, backpropagation is a gradient computation method commonly used for training a neural network in computing parameter updates. It is an efficient application of the chain rule to neural networks.  -->
 
 
-## Link and a preview a webpage:
 
+
+<!-- ########################################### -->
+## Animal pose estimation
+
+A note about old-school DL-based CV vs transformer CV models
+
+<!-- link and preview a webpage -->
 ::: {style="text-align: center; margin-top: 1em"}
-[interoperable Python-based tools for computational neuroanatomy](https://brainglobe.info/index.html){preview-link="true" style="text-align: center"}
+[sleap](https://sleap.ai/){preview-link="true" style="text-align: center"}
 :::
 
-## Use a variable several times
+
+<!-- ## Use a variable several times
 
 Variables defined in the metadata is re-useable anywhere
 
 * {{< meta my-custom-stuff.my-reuseable-variable >}}
-* {{< meta my-custom-stuff.my-reuseable-variable >}}
+* {{< meta my-custom-stuff.my-reuseable-variable >}} -->
 
 
