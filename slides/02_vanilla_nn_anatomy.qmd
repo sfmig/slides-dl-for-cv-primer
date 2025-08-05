@@ -67,14 +67,7 @@ More specifically, the challenge is to write a program that taxes a grid of 28x2
 
 <!-- ------------- -->
 
-# Structure of a neural network
-
-----
-
-
-<!-- ------------- -->
-
-## A single neuron
+## A single neuron {#single-neuron-first-slide}
 
 ::: {.fragment .fade-in}
 Neurons in a network are organised in **layers**
@@ -111,7 +104,9 @@ digraph G {
 <div style="position: absolute; top: 350px; right: 50px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
   Activation function
   <br>
-  f(x₁, x₂, x₃, ...)
+  $$
+  f(x_1, x_2, x_3, \ldots)
+  $$
 </div>
 
 :::
@@ -262,41 +257,98 @@ many neurons.
 
 
 ## Layers: input layer
+::: {.columns}
+::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%"}
+![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
+:::
 
-![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+::: {.column style="width: 30%; margin-top: 20%"}
+<div style="text-align: center; margin-left: 0%; ">
+  <span style="font-size: 100px; color: rgb(174, 9, 9);">→</span>
+  <code style="font-size: 20px; margin-left: 7%; color: rgb(174, 9, 9);">np.reshape(28*28, -1)</code>
+</div>
+
+:::
+
+::: {.column style="width: 45%; margin-left: 5%"}
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=100%}
+
+<div style="width: 40px; height: 570px; background-color: transparent; border: 4px solid rgb(174, 9, 9); position: absolute; top: 100px; right: 425px;">
+</div>
+
+:::
+
+:::
+
+
 
 ::: {.notes}
 The input layer simply holds the input values. 
+
 We have seen that for our problem the input image is a greyscale image of size 28x28. 
+
 That means that we have an array of numbers organised in 28 rows and 28 columns, 
 each of which with a value between 0 and 1, where 0 is black and 1 is white.
-The first layer in our neural network will hold these values, stretched out in 784 
-different neurons (we reshape the 2D array as a vector)
 
+The first layer in our neural network will hold these values, stretched out in 784 different neurons (we reshape the 2D array as a vector)
 
 :::
 
 ## Layers: output layer
 
-![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+::: {.columns}
+::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%"}
+![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
+:::
+
+
+
+::: {.column style="width: 45%; margin-left: 5%"}
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=100%}
+
+<!-- Rectangle output layer -->
+<!-- <div style="width: 40px; height: 320px; background-color: transparent; border: 4px solid rgb(103, 152, 205); position: absolute; top: 225px; right: 330px;">
+</div> -->
+
+<div style="width: 40px; height: 320px; background-color: transparent; border: 4px solid rgb(103, 152, 205); position: absolute; top: 225px; right: 330px;">
+  <div style="position: absolute; top: 2.5%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">0</div>
+  <div style="position: absolute; top: 12%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">1</div>
+  <div style="position: absolute; top: 22%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">2</div>
+  <div style="position: absolute; top: 31%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">3</div>
+  <div style="position: absolute; top: 40%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">4</div>
+  <div style="position: absolute; top: 50%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">5</div>
+  <div style="position: absolute; top: 60%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">6</div>
+  <div style="position: absolute; top: 70%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">7</div>
+  <div style="position: absolute; top: 80%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">8</div>
+  <div style="position: absolute; top: 90%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">9</div>
+</div>
+
+
+:::
+
+::: {.column style="width: 30%; margin-top: 20%"}
+<div style="text-align: center; margin-left: 0%; ">
+  <span style="font-size: 100px; color: rgb(103, 152, 205);">
+  → 2</span>
+</div>
+
+:::
+
+:::
+
 
 ::: {.notes}
 As we mentioned at the output layer we would like to have the classification decision. 
+
 What digit is represented in the image? 
 - A convenient way to output this decision is to have as many neurons as classes we are considering. 
 - In this case any input image can be 1 in 10 classes, corresponding to the digits from 0 to 9.
 
 Therefore in the output layer, each of the neurons would hold a number that represents how much the model thinks that the input image represents the corresponding class (digits in our case). [In an image classification task, it could be whether or not a cat, dog, car is present in the image]
 
+
+So now we just need to understand what kind of transformations are happening in the hidden layers.
 :::
-
-
-# Forward pass
-
-
-
-
-
 
 
 

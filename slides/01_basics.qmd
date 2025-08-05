@@ -1,6 +1,5 @@
 <!-- ------------------ -->
-## What is <strong style="color: #daa520;">Deep Learning</strong>? {#what-is-dl-first-slide}
-
+## What is <strong style="color: #daa520;">Deep Learning</strong>? 
 <br> 
 
 . . . 

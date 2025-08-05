@@ -1,0 +1,241 @@
+
+## From layer to layer: one neuron
+
+<div style="text-align: center; width: 100%;">
+
+```{dot}
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+
+    node [shape=circle, style=filled, fontname="Arial", fontsize=16, width=.7, height=.7];
+    edge [color=lightblue];
+    
+    x1 [fillcolor=lightblue, fontcolor=black, label="x₁"];
+    x2 [fillcolor=lightblue, fontcolor=black, label="x₂"];
+    x3 [fillcolor=lightblue, fontcolor=black, label="x₃"];
+    f [fillcolor=royalblue, fontcolor=royalblue, label="f"];
+    
+    x1 -> f;
+    x2 -> f;
+    x3 -> f;
+}
+```
+
+</div>
+
+
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 280px; right: 50px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
+  Activation function
+  <br>
+  $$
+  f(x_1, x_2, x_3, \ldots) = \mathbf{\color{rgb(225, 174, 65)}h}
+  $$
+  
+</div>
+
+:::
+
+
+::: {.notes}
+For the case of a single neuron, we have seen that each neuron holds a number that
+results from taking all the numbers held at the neurons in the previous layer and 
+applying a certain function. 
+
+We consider a neuron at the first hidden layer. We represent its output by h. We are now going to describe that function
+
+:::
+
+<!-- --- -->
+
+## From layer to layer: one neuron
+
+::: {.columns}
+<!-- ::: {.column width="20%" style="margin-left: -15%; margin-top: 5%;"} -->
+::: {.column style="margin-left: -15%; margin-top: 5%;"}
+
+```{dot}
+//| fig-width: 7
+//| fig-height: 3.5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+
+    node [shape=circle, style=filled, fontname="Arial", fontsize=16, width=.7, height=.7];
+    edge [color="#89E141", fontcolor="#89E141", labeldistance=2.0];
+    
+    x1 [fillcolor=lightblue, fontcolor=black, label="x₁"];
+    x2 [fillcolor=lightblue, fontcolor=black, label="x₂"];
+    x3 [fillcolor=lightblue, fontcolor=black, label="x₃"];
+    f [fillcolor=royalblue, fontcolor=royalblue, label="f"];
+    
+    x1 -> f [label="w₁"];
+    x2 -> f [label="w₂"];
+    x3 -> f [label="w₃"];
+}
+```
+
+<div style="position: absolute; top: 280px; left: 370px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
+  $$
+  \mathbf{\color{rgb(225, 174, 65)}h}
+  $$
+  
+</div>
+
+
+:::
+
+::: {.column width="10%"}
+:::
+
+<!-- ::: {.column width="70%" style="text-align: left;"} -->
+::: {.column style="text-align: left;"}
+
+1. Compute weighted sum
+$$
+{\color{rgb(225, 65, 185)}\Sigma} = {\color{rgb(137, 225, 65)}w_1} x_1 + {\color{rgb(137, 225, 65)}w_2} x_2 + {\color{rgb(137, 225, 65)}w_3} x_3
+$$
+
+2. Apply non-linearity
+$$
+\mathbf{\color{rgb(225, 174, 65)}h} = max({\color{rgb(225, 65, 185)}\Sigma}, 0)
+$$
+
+::: {.fragment .fade-in}
+
+![](../img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+
+:::
+
+
+
+:::
+
+:::
+
+::: {.notes}
+The neuron processes the inputs as follows:
+
+First it computes a weighted sum of the inputs. The weights represent the connections between the neurons. The weighted sum can be seen as the neuron attending to different parts of the input.
+
+Then it applies a non-linear function. For example, the rectified linear unit (ReLU) function. This function will output the final output of the neuron
+
+Choosing the ReLU function is not a totally arbitrary choice: the ReLU function is a 
+common choice due to its properties when it comes to optimization via gradient
+descent. However there are other popular options for activation functions
+
+Note as well that, a non linear function is required for the MLP to be a universal 
+function approximator (along with a hidden layer with enough number of units/neurons)
+
+The activation function is loosely based on biological neurons
+- It represents that the artificial neuron will respond to inputs beyond a certain
+threshold. 
+- As it is now, this threshold would be zero: if the weighted sum is positive the
+neuron will output the result of the weighted sum, if it's negative it will output 
+zero. 
+:::
+
+<!-- ------ -->
+
+## From layer to layer: one neuron
+
+::: {.columns }
+::: {.column .nonincremental style="margin-left: -15%; margin-top: 5%;"}
+
+```{dot}
+//| fig-width: 7
+//| fig-height: 3.5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+
+    node [shape=circle, style=filled, fontname="Arial", fontsize=16, width=.7, height=.7];
+    edge [color="#89E141", fontcolor="#89E141", labeldistance=2.0];
+    
+    x1 [fillcolor=lightblue, fontcolor=black, label="x₁"];
+    x2 [fillcolor=lightblue, fontcolor=black, label="x₂"];
+    x3 [fillcolor=lightblue, fontcolor=black, label="x₃"];
+    f [fillcolor=royalblue, fontcolor=royalblue, label="f"];
+
+
+    
+    x1 -> f [label="w₁"];
+    x2 -> f [label="w₂"];
+    x3 -> f [label="w₃"];
+
+    {rank=same; bias; f;}
+    bias [shape=none, label="", width=0, height=0];
+    bias -> f [label="b", color="red", fontcolor="red", style=bold];
+    
+}
+```
+
+<div style="position: absolute; top: 280px; left: 370px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
+  $$
+  \mathbf{\color{rgb(225, 174, 65)}h}
+  $$
+  
+</div>
+
+
+:::
+
+::: {.column width="10%"}
+:::
+
+<!-- ::: {.column width="70%" style="text-align: left;"} -->
+::: {.column .nonincremental style="text-align: left;"}
+
+1. Compute weighted sum
+$$
+{\color{rgb(225, 65, 185)}\Sigma} = {\color{rgb(137, 225, 65)}w_1} x_1 + {\color{rgb(137, 225, 65)}w_2} x_2 + {\color{rgb(137, 225, 65)}w_3} x_3
+$$
+
+2. Apply non-linearity
+$$
+\mathbf{\color{rgb(225, 174, 65)}h} = max({\color{rgb(225, 65, 185)}\Sigma} + {\color{rgb(213, 24, 24)}b}, 0)
+$$
+
+::: {.fragment .fade-in}
+
+![](../img/vanilla-nn/relu-w-bias.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+
+:::
+
+
+
+:::
+
+:::
+
+
+
+::: {.notes}
+What if we want a threshold different from zero? One easy way to “control” this
+threshold with a parameter is to introduce a bias term.
+
+
+With a bias term, the ReLU function will output the result of the weighted sum if
+its value is below b, and zero otherwise.
+
+Intuition: the neuron pays attention to certain inputs more than others, if they are 
+large enough.
+
+
+:::
+
+
+## Additional references
+::: {.nonincremental style="font-size: 0.6em;"}
+- On neural networks being universal function approximators
+  - Deep learning book section 6.4 
+  [http://www.deeplearningbook.org/contents/mlp.html](http://www.deeplearningbook.org/contents/mlp.html)
+  - CS231n notes [https://cs231n.github.io/neural-networks-1/#power](https://cs231n.github.io/neural-networks-1/#power)
+  - Michael Nielsen’s book [http://neuralnetworksanddeeplearning.com/chap4.html](http://neuralnetworksanddeeplearning.com/chap4.html)
+
+
+:::

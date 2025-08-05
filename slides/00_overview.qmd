@@ -48,11 +48,10 @@
 
 ## Overview
 
-- [Preliminary concepts](#what-is-dl-first-slide)
-- Vanilla neural network
-    - Structure
-    - Forward pass
-    - Training and backward pass
+- [Preliminary concepts](#preliminaries)
+- [Anatomy of a neural network](#anatomy-of-a-nn)
+- [Forward pass](#forward-pass)
+- Training and backward pass
 - Generalisation to convolutional neural network
 - Pose estimation in animal behaviour
 

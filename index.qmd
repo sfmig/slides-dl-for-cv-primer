@@ -9,7 +9,8 @@
 
 <!-- ########################################### -->
 <!-- Some basic definitions -->
-# Some preliminaries
+# Some preliminaries{#preliminaries}
+
 
 ---
 
@@ -23,7 +24,7 @@ This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow _et a
 
 
 <!-- ########################################### -->
-## A vanilla neural network
+# Anatomy of a neural network{#anatomy-of-a-nn}
 
 ---
 
@@ -32,7 +33,19 @@ This section is largely based on the [neural networks video series by _3Blue1Bro
 :::
 
 
-{{< include slides/02_vanilla_nn.qmd >}}
+{{< include slides/02_vanilla_nn_anatomy.qmd >}}
+
+<!-- ########################################### -->
+# Forward pass{#forward-pass}
+
+---
+
+::: aside
+This section is largely based on the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
+:::
+
+
+{{< include slides/03_vanilla_nn_forward.qmd >}}
 
 
 
