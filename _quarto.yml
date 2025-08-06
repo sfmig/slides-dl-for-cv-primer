@@ -38,6 +38,33 @@ format:
         incremental: true
         math:
           engine: mathjax
+        include-in-header:
+          text: |
+            <style>
+            .equation-container {
+              position: relative;
+              display: inline-block;
+            }
+            .highlight-box {
+              position: absolute;
+              background-color: rgba(255, 165, 0, 0.3);
+              border: 2px solid orange;
+              border-radius: 5px;
+              pointer-events: none;
+            }
+            .matrix-box {
+              top: 10px;
+              left: 20px;
+              width: 120px;
+              height: 60px;
+            }
+            .vector-box {
+              top: 10px;
+              left: 200px;
+              width: 60px;
+              height: 60px;
+            }
+            </style>
     html:
         theme: [default, niu-light.scss]
         logo: img/logo_niu_light.png

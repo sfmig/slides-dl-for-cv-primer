@@ -100,7 +100,7 @@ digraph G {
 
 :::
 
-::: {.fragment .fade-in}
+<!-- ::: {.fragment .fade-in}
 <div style="position: absolute; top: 350px; right: 50px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
   Activation function
   <br>
@@ -109,7 +109,7 @@ digraph G {
   $$
 </div>
 
-:::
+::: -->
 
 ::: {.notes}
 Neurons in a neural network are organised in **layers** (remember the hierarchy of concepts characteristic of DL). 
@@ -168,7 +168,7 @@ Every neuron behaves exactly as we saw in the simple case:
 :::
 
 
-## A multi-layer perceptron
+## A multi-layer perceptron {data-visibility="hidden"}
 
 ![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
 
@@ -243,6 +243,8 @@ In our example case, let's assume we use this MLP to classify handwritten digits
 :::
 
 ::: {.notes}
+In our example case, let's assume we use this MLP to classify handwritten digits.
+
 From this description of the workflow we can already see there are three types of 
 layers
 - The Input layer, that hold the input values
@@ -265,7 +267,7 @@ many neurons.
 ::: {.column style="width: 30%; margin-top: 20%"}
 <div style="text-align: center; margin-left: 0%; ">
   <span style="font-size: 100px; color: rgb(174, 9, 9);">→</span>
-  <code style="font-size: 20px; margin-left: 7%; color: rgb(174, 9, 9);">np.reshape(28*28, -1)</code>
+  <code style="font-size: 20px; margin-left: 7%; color: rgb(174, 9, 9);">np.reshape(28*28, 1)</code>
 </div>
 
 :::

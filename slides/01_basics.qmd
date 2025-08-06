@@ -48,7 +48,7 @@ often go together.
 
 
 <!-- ------------------ -->
-## What is <strong style="color: blue;">Artificial Intelligence</strong>?
+## What is <strong style="color: blue;">Artificial Intelligence</strong>? {data-visibility="hidden"}
 
 <br>
 
@@ -70,6 +70,8 @@ its chance of successfully achieving its goals
 
 <!-- ------------------ -->
 ## What is <strong style="color: blue;">Artificial Intelligence</strong>?
+
+. . . 
 
 <br>
 
@@ -192,7 +194,7 @@ adapt to new tasks. E.g., autoencoder
 
 
 <!-- ------------------ -->
-## <strong style="color: #daa520;">Deep Learning</strong> is compositional
+## <strong style="color: #daa520;">Deep Learning</strong> is compositional {data-visibility="hidden"}
 
 <br>
 

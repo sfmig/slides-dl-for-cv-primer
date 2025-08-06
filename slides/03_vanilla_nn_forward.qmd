@@ -1,4 +1,22 @@
 
+## From layer to layer
+
+
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+
+
+<!-- Hidden layers -->
+<div style="position: absolute; top: 40px; right: 300px; font-size: 24px; text-align: left; font-weight: bold; color: rgb(207, 161, 13);">
+  Hidden layers
+</div>
+
+<!-- Rectangle hidden layers -->
+<div style="width: 200px; height: 550px; background-color: transparent; border: 4px solid rgb(207, 161, 13); position: absolute; top: 110px; right: 420px;">
+</div>
+
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## From layer to layer: one neuron
 
 <div style="text-align: center; width: 100%;">
@@ -27,8 +45,8 @@ digraph G {
 
 
 ::: {.fragment .fade-in}
-<div style="position: absolute; top: 280px; right: 50px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
-  Activation function
+<div style="position: absolute; top: 260px; right: 50px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
+  <!-- Activation function -->
   <br>
   $$
   f(x_1, x_2, x_3, \ldots) = \mathbf{\color{rgb(225, 174, 65)}h}
@@ -48,7 +66,7 @@ We consider a neuron at the first hidden layer. We represent its output by h. We
 
 :::
 
-<!-- --- -->
+<!-- ------------------------------------------------------------------------ -->
 
 ## From layer to layer: one neuron
 
@@ -91,7 +109,6 @@ digraph G {
 ::: {.column width="10%"}
 :::
 
-<!-- ::: {.column width="70%" style="text-align: left;"} -->
 ::: {.column style="text-align: left;"}
 
 1. Compute weighted sum
@@ -109,7 +126,6 @@ $$
 ![](../img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
 
 :::
-
 
 
 :::
@@ -138,7 +154,7 @@ neuron will output the result of the weighted sum, if it's negative it will outp
 zero. 
 :::
 
-<!-- ------ -->
+<!-- ------------------------------------------------------------------------ -->
 
 ## From layer to layer: one neuron
 
@@ -168,8 +184,8 @@ digraph G {
     x3 -> f [label="w₃"];
 
     {rank=same; bias; f;}
-    bias [shape=none, label="", width=0, height=0];
-    bias -> f [label="b", color="red", fontcolor="red", style=bold];
+    bias [shape=square, label="b", width=0.06, height=0.06, fillcolor="#D51818"];
+    bias -> f [label="+", color="#D51818", fontcolor="#D51818", style=bold];
     
 }
 ```
@@ -187,7 +203,6 @@ digraph G {
 ::: {.column width="10%"}
 :::
 
-<!-- ::: {.column width="70%" style="text-align: left;"} -->
 ::: {.column .nonincremental style="text-align: left;"}
 
 1. Compute weighted sum
@@ -200,7 +215,9 @@ $$
 \mathbf{\color{rgb(225, 174, 65)}h} = max({\color{rgb(225, 65, 185)}\Sigma} + {\color{rgb(213, 24, 24)}b}, 0)
 $$
 
-::: {.fragment .fade-in}
+::: {.r-stack}
+![](../img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+
 
 ![](../img/vanilla-nn/relu-w-bias.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
 
@@ -227,6 +244,447 @@ large enough.
 
 
 :::
+
+<!-- ------------------------------------------------------------------------ -->
+
+## From layer to layer: many neurons
+
+::: {.columns}
+::: {.column}
+
+In a network:
+
+- each <em style="color:rgb(137, 225, 65);">connection</em> is associated with a <strong style="color:rgb(137, 225, 65);">weight</strong>
+- each <em style="color:rgb(213, 24, 24);">neuron</em> is associated with a <strong style="color:rgb(213, 24, 24);">bias</strong>
+
+:::
+
+::: {.column}
+![](../img/vanilla-nn/network-3b1b.png){width=80% style="margin-left: 20%;"}
+
+<div style="position: absolute; bottom: 50px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/aircAruvnKk?si=PAb025jmbPGYt7hi&t=757" target="_blank">
+But what is a neural network? | Deep learning chapter 1</a></div>
+
+:::
+
+:::
+
+
+::: {.notes}
+:::
+
+
+<!-- ------------------------------------------------------------------------ -->
+
+## From layer to layer: many neurons {data-visibility="hidden"}
+
+::: {.columns}
+::: {.column}
+
+In our example MLP:
+<div style="font-size: 0.7em;">
+- 784 neurons in the input layer
+- 16 neurons in the first hidden layer
+- 16 neurons in the second hidden layer
+- 10 neurons in the output layer
+</div>
+
+::: {.fragment .fade-in}
+$\approx$ 13000 weights and biases
+
+:::
+
+
+:::
+
+::: {.column}
+![](../img/vanilla-nn/network-3b1b.png){width=80% style="margin-left: 20%;"}
+
+<div style="position: absolute; bottom: 50px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/aircAruvnKk?si=PAb025jmbPGYt7hi&t=757" target="_blank">
+But what is a neural network? | Deep learning chapter 1</a></div>
+
+:::
+
+
+:::
+
+
+::: {.notes}
+If we extend what we've seen for one neuron to all of the neurons in our sample
+network, we get over 13000 parameters!
+And this is just a small network.... 
+
+Can we write the transformations we've seen for one neuron for all the network, 
+in a more compact form?
+
+We'll make use of matrix notation for that. If you have some knowledge of linear 
+algebra that's excellent, if not it's just enough if you remember there is a compact 
+way of writing these equations
+:::
+
+<!-- ------------------------------------------------------------------------ -->
+
+
+## From layer to layer: many neurons
+
+
+::: {.columns}
+::: {.column style="margin-left: -15%;margin-top: 5%;"}
+
+
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="0"}
+```{dot}
+//| fig-width: 2
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", fontcolor="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor=lightblue];
+    
+      h1 [label="h₀⁰"];
+      h2 [label="h₁⁰"];
+      h3 [label="h₂⁰"];
+      h4 [label="h₃⁰"]; 
+      h5 [label="..."];
+      h6 [label="hₙ⁰"];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5; h6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1_prime [label="h₀¹"];
+      h2_prime [label="h₁¹"];
+      h3_prime [label="h₂¹"];
+      h4_prime [label="..."];
+      h5_prime [label="hₖ¹"];
+
+      // Invisible edges to force vertical ordering
+      // bias -> h1_prime [style=invis];
+      h1_prime -> h2_prime [style=invis];
+      h2_prime -> h3_prime [style=invis];
+      h3_prime -> h4_prime [style=invis];
+      h4_prime -> h5_prime [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1_prime; h2_prime; h3_prime; h4_prime; h5_prime;}
+    }
+
+
+    h1 -> h1_prime;
+    h1 -> h2_prime;
+    h1 -> h3_prime;
+    h1 -> h4_prime;
+    h1 -> h5_prime;
+
+    h2 -> h1_prime;
+    h2 -> h2_prime;
+    h2 -> h3_prime;
+    h2 -> h4_prime;
+    h2 -> h5_prime;
+
+    h3 -> h1_prime;
+    h3 -> h2_prime;
+    h3 -> h3_prime;
+    h3 -> h4_prime;
+    h3 -> h5_prime;
+
+    h4 -> h1_prime;
+    h4 -> h2_prime;
+    h4 -> h3_prime;
+    h4 -> h4_prime;
+    h4 -> h5_prime;
+
+    h5 -> h1_prime;
+    h5 -> h2_prime;
+    h5 -> h3_prime;
+    h5 -> h4_prime;
+    h5 -> h5_prime;
+
+    h6 -> h1_prime;
+    h6 -> h2_prime;
+    h6 -> h3_prime;
+    h6 -> h4_prime;
+    h6 -> h5_prime;
+
+    
+}
+```
+:::
+
+::: {.fragment .fade-in data-fragment-index="1"}
+```{dot}
+//| fig-width: 2
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", fontcolor="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor=lightblue];
+    
+      h1 [label="h₀⁰"];
+      h2 [label="h₁⁰"];
+      h3 [label="h₂⁰"];
+      h4 [label="h₃⁰"]; 
+      h5 [label="..."];
+      h6 [label="hₙ⁰"];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5; h6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1_prime [label="h₀¹"];
+      h2_prime [label="h₁¹"];
+      h3_prime [label="h₂¹"];
+      h4_prime [label="..."];
+      h5_prime [label="hₖ¹"];
+
+      // Invisible edges to force vertical ordering
+      // bias -> h1_prime [style=invis];
+      h1_prime -> h2_prime [style=invis];
+      h2_prime -> h3_prime [style=invis];
+      h3_prime -> h4_prime [style=invis];
+      h4_prime -> h5_prime [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1_prime; h2_prime; h3_prime; h4_prime; h5_prime;}
+    }
+
+    subgraph layer_bias {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=square, label="b₀¹", width=0.06, height=0.06, fillcolor="#D51818"];
+      {rank=same; h1_prime; bias;}
+    }
+
+
+    h1 -> h1_prime [color="#89E141", penwidth=2.0];
+    h1 -> h2_prime;
+    h1 -> h3_prime;
+    h1 -> h4_prime;
+    h1 -> h5_prime;
+
+    h2 -> h1_prime [color="#89E141", penwidth=2.0];
+    h2 -> h2_prime;
+    h2 -> h3_prime;
+    h2 -> h4_prime;
+    h2 -> h5_prime;
+
+    h3 -> h1_prime [color="#89E141", penwidth=2.0];
+    h3 -> h2_prime;
+    h3 -> h3_prime;
+    h3 -> h4_prime;
+    h3 -> h5_prime;
+
+    h4 -> h1_prime [color="#89E141", penwidth=2.0];
+    h4 -> h2_prime;
+    h4 -> h3_prime;
+    h4 -> h4_prime;
+    h4 -> h5_prime;
+
+    h5 -> h1_prime [color="#89E141", penwidth=2.0];
+    h5 -> h2_prime;
+    h5 -> h3_prime;
+    h5 -> h4_prime;
+    h5 -> h5_prime;
+
+    h6 -> h1_prime [color="#89E141", penwidth=2.0];
+    h6 -> h2_prime;
+    h6 -> h3_prime;
+    h6 -> h4_prime;
+    h6 -> h5_prime;
+
+    bias -> h1_prime [color="#D51818", penwidth=2.0, style="dashed", arrowhead="none"];
+    
+}
+```
+:::
+:::
+
+:::
+
+
+
+::: {.column style="margin-left: -10%;"}
+
+::: {.fragment .fade-in data-fragment-index="1"}
+$$
+\small 
+\qquad \color{rgb(123, 164, 240)}{h_0^1} = ReLU(\sum_{i=0}^{n} \color{rgb(137, 225, 65)}{w_i^{0,1}} \color{rgb(173, 216, 230)}{h_i^0}  + \color{rgb(213, 24, 24)}{b_0^1})
+$$
+:::
+
+
+::: {.r-stack}
+::: {.fragment .fade-in}
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+
+:::
+
+::: {.fragment .fade-in}
+<div class="equation-container">
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+
+<div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 30px; left: 110px; width: 275px; height: 60px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid rgba(173, 216, 230, 0.3) ; top: 40px; left: 610px; width: 75px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid rgba(213, 24, 24, 0.3); top: 40px; left: 500px; width: 71px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(123, 164, 240, 0.3); border: 2px solid  rgba(123, 164, 240, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
+</div>
+
+:::
+
+:::
+
+:::
+
+:::
+
+
+
+::: {.notes}
+We can use matrix multiplication to extend that expression to all the neurons in 
+layer 1.
+
+If you remember matrix multiplication from linear algebra.... you'll see that
+the computation of the first neuron in layer 1 is equivalent to the one above (we multiply
+the first row and the first column to obtain the element at the first row and first
+column, etc.)
+
+We now have a **weight matrix**, that collects all the weights representing the
+connections between all the neurons in layer 0 and all the neurons in layer 1. The first
+row in the weight matrix has the weights required to compute the output of the first
+neuron in layer 1, the second row those required to compute neuron 2, and so on
+until the k-th row to compute the k-th neuron. 
+
+The vector that multiplies with this matrix collects the neurons in the previous layer. 
+To the result of this multiplication we add the bias term of each neuron in layer 1 and 
+then feed the result to a ReLU function to obtain the final number held by the neurons in layer 1
+
+:::
+
+
+## Matrix notation
+
+Bias trick
+
+![](../img/vanilla-nn/temp-2.png){width=100%}
+
+
+::: {.notes}
+Often the bias vector is included in the weight matrix
+as an additional column for further compactness. 
+
+But note that if we adequately respect the dimensions and add a 1 as a last row in 
+the vector of neurons in the previous layer, both expressions are equivalent
+
+:::
+
+
+## Matrix notation
+
+![](../img/vanilla-nn/temp-3.png){width=100%}
+
+::: {.notes}
+Just remember that there is a compact way that is often preferred to express the
+transition from one layer to the next. And that often making use of this bias trick
+the bias is omitted, but it's implicitly considered within the weight matrix as we've
+seen.
+
+Expressing the transformations as vectorised operations is very convenient for
+computing efficiency (we have specialised hardware that performs this operations
+very fast)
+
+:::
+
+
+## Matrix notation
+
+For a two layer network
+
+![](../img/vanilla-nn/temp-4.png){width=100%}
+
+::: {.notes}
+We will do this for as many layers we have in the network. This will result in a nested
+function. For example for a two layer network it would be something like in the slide. 
+
+Two things to note here:
+- first, when counting the number of layers in the neural network, we usually omit
+the input layer since it does not have tunable weights
+- Second, Note that usually the non linear function is not applied at the last output 
+layer (also called readout layer because it's where we read the predictions for the
+classes). 
+
+:::
+
+
+## From layer to layer: forward pass
+
+
+::: {.notes}
+Ok so we've now seen how we go from a certain input (in our case a greyscale image
+with a digit), across all layers applying the corresponding transformations, until the
+output layer, where we will obtain 'scores' representing how much the model thinks
+the input represents each class. This whole process is usually called forward pass, 
+since the information flows from input to output
+
+
+:::
+
+
+## From layer to layer: forward pass
+
+![](../img/vanilla-nn/temp-5.png){width=100%}
+
+
+
+::: {.notes}
+We've also seen that each layer has a collection of weights and biases that along with
+the activation function, define the transformation taking place across that layer. The
+weights and biases of all the layers constitute the network parameters, and they
+determine what the network "does". 
+
+With an ideal set of parameters, we would feed a certain image, for example one
+representing a 3, and the transformations across the layers should end up in the class
+"3" having the highest score in the output layer.
+
+How do we choose these parameters? We would like to obtain the weights and 
+biases that perform best in the task of recognising digits. 
+
+We can formulate this as an optimisation problem: we want to obtain the weights
+and biases that minimise the error when recognising digits.
+
+This is what we basically do when we train the network, which is the next part of the
+session.
+
+::: 
+
 
 
 ## Additional references
