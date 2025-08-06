@@ -563,6 +563,7 @@ $$
 :::
 
 ::: {.fragment .fade-in data-fragment-index="4"}
+::: {.fragment .fade-out data-fragment-index="5"}
 <div class="equation-container">
 $$
 \scriptstyle 
@@ -575,6 +576,15 @@ $$
 </div>
 
 :::
+:::
+
+::: {.fragment .fade-in data-fragment-index="5"}
+
+$$
+ReLU(\color{rgb(137, 225, 65)}{\mathbf{W}'} \color{rgb(173, 216, 230)}{h^{0^{\prime}}} ) = \color{rgb(0, 0, 255)}{h^1}
+$$
+
+:::
 
 
 :::
@@ -582,7 +592,6 @@ $$
 :::
 
 :::
-
 
 
 ::: {.notes}
@@ -610,15 +619,6 @@ as an additional column for further compactness.
 But note that if we adequately respect the dimensions and add a 1 as a last row in 
 the vector of neurons in the previous layer, both expressions are equivalent
 
-:::
-
-
-
-## Matrix notation
-
-![](../img/vanilla-nn/temp-3.png){width=100%}
-
-::: {.notes}
 Just remember that there is a compact way that is often preferred to express the
 transition from one layer to the next. And that often making use of this bias trick
 the bias is omitted, but it's implicitly considered within the weight matrix as we've
@@ -631,11 +631,179 @@ very fast)
 :::
 
 
-## Matrix notation
+<!-- ---------------------------- -->
 
-For a two layer network
+## A two layer network
 
-![](../img/vanilla-nn/temp-4.png){width=100%}
+::: {.columns}
+::: {.column style="margin-left: -5%;margin-top: 5%;"}
+```{dot}
+//| fig-width: 5
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor="#5C90E0"];
+
+      x1 [label="x₀"];
+      x2 [label="x₁"];
+      x3 [label="x₂"];
+      x4 [label="x₃"]; 
+      x5 [label="..."];
+      x6 [label="xₙ"];
+
+      // Invisible edges to force vertical ordering
+      x1 -> x2 [style=invis];
+      x2 -> x3 [style=invis];
+      x3 -> x4 [style=invis];
+      x4 -> x5 [style=invis];
+      x5 -> x6 [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; x1; x2; x3; x4; x5; x6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#CCFFCC"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1 [label="h₀"];
+      h2 [label="h₁"];
+      h3 [label="h₂"];
+      h4 [label="..."];
+      h5 [label="hₖ"];
+
+      // Invisible edges to force vertical ordering
+      h1 -> h2 [style=invis];
+      h2 -> h3 [style=invis];
+      h3 -> h4 [style=invis];
+      h4 -> h5 [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5;}
+    }
+
+    subgraph layer_2 {
+      node [fillcolor="#FFF8C7"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      y1 [label="y₀"];
+      y2 [label="y₁"];
+      y3 [label="..."];
+      y4 [label="yₘ"];
+
+      // Invisible edges to force vertical ordering
+      y1 -> y2 [style=invis];
+      y2 -> y3 [style=invis];
+      y3 -> y4 [style=invis];
+
+      {rank=same; y1; y2; y3; y4;}
+    }
+
+    // Layer labels (positioned below each layer)
+    input_label [shape=none, label="Input Layer", fontsize=14, fontcolor=black];
+    hidden_label [shape=none, label="Hidden Layer", fontsize=14, fontcolor=black];
+    output_label [shape=none, label="Output Layer", fontsize=14, fontcolor=black];
+
+    x6 -> input_label [style=invis];
+    h5 -> hidden_label [style=invis];
+    y4 -> output_label [style=invis];
+
+    // Position labels below their respective layers
+    {rank=same; input_label; x1; x2; x3; x4; x5; x6;}
+    {rank=same; hidden_label; h1; h2; h3; h4; h5;}
+    {rank=same; output_label; y1; y2; y3; y4;}
+
+    // edges between input and hidden layer
+    x1 -> h1 [color="#A7DBFF"];
+    x1 -> h2 [color="#A7DBFF"];
+    x1 -> h3 [color="#A7DBFF"];
+    x1 -> h4 [color="#A7DBFF"];
+    x1 -> h5 [color="#A7DBFF"];
+
+    x2 -> h1 [color="#A7DBFF"];
+    x2 -> h2 [color="#A7DBFF"];
+    x2 -> h3 [color="#A7DBFF"];
+    x2 -> h4 [color="#A7DBFF"];
+    x2 -> h5 [color="#A7DBFF"];
+
+    x3 -> h1 [color="#A7DBFF"];
+    x3 -> h2 [color="#A7DBFF"];
+    x3 -> h3 [color="#A7DBFF"];
+    x3 -> h4 [color="#A7DBFF"];
+    x3 -> h5 [color="#A7DBFF"];
+
+    x4 -> h1 [color="#A7DBFF"];
+    x4 -> h2 [color="#A7DBFF"];
+    x4 -> h3 [color="#A7DBFF"];
+    x4 -> h4 [color="#A7DBFF"];
+    x4 -> h5 [color="#A7DBFF"];
+
+    x5 -> h1 [color="#A7DBFF"];
+    x5 -> h2 [color="#A7DBFF"];
+    x5 -> h3 [color="#A7DBFF"];
+    x5 -> h4 [color="#A7DBFF"];
+    x5 -> h5 [color="#A7DBFF"];
+
+    x6 -> h1 [color="#A7DBFF"];
+    x6 -> h2 [color="#A7DBFF"];
+    x6 -> h3 [color="#A7DBFF"];
+    x6 -> h4 [color="#A7DBFF"];
+    x6 -> h5 [color="#A7DBFF"];
+
+    // edges between hidden and output layer
+    h1 -> y1 [color="#B8E6B8"];
+    h1 -> y2 [color="#B8E6B8"];
+    h1 -> y3 [color="#B8E6B8"];
+    h1 -> y4 [color="#B8E6B8"];
+
+    h2 -> y1 [color="#B8E6B8"];
+    h2 -> y2 [color="#B8E6B8"];
+    h2 -> y3 [color="#B8E6B8"];
+    h2 -> y4 [color="#B8E6B8"];
+
+    h3 -> y1 [color="#B8E6B8"];
+    h3 -> y2 [color="#B8E6B8"];
+    h3 -> y3 [color="#B8E6B8"];
+    h3 -> y4 [color="#B8E6B8"];
+
+    h4 -> y1 [color="#B8E6B8"];
+    h4 -> y2 [color="#B8E6B8"];
+    h4 -> y3 [color="#B8E6B8"];
+    h4 -> y4 [color="#B8E6B8"];
+
+    h5 -> y1 [color="#B8E6B8"];
+    h5 -> y2 [color="#B8E6B8"];
+    h5 -> y3 [color="#B8E6B8"];
+    h5 -> y4 [color="#B8E6B8"];
+
+
+}
+```
+:::
+
+::: {.column}
+
+<br>
+<br>
+
+::: {.fragment .fade-in}
+$$
+\color{rgb(255, 176, 0)}{y} = \color{rgb(143, 204, 143)}{W_1} \color{rgb(92, 144, 224)}{ReLU({W_0}x)}
+$$
+
+:::
+
+:::
+
+:::
 
 ::: {.notes}
 We will do this for as many layers we have in the network. This will result in a nested
@@ -651,7 +819,87 @@ classes).
 :::
 
 
-## From layer to layer: forward pass
+## Forward pass
+
+<!-- ![](../img/vanilla-nn/temp-6.png){width=100%} -->
+
+
+::: {.columns}
+
+<!-- ::: {.fragment .fade-in} -->
+::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%"}
+::: {.fragment .fade-in data-fragment-index="1"}
+![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
+:::
+:::
+
+::: {.column style="width: 20%; margin-top: 20%"}
+::: {.fragment .fade-in data-fragment-index="1"}
+<div style="text-align: left; ">
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → </span>
+</div>
+
+:::
+:::
+
+::: {.column style="width: 45%; text-align: centre; margin-left: -7%; margin-top: 5%"}
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
+
+
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="2"}
+::: {.fragment .fade-out data-fragment-index="4"}
+<div style="text-align: left; margin-left: -30%; margin-top: -30%">
+$$
+\scriptstyle
+ReLU(W h^n) = h^{n+1}
+$$
+</div>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="4"}
+<div style="text-align: left; margin-left: -30%; margin-top: -30%">
+$$
+\scriptstyle
+ReLU(\color{rgb(255,0,0)}{W} h^n) = h^{n+1}
+$$
+</div>
+
+:::
+:::
+
+:::
+
+
+::: {.column style="width: 30%; margin-top: 20%; margin-left: -20%"}
+::: {.fragment .fade-in data-fragment-index="3"}
+<div style="text-align: right; margin-left: -10%; ">
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → 2</span>
+</div>
+
+:::
+
+
+::: {.fragment .fade-in data-fragment-index="5"}
+<div style="text-align: left; margin-left: 40%; margin-top: 30%">
+  <span style="font-size: 40px; color: rgb(255, 0, 0);">
+  How to choose them?
+  </span>
+</div>
+
+:::
+
+
+:::
+
+:::
+
+
+
 
 
 ::: {.notes}
@@ -662,16 +910,6 @@ the input represents each class. This whole process is usually called forward pa
 since the information flows from input to output
 
 
-:::
-
-
-## From layer to layer: forward pass
-
-![](../img/vanilla-nn/temp-5.png){width=100%}
-
-
-
-::: {.notes}
 We've also seen that each layer has a collection of weights and biases that along with
 the activation function, define the transformation taking place across that layer. The
 weights and biases of all the layers constitute the network parameters, and they
@@ -690,7 +928,9 @@ and biases that minimise the error when recognising digits.
 This is what we basically do when we train the network, which is the next part of the
 session.
 
-::: 
+:::
+
+
 
 
 
