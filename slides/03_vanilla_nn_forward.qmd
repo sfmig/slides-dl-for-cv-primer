@@ -531,34 +531,51 @@ digraph G {
 ::: {.fragment .fade-in data-fragment-index="1"}
 $$
 \small 
-\qquad \color{rgb(123, 164, 240)}{h_0^1} = ReLU(\sum_{i=0}^{n} \color{rgb(137, 225, 65)}{w_i^{0,1}} \color{rgb(173, 216, 230)}{h_i^0}  + \color{rgb(213, 24, 24)}{b_0^1})
+\qquad \color{rgb(0, 0, 255)}{h_0^1} = ReLU(\sum_{i=0}^{n} \color{rgb(137, 225, 65)}{w_i^{0,1}} \color{rgb(173, 216, 230)}{h_i^0}  + \color{rgb(213, 24, 24)}{b_0^1})
 $$
 :::
 
 
 ::: {.r-stack}
-::: {.fragment .fade-in}
+::: {.fragment .fade-in data-fragment-index="2"}
+::: {.fragment .fade-out data-fragment-index="3"}
 $$
 \scriptstyle 
 ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
 $$
-
+:::
 :::
 
-::: {.fragment .fade-in}
+::: {.fragment .fade-in data-fragment-index="3"}
+::: {.fragment .fade-out data-fragment-index="4"}
 <div class="equation-container">
 $$
 \scriptstyle 
 ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
 $$
-
 <div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 30px; left: 110px; width: 275px; height: 60px;"></div>
-<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid rgba(173, 216, 230, 0.3) ; top: 40px; left: 610px; width: 75px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid  rgba(173, 216, 230, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
 <div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid rgba(213, 24, 24, 0.3); top: 40px; left: 500px; width: 71px; height: 45px;"></div>
-<div class="highlight-box" style="background-color: rgba(123, 164, 240, 0.3); border: 2px solid  rgba(123, 164, 240, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 40px; left: 610px; width: 75px; height: 45px;"></div>
 </div>
 
 :::
+:::
+
+::: {.fragment .fade-in data-fragment-index="4"}
+<div class="equation-container">
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} & b_0^1 \\ \vdots & \ddots & \vdots & \vdots \\ w_{k,0} & \cdots & w_{k,n} & b_k^1 \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \\ 1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+<div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 55px; left: 110px; width: 275px; height: 60px;"></div>
+<div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid  rgba(213, 24, 24, 0.3); top: 55px; left: 415px; width: 65px; height: 180px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid rgba(173, 216, 230, 0.3); top: 40px; left: 490px; width: 71px; height: 220px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 55px; left: 600px; width: 75px; height: 180px;"></div>
+</div>
+
+:::
+
 
 :::
 
@@ -587,17 +604,6 @@ The vector that multiplies with this matrix collects the neurons in the previous
 To the result of this multiplication we add the bias term of each neuron in layer 1 and 
 then feed the result to a ReLU function to obtain the final number held by the neurons in layer 1
 
-:::
-
-
-## Matrix notation
-
-Bias trick
-
-![](../img/vanilla-nn/temp-2.png){width=100%}
-
-
-::: {.notes}
 Often the bias vector is included in the weight matrix
 as an additional column for further compactness. 
 
@@ -605,6 +611,7 @@ But note that if we adequately respect the dimensions and add a 1 as a last row 
 the vector of neurons in the previous layer, both expressions are equivalent
 
 :::
+
 
 
 ## Matrix notation
