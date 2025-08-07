@@ -277,8 +277,8 @@ described by a different layer of the network
 
 . . .
 
-::: {.columns}
-::: {.column style="width: 55%"}
+::: {.columns .nonincremental}
+::: {.column .nonincremental style="width: 55%"}
 <text style="color: #daa520;">Deep Learning</text> is: 
 
 - an approach to <text style="color: blue;">AI</text>
@@ -292,11 +292,10 @@ described by a different layer of the network
 
 :::
 
-::: {.column style="width: 5%"}
-
+::: {.column .nonincremental style="width: 5%"}
 :::
 
-::: {.column style="width: 40%; font-size: 0.3em; text-align: center;"}
+::: {.column .nonincremental style="width: 40%; font-size: 0.3em; text-align: center;"}
 ::: {.fragment .fade-in}
 ![](../img/basics/ai-venn-diagram.png){width=100%}
 

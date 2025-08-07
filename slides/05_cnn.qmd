@@ -288,6 +288,8 @@ CS231n</a>
     - Fine-tuning (very common)
     - As a feature extractor (less common, e.g. [DINOv2](https://dinov2.metademolab.com/))
 
+- Or simply run inference! (e.g. human pose estimation)
+
 
 ::: {.notes}
 > In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e.g. ImageNet, which contains 1.2 million images with 1000 categories), and then use the ConvNet either as an initialization or a fixed feature extractor for the task of interest. 
@@ -300,12 +302,15 @@ Fine tuning: use the pretrained model as a weight initialization
 As a feature extractor: to compute embeddings for your images
 > Take a ConvNet pretrained on ImageNet, remove the last fully-connected layer (this layer’s outputs are the 1000 class scores for a different task like ImageNet), then treat the rest of the ConvNet as a fixed feature extractor for the new dataset. 
 
+You may even be able to simply run inference on a pretrained model (e.g., human pose estimation)
+
 :::
 
 
 ## Transfer learning
 
-
+:::{.columns}
+:::{.column style="width: 50%;"}
 Common architectures:
 
 - ResNet
@@ -313,7 +318,26 @@ Common architectures:
 - Inception
 - MobileNet
 - EfficientNet
+- UNet
 - ...
+
+:::
+
+:::{.column style="width: 50%;"}
+
+:::{.fragment .fade-in}
+<div style="text-align: left; width: 100%; margin: 0 auto; margin-left: -10%; margin-top: 30%;">
+![](../img/cnn/vgg16.png){width=100%, fig-align="center"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://www.neuralception.com/objectdetection-convnetbasics" target="_blank">
+Neuralception</a>
+</div>
+</div>
+:::
+
+:::
+:::
+
 
 
 ::: {.notes}
@@ -349,5 +373,4 @@ Head vs backbone
     - [https://cs231n.github.io/transfer-learning/](https://cs231n.github.io/transfer-learning/)
 - CS4780: Machine Learning for Intelligent Systems
     - [lecture 20 notes](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote20.pdf)
-
 :::
