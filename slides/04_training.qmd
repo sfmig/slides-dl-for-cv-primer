@@ -258,6 +258,10 @@ As we said the test set as a very precious resource, as we can use it as a proxy
 
 :::
 
+::: {.fragment .fade-in data-fragment-index="3"}
+![](../img/training/k-fold.png){width=100%}
+:::
+
 :::
 
 :::
@@ -275,12 +279,12 @@ Usually people split the data into three sets: training, validation and test.
 - The test set is only used once, at the end, to evaluate the performance of the model with the selected hyperparameters. This way it remains a good proxy for measuring the generalization of our model.
 
 
-In cases where the size of your training data (and therefore also the validation data) might be small, it is common practice to do what is called k-fold validation.
+In cases where the size of your training data (and therefore also the validation data) might be small, it is common practice to do what is called **k-fold validation**.
 
 In k-fold validation: The training set is split into folds (for example 5 folds). The folds 1-4 become the training set. One fold (e.g. fold 5 here in yellow) is denoted as the Validation fold and is used to tune the hyperparameters. Cross-validation goes a step further and iterates over the choice of which fold is the validation fold, separately from 1-5. This would be referred to as 5-fold cross-validation. In the very end once the model is trained and all the best hyperparameters are determined, the model is evaluated a single time on the test data (red).
 
 
-In animal pose estimation, most frameworks make it very easy to do a slight variant of this. Instead of fixed folds, people often do random samples for the training and the test set (in DLC these are called "shuffles").
+**In animal pose estimation**, most frameworks make it very easy to do a slight variant of this. Instead of fixed folds, people often do random samples for the training and the test set (in DLC for examplethese are called "shuffles").
 
 :::
 
@@ -288,43 +292,39 @@ In animal pose estimation, most frameworks make it very easy to do a slight vari
 
 ## Training as an optimisation problem
 
-::: {.columns}
-
-::: {.column .nonincremental style="width: 35%; text-align: left; margin-top: 5%"}
-
 ::: {.fragment .fade-in data-fragment-index="2"}
-- Loss function
+::: {.fragment .fade-out data-fragment-index="3"}
+<text><span style="color: rgb(231, 133, 34); position: absolute; top: 25%; left: 45%;">Loss function</span></text>
+
+:::
 :::
 
 ::: {.fragment .fade-in data-fragment-index="4"}
-- Gradient descent
+<text><span style="color: rgb(231, 133, 34); position: absolute; top: 25%; left: 43%;">Gradient descent</span></text>
 :::
 
 
-:::
 
-::: {.column style="width: 60%; margin-left: 4%; margin-top: 0%"}
 
-::: {.r-stack}
+::: {.r-stack style="margin-left: 20%; margin-top: 5%;"}
+
 ::: {.fragment .fade-out data-fragment-index="1"}
-![](../img/training/training-one-sample.png){width=100% style="border: 1px solid black;"}
+![](../img/training/training-one-sample.png){width=80% style="border: 1px solid black;"}
 :::
 
 ::: {.fragment .fade-in data-fragment-index="1"}
 ::: {.fragment .fade-out data-fragment-index="3"}
-![](../img/training/loss-intro.png){width=100% style="border: 1px solid black;"}
+![](../img/training/loss-intro.png){width=80% style="border: 1px solid black;"}
 :::
 :::
 
 ::: {.fragment .fade-in data-fragment-index="3"}
-![](../img/training/gd-intro.png){width=100% style="border: 1px solid black;"}
+![](../img/training/gd-intro.png){width=80% style="border: 1px solid black;"}
+:::
+
 :::
 
 
-:::
-:::
-
-:::  
 
 ::: {.notes}
 So we need to further define two aspects of this process:
@@ -341,46 +341,50 @@ loss, which is a popular choice but there are many other alternative loss functi
 :::
 
 
-
+<!-- ------------------------------------------------------------ -->
 
 
 ## Loss function
 
 ::: {.columns}
-::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%"}
+::: {.column style="width: 15%; margin-top: 18%; margin-left: 0%"}
+::: {.fragment .fade-in data-fragment-index="1"}
 ![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
 :::
-
-
-
-::: {.column style="width: 45%; margin-left: 5%"}
-![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=100%}
-
-<!-- Rectangle output layer -->
-<div style="width: 40px; height: 320px; background-color: transparent; border: 4px solid rgb(103, 152, 205); position: absolute; top: 225px; right: 330px;">
-</div>
-
-<div style="width: 40px; height: 320px; background-color: transparent; border: 4px solid rgb(103, 152, 205); position: absolute; top: 225px; right: 330px;">
-  <div style="position: absolute; top: 2.5%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">0</div>
-  <div style="position: absolute; top: 12%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">1</div>
-  <div style="position: absolute; top: 22%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">2</div>
-  <div style="position: absolute; top: 31%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">3</div>
-  <div style="position: absolute; top: 40%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">4</div>
-  <div style="position: absolute; top: 50%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">5</div>
-  <div style="position: absolute; top: 60%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">6</div>
-  <div style="position: absolute; top: 70%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">7</div>
-  <div style="position: absolute; top: 80%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">8</div>
-  <div style="position: absolute; top: 90%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">9</div>
-</div>
-
-
 :::
 
-::: {.column style="width: 30%; margin-top: 20%"}
 
-<div style="text-align: left; margin-left: -10%; margin-top: -35%;">
+
+::: {.column style="width: 40%; margin-left: 5%"}
+::: {.fragment .fade-in data-fragment-index="2"}
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=100%}
+:::
+
+::: {.fragment .fade-in data-fragment-index="3"}
+
+<!-- ---- Class positions ---- -->
+<div style="width: 40px; height: 270px; background-color: transparent; border: 4px solid rgb(103, 152, 205); position: absolute; top: 220px; right: 435px;">
+  <div style="position: absolute; top: -1.5%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">0</div>
+  <div style="position: absolute; top: 8.5%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">1</div>
+  <div style="position: absolute; top: 19%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">2</div>
+  <div style="position: absolute; top: 29%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">3</div>
+  <div style="position: absolute; top: 39%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">4</div>
+  <div style="position: absolute; top: 49%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">5</div>
+  <div style="position: absolute; top: 58%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">6</div>
+  <div style="position: absolute; top: 69%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">7</div>
+  <div style="position: absolute; top: 78%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">8</div>
+  <div style="position: absolute; top: 88%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">9</div>
+</div>
+
+:::
+:::
+
+::: {.column style="width: 30%; margin-top: 8%; margin-left: -2%;"}
+::: {.fragment .fade-in data-fragment-index="4" }
+<div style="text-align: left;">
 <div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 45px;">Raw scores</div>
-<div style="font-family: 'Courier New', monospace; font-size: 17px; line-height: 1.9; margin-top: 10px; margin-left: 50px;">
+
+<div style="font-family: 'Courier New', monospace; font-size: 15px; font-weight: bold; line-height: 1.9; margin-top: 10px; margin-left: 40px;">
 <div style="text-align: right; width: 80px;">-6.8</div>
 <div style="text-align: right; width: 80px;"> 2.6</div>
 <div style="text-align: right; width: 80px; font-weight: bold; color: rgb(103, 152, 205);"> 6.7</div>
@@ -391,15 +395,32 @@ loss, which is a popular choice but there are many other alternative loss functi
 <div style="text-align: right; width: 80px;"> 3.2</div>
 <div style="text-align: right; width: 80px;"> 1.3</div>
 <div style="text-align: right; width: 80px;"> 1.0</div>
+
 </div>
 </div>
 
 :::
 
+:::
 
-::: {.column style="width: 10%; margin-top: 20%"}
+::: {.column style="width: 10%; margin-top: 20%; margin-left: -15%;"}
+::: {.fragment .fade-in data-fragment-index="6"}
+![](../img/training/softmax.png){width=100%}
+:::
+:::
+
+::: {.column style="width: 5%; margin-top: 8%; margin-left: 0%;"}
+::: {.fragment .fade-in data-fragment-index="5"}
+
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 0px;">Probabilities</div>
+
+<div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
+![](../img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+</div>
 
 :::
+:::
+
 
 :::
 
@@ -411,18 +432,14 @@ Sometimes called cost function, objective function.
 To describe the loss function let’s look at what happens at the end of a forward pass
 during training. After we go through all the layers we arrive at the output layer or
 readout layer, where the scores for each of the classes are collected in the neurons. 
-We would like the score for the correct class, in this case “3”, to be very high, and 
+
+We would like the score for the correct class, in this case “2”, to be very high, and 
 best highest than the other classes. 
+
 But these numbers at the output layer are just ‘raw’ scores. They are unnormalised
 (we interpret them as unnormalised log probabilities). It would be very nice for
-interpretability if these scores would actually represent a probability distribution
+interpretability if these scores could represent something like a probability distribution
 across the classes, reflecting the network’s prediction.
-
-
-This is exactly what the softmax function does. It is a function that takes as inputs K 
-real numbers and normalices them into a prob distribution (in which each prob is
-proportional to the exp of the score). So after the softmax each score will be now between 0 
-and 1 and all of them will add up to 1
 
 
 
@@ -430,11 +447,99 @@ and 1 and all of them will add up to 1
 
 
 
-## Loss function: cross-entropy
+## Loss function
 
+::: {.columns}
+
+::: {.column style="width: 30%; margin-top: 8%; margin-left: -2%;"}
+<div style="text-align: left;">
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 45px;">Raw scores _z_</div>
+
+<div style="font-family: 'Courier New', monospace; font-size: 15px; font-weight: bold; line-height: 1.9; margin-top: 10px; margin-left: 40px;">
+<div style="text-align: right; width: 80px;">-6.8</div>
+<div style="text-align: right; width: 80px;"> 2.6</div>
+<div style="text-align: right; width: 80px; font-weight: bold; color: rgb(103, 152, 205);"> 6.7</div>
+<div style="text-align: right; width: 80px;"> 5.9</div>
+<div style="text-align: right; width: 80px;"> 1.9</div>
+<div style="text-align: right; width: 80px;">-1.3</div>
+<div style="text-align: right; width: 80px;">-5.7</div>
+<div style="text-align: right; width: 80px;"> 3.2</div>
+<div style="text-align: right; width: 80px;"> 1.3</div>
+<div style="text-align: right; width: 80px;"> 1.0</div>
+
+</div>
+</div>
+
+:::
+
+::: {.column style="width: 10%; margin-top: 20%; margin-left: -15%;"}
+![](../img/training/softmax.png){width=100%}
+:::
+
+::: {.column style="width: 5%; margin-top: 8%; margin-left: 0%;"}
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: -30px;">Probabilities _q_</div>
+<div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
+![](../img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+</div>
+
+:::
+
+::: {.column style="width: 9%; margin-top: 20%; margin-left: 10%;"}
+![](../img/training/softmax.png){width=100%}
+:::
+
+
+::: {.column style="width: 5%; margin-top: 8%; margin-left: 0%;"}
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 0px;">GT _p_</div>
+<div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
+![](../img/training/gt-prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+</div>
+
+:::
+
+
+::: {.column style="width: 35%; margin-top: 0%; margin-left: 12%; text-align: left; font-size: 32px;"}
+Softmax:
+$$
+\tiny
+\widehat{p} (z_{j}) = \frac{e^{z_j}}{\sum_{k} e^{z_k}}
+$$
+
+
+Cross-entropy:
+$$
+\tiny
+\text{H}(p, q) = -\sum_{k} p_k \log(\widehat{p}_{k})
+$$
+
+Loss:
+$$
+\tiny
+\text{L}_{i} = - \log(\widehat{p} (z_{j=y_i}) )
+$$
+
+$$
+\tiny
+\text{L} = \frac{1}{N} \sum_{i} \text{L}_{i}
+$$
+
+
+
+
+
+:::
+:::
 
 
 ::: {.notes}
+
+This is exactly what the softmax function does. It is a function that takes as inputs K 
+real numbers, and transforms them so that they fulfill the minimum requirements for a probability distribution 
+(numbers from 0 to 1 that add up to 1). In the result, each prob is proportional to the exp of the raw score. 
+So after the softmax each score will be now between 0 
+and 1 and all of them will add up to 1.
+
+
 Now we have a probability distribution over the classes that represent the
 network’s prediction. However because we have the labels, we actually know the
 true probability distribution, or the ground truth. This distribution is “1” at the correct
@@ -449,6 +554,28 @@ are. This is great because we can already use this as our loss function! It inde
 us how good or bad we are doing, which is what we were looking for.
 Note that the cross‐entropy function spits out a scalar (i.e., a number) for the
 probabilities we obtain for one input image.
+
+With a bit of reordering of the cross-entropy expression we can define the loss per 
+input image as shown in the slide.
+
+However the full loss of the complete dataset would be the average over the losses
+for each of the training samples. If the training samples are too many, so much that it
+slows down the training process, often a small portion of samples is considered, but
+we'll see that in more detail in a few slides.
+
+
+
+:::
+
+
+
+
+## Loss function: cross-entropy
+
+
+
+::: {.notes}
+
 
 
 
