@@ -441,9 +441,13 @@ But these numbers at the output layer are just ‘raw’ scores. They are unnorm
 interpretability if these scores could represent something like a probability distribution
 across the classes, reflecting the network’s prediction.
 
+This is exactly what the softmax function does. 
 
 
 :::
+
+
+<!-- ------------------------------------------------------------ -->
 
 
 
@@ -451,7 +455,7 @@ across the classes, reflecting the network’s prediction.
 
 ::: {.columns}
 
-::: {.column style="width: 30%; margin-top: 8%; margin-left: -2%;"}
+::: {.column style="width: 25%; margin-top: 8%; margin-left: -4%;"}
 <div style="text-align: left;">
 <div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 45px;">Raw scores _z_</div>
 
@@ -472,56 +476,80 @@ across the classes, reflecting the network’s prediction.
 
 :::
 
-::: {.column style="width: 10%; margin-top: 20%; margin-left: -15%;"}
+::: {.column style="width: 10%; margin-top: 20%; margin-left: -10%;"}
 ![](../img/training/softmax.png){width=100%}
 :::
 
-::: {.column style="width: 5%; margin-top: 8%; margin-left: 0%;"}
-<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: -30px;">Probabilities _q_</div>
+::: {.column style="width: 15%; margin-top: 8%; margin-left: 2%;"}
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: -30px;">Probabilities _p̂_</div>
 <div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
 ![](../img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
 </div>
 
 :::
 
-::: {.column style="width: 9%; margin-top: 20%; margin-left: 10%;"}
-![](../img/training/softmax.png){width=100%}
+::: {.column style="width: 10%; margin-top: 21%; margin-left: -4%;"}
+::: {.fragment .fade-in data-fragment-index="3"}
+![](../img/training/cross-entropy.png){width=100%}
+:::
 :::
 
 
-::: {.column style="width: 5%; margin-top: 8%; margin-left: 0%;"}
-<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 0px;">GT _p_</div>
+::: {.column style="width: 15%; margin-top: 8%; margin-left: 2%;"}
+::: {.fragment .fade-in data-fragment-index="2"}
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: -30px;">Ground truth _p_</div>
 <div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
 ![](../img/training/gt-prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
 </div>
 
 :::
+:::
 
 
-::: {.column style="width: 35%; margin-top: 0%; margin-left: 12%; text-align: left; font-size: 32px;"}
+::: {.column style="width: 30%; margin-top: 0%; margin-left: 5%; text-align: left; font-size: 32px;"}
+
+::: {.fragment .fade-in data-fragment-index="1"}
 Softmax:
+<div style="background-color: rgba(77, 214, 24, 0.3); width: 60%; height: 40%; text-align: center;margin: 0 auto; padding: 3; display: block;">
+
 $$
 \tiny
 \widehat{p} (z_{j}) = \frac{e^{z_j}}{\sum_{k} e^{z_k}}
 $$
+</div>
 
+:::
 
+::: {.fragment .fade-in data-fragment-index="3"}
 Cross-entropy:
+<div style="background-color: rgba(233, 97, 7, 0.3); width: 80%; height: 40%; text-align: center;margin: 0 auto; padding: 3; display: block;">
+
 $$
 \tiny
 \text{H}(p, q) = -\sum_{k} p_k \log(\widehat{p}_{k})
 $$
+</div>
 
+:::
+
+::: {.fragment .fade-in data-fragment-index="4"}
 Loss:
+<!-- <div style="border: 2px solid #333;"> -->
 $$
 \tiny
 \text{L}_{i} = - \log(\widehat{p} (z_{j=y_i}) )
 $$
+:::
 
+
+::: {.fragment .fade-in data-fragment-index="5"}
+<div style="border: 2px solid rgba(70, 73, 68, 0.27); width: 50%; height: 30%; text-align: center; margin: 0 auto; display: block;">
 $$
 \tiny
 \text{L} = \frac{1}{N} \sum_{i} \text{L}_{i}
 $$
+</div>
+:::
 
 
 
@@ -536,24 +564,28 @@ $$
 This is exactly what the softmax function does. It is a function that takes as inputs K 
 real numbers, and transforms them so that they fulfill the minimum requirements for a probability distribution 
 (numbers from 0 to 1 that add up to 1). In the result, each prob is proportional to the exp of the raw score. 
-So after the softmax each score will be now between 0 
-and 1 and all of them will add up to 1.
+So after the softmax each score will be now between 0 and 1 and all of them will add up to 1.
 
 
 Now we have a probability distribution over the classes that represent the
-network’s prediction. However because we have the labels, we actually know the
+network’s predictions. However because we have the labels, we actually know the
 true probability distribution, or the ground truth. This distribution is “1” at the correct
 label class, and zero elsewhere. 
-How can we compare the set of two probability distributions? We can use tools from
-information theory to quantify how far off these distributions are. If we call the true 
-probability distribution $p(x)$ and the one estimated by the network $q(x)$, the cross
+
+How can we compare the set of two probability distributions? 
+
+We can use tools from information theory to quantify how far off these distributions are. 
+If we call the true probability distribution $\hat{p}(x)$ and the one estimated by the network $p(x)$, the cross
 entropy between them is defined as shown in the slide. 
+
 You can go into further detail about interpretation of cross‐entropy but for now it’s
 enough to know that it measures how far off the true and the estimated distributions
 are. This is great because we can already use this as our loss function! It indeed tells
 us how good or bad we are doing, which is what we were looking for.
-Note that the cross‐entropy function spits out a scalar (i.e., a number) for the
-probabilities we obtain for one input image.
+
+
+Note that the cross‐entropy function **spits out a scalar (i.e., a number) for the
+probabilities we obtain for one input image.**
 
 With a bit of reordering of the cross-entropy expression we can define the loss per 
 input image as shown in the slide.
@@ -562,22 +594,6 @@ However the full loss of the complete dataset would be the average over the loss
 for each of the training samples. If the training samples are too many, so much that it
 slows down the training process, often a small portion of samples is considered, but
 we'll see that in more detail in a few slides.
-
-
-
-:::
-
-
-
-
-## Loss function: cross-entropy
-
-
-
-::: {.notes}
-
-
-
 
 :::
 
