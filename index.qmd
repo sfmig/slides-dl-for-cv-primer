@@ -53,7 +53,11 @@ This section is largely based on the [neural networks video series by _3Blue1Bro
 
 {{< include slides/04_training.qmd >}}
 
+---
 
+::: aside
+This section is largely based on the lecture notes from cs231n available at [cs231n.github.io](https://cs231n.github.io/) and the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
+:::
 
 <!-- ########################################### -->
 ## Animal pose estimation

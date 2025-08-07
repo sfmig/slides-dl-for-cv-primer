@@ -134,6 +134,11 @@ abstraction of concepts, we may be able to train a network that generalises beyo
 
 ::: {.column style="width: 45%; text-align: centre; margin-left: -7%; margin-top: 5%"}
 ![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
+
+::: {.fragment .fade-in data-fragment-index="0"}
+<span style="font-size: 100px; color: rgb(210, 7, 7); position: absolute; top: 45%; left: 29%; transform: rotate(-30deg);"> TRAINED </span>
+:::
+
 :::
 
 
@@ -598,70 +603,189 @@ we'll see that in more detail in a few slides.
 :::
 
 
+<!-- ----------------- -->
+
+
 
 ## Optimisation: intuition
 
-1D
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="0"}
+![](../img/training/optim-1d-before.png){width=70%, fig-align="center"}
+
+<div style="position: absolute; bottom: 30px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/IHZwWFHWa-w?si=Ag4HuuL_IqxIZDkq&t=363" target="_blank">
+Gradient descent, how neural networks learn | Deep Learning Chapter 2</a></div>
+
+:::
+
+::: {.fragment .fade-in data-fragment-index="1"}
+![](../img/training/optim-1d.png){width=70%, fig-align="center"}
+:::
+
+
+
+:::
+
 
 
 ::: {.notes}
-Ok so we used a simple case of a cost function with one input and one output to 
-visualise the optimisation problem
-- We’ve seen that we initialise in a random point, and then follow the derivative
-(i.e., the slope) which tells us in which direction should we move to decrease the
-function. 
-- We do that iteratively, that means that at every point we compute the slope, we
-take a small step following the slope in the adequate direction, and then repeat. 
-- We’ve also seen that if we move every time an amount proportional to the slope
-we will prevent overshooting the minimum, since as we approach the minimum 
-the slope becomes flatter and flatter.
+Going back to the two aspects of training we wanted to further define:
+- We have talked about the loss function and how it allows us to quantify how well/ 
+how badly our network is doing, **given a certain set of weights** and a bunch of input 
+images
+- Now we are going to talk about the last aspect of the training process: the
+optimisation of the weights and biases, or how we go about adapting the parameters
+of the network to improve performance
+
+Let's consider a simple case of a loss function with one input (corresponding to something like a 
+hypothetical network with single parameter). Remember that the loss function always 
+returns a scalar value (i.e., one output). We want to find the value of the parameter that minimises the loss. 
+
+If we solved this with gradient descent, the process would be approximately as follows:
+
+- We initialise our parameter in a random point
+- We compute the derivative of the loss function with respect to the parameter (i.e., the slope). The derivative tells us in which direction we decrease the loss.
+- We take a small step in that direction and repeat the process: at every point we compute the slope, we take a small step following the slope in the adequate direction, and then repeat. 
+- If we move every time an amount proportional to the slope we will prevent overshooting the minimum, since as we approach the minimum the slope becomes flatter and flatter.
+
+Note that there is no guarantee that we will find the global minimum, that is a hard problem, but we are fine with a local minimum!
+
 :::
 
 
 
 ## Optimisation: intuition
 
-nD
+<div style="width: 75%; margin: 0 auto; text-align: right;">
+![](../img/training/optim-2d.png){width=100%}
+
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://youtu.be/IHZwWFHWa-w?si=LZGSqvBlbHsSIqx5&t=511" target="_blank">
+Gradient descent, how neural networks learn | Deep Learning Chapter 2</a>
+</div>
+</div>
+
+
+
 
 
 ::: {.notes}
 
-Now we will expand this case to higher dimensions, 
+We can expand this intuition to higher dimensions, 
 - first to a loss function that takes two inputs, and then to a loss function that takes
 many more inputs. 
-In higher dimensions, the gradient fulfills the role of the slope. 
+
+In higher dimensions, the **gradient** fulfills the role of the slope.
 
 For those of you who remember from calculus, in a function of multiple inputs and 
-one output, computing the gradient at a certain point tells us the direction in which
-the function increases most. So you may already see that for the loss function, whose
-inputs are the network's weights and biases, the gradient will be a vector that will tell us at each point, how much to vary the weights and biases so as to decrease more 
-steeply the loss.
+one output (i.e. a multivariate scalar function), computing the gradient at a certain point tells us the direction in which
+the function increases most. 
+
+So you may already see that for the loss function (whose inputs are the network's weights and biases), the gradient will be a vector that will tell us at each point, how much to vary the weights and biases so as to decrease more steeply the loss.
 
 
 :::
 
 
-## Optimisation takeaways
+## Seven optimisation takeaways!
 
+<div style="font-size: 1em; margin-left: 10px; margin-right: 50px; line-height: 1.5;">
 
+1. The loss function as a **high-dimensional "surface"**.
 
+2. The **gradient** is a vector that at any point in the loss "surface" gives us the direction of steepest ascent.
+
+3. The **negative gradient** gives us the direction of steepest descent.
+
+4. **Gradient descent** is an optimisation procedure that iteratively adjusts the parameters based on the gradient. 
+
+::: {.fragment .fade-in}
+Until when?....
+:::
+
+</div>
 
 
 ::: {.notes}
-We now have a good intuition on how the optimisation problem is solved, and how
-we adjust the weights and biases in the network to minimise our loss. Let’s
-consolidate what we’ve seen a bit more formally, in the form of 6 Main Optimisation
-Takeaways
+We now have a good intuition on how the optimisation problem is solved, and how we adjust the weights and biases in the network to minimise our loss. Let’s consolidate what we’ve seen a bit more formally, in the form of 6 Main Optimisation Takeaways
 
 
-- Simplest form of parameter update: actually very vanilla and mostly never used, but
-it’s the main idea behind all parameter updates. 
+1. Loss function as a **high-dimensional "surface"**, where each point in the surface corresponds to a set of weights and biases.
 
+2. The **gradient**, a vector that at any point in the loss "surface" gives us the direction of steepest ascent (i.e. the direction in which the loss increases most).
+
+3. The **negative gradient** gives us the direction of steepest descent (i.e. the direction in which the loss decreases most).
+
+
+4. We optimise (i.e. find the parameters that make the loss function minimal) the loss function iteratively, starting off with a random set of parameters and adjusting them until the loss is below a certain threshold.
+
+:::
+
+
+## Seven optimisation takeaways!
+
+<div style="width: 65%; margin: 0 auto; text-align: right;">
+![](../img/training/babysitting.png){width=100%}
+
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://cs231n.github.io/neural-networks-3/#update" target="_blank">
+CS231n lecture notes</a>
+</div>
+</div>
+
+
+::: {.notes}
+
+In practice, you would monitor the loss function or your accuracy on both the training and the validation set during training, and stop when the validation error stops improving.
+
+
+> The gap between the training and validation accuracy indicates the amount of overfitting. Two possible cases are shown in the diagram on the left. The blue validation error curve shows very small validation accuracy compared to the training accuracy, indicating strong overfitting (note, it's possible for the validation accuracy to even start to go down after some point). When you see this in practice you probably want to increase regularization (stronger L2 weight penalty, more dropout, etc.) or collect more data. 
 
 :::
 
 
 
+## Seven optimisation takeaways!
+
+<div style="font-size: 1em; margin-left: 10px; margin-right: 50px; line-height: 1.5;">
+5. To **update the parameters** we take a small step in the direction of the negative gradient.
+$$
+W_{new} = W_{old} - \alpha \nabla \text{L}_W
+$$
+
+7. **Stochastic gradient descent** is a more efficient variant of gradient descent which computes the gradient on **batches** of training samples.
+
+7. An **epoch** is a single pass through the complete training set. A training process will consist of multiple epochs.
+
+</div>
+
+
+::: {.notes}
+
+5. The simplest form of parameter update is to take a small step in the direction of the negative gradient.
+$$
+W_{new} = W_{old} - \alpha \nabla \text{L}_W
+$$
+where $\alpha$ is the learning rate. This is actually never used in practice, but it's the main idea behind all methods for parameter updates.
+
+
+7. In gradient descent, a parameter update takes place when we compute the full loss (i.e. across the entire training set). However due to vectorisation, it is much more efficient to do **stochastic gradient descent**. In this case, we update the parameters more frequently, and compute the gradient on a small subset of the training set, called a **batch**.
+
+"True" stochastic gradient descent is when we compute the gradient and perform an update on every single sample. But a batch of samples has better convergence properties.
+> A compromise between computing the true gradient and the gradient at a single sample is to compute the gradient against more than one training sample (called a "mini-batch") at each step. This can perform significantly better than "true" stochastic gradient descent described, because the code can make use of vectorization libraries rather than computing each step separately as was first shown in [6] where it was called "the bunch-mode back-propagation algorithm". It may also result in smoother convergence, as the gradient computed at each step is averaged over more training samples. [From https://en.wikipedia.org/wiki/Stochastic_gradient_descent]
+
+> This [single-example parameter updates] is relatively less common to see because in practice due to vectorized code optimizations it can be computationally much more efficient to evaluate the gradient for 100 examples, than the gradient for one example 100 times. [From https://cs231n.github.io/optimization-1/ ]
+
+
+
+> The size of the mini-batch is a hyperparameter but it is not very common to cross-validate it. It is usually based on memory constraints (if any), or set to some value, e.g. 32, 64 or 128. We use powers of 2 in practice because many vectorized operation implementations work faster when their inputs are sized in powers of 2. [From https://cs231n.github.io/optimization-1/ ]
+
+
+
+
+> There are other ways of performing the optimization (e.g. LBFGS), but Gradient Descent is currently by far the most common and established way of optimizing Neural Network loss function. [From https://cs231n.github.io/optimization-1/ ]
+
+:::
 
 ## Additional references
 ::: {.nonincremental style="font-size: 0.6em;"}
@@ -671,7 +795,14 @@ it’s the main idea behind all parameter updates.
   - Deep learning book chapter 3
   [http://www.deeplearningbook.org/contents/prob.html](http://www.deeplearningbook.org/contents/prob.html)
 - On weight initialisation
-  - [http://cs231n.github.io/neural‐networks‐2/#init](http://cs231n.github.io/neural‐networks‐2/#init) 
+  - [https://cs231n.github.io/neural-networks-2/](https://cs231n.github.io/neural-networks-2/) 
 - On methods for gradient update
-  - [http://cs231n.github.io/neural‐networks‐3/#update](http://cs231n.github.io/neural‐networks‐3/#update) 
+  - [https://cs231n.github.io/neural‐networks‐3/#update](https://cs231n.github.io/neural-networks-3/#update) 
+- On babysitting the training process
+  - [https://cs231n.github.io/neural-networks-3/#baby](https://cs231n.github.io/neural-networks-3/#baby) 
+- On optimisation
+  - [https://cs231n.github.io/optimization-1/](https://cs231n.github.io/optimization-1/) 
+- On precisely how the gradient is computed
+    - [Backpropagation, intuitively | Deep Learning Chapter 3](https://youtu.be/Ilg3gGewQ5U?si=3gMshup9ctIzRc2_)
+    - [Backpropagation calculus | Deep Learning Chapter 3](https://youtu.be/tIeHLnjs5U8?si=E6emafp6dsAXutW5)
 :::
