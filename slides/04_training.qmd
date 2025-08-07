@@ -804,5 +804,8 @@ where $\alpha$ is the learning rate. This is actually never used in practice, bu
   - [https://cs231n.github.io/optimization-1/](https://cs231n.github.io/optimization-1/) 
 - On precisely how the gradient is computed
     - [Backpropagation, intuitively | Deep Learning Chapter 3](https://youtu.be/Ilg3gGewQ5U?si=3gMshup9ctIzRc2_)
-    - [Backpropagation calculus | Deep Learning Chapter 3](https://youtu.be/tIeHLnjs5U8?si=E6emafp6dsAXutW5)
+    - [Backpropagation calculus | Deep Learning Chapter 4](https://youtu.be/tIeHLnjs5U8?si=E6emafp6dsAXutW5)
+- Neural networks and an interesting insight into stochastic gradient descent
+    - [Machine Learning for Intelligent Systems CS4780 (Cornell University)](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/)
+    - see lectures 20 and 21
 :::

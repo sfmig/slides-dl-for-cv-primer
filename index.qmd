@@ -15,7 +15,7 @@
 ---
 
 ::: aside
-This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow _et al_. (2016), available for free at [deeplearningbook.org](https://www.deeplearningbook.org/)
+This section is based on Chapter 1 of _Deep Learning_ by Goodfellow _et al_. (2016), available for free at [deeplearningbook.org](https://www.deeplearningbook.org/)
 :::
 
 
@@ -29,7 +29,7 @@ This section is mostly based on Chapter 1 of _Deep Learning_ by Goodfellow _et a
 ---
 
 ::: aside
-This section is largely based on the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
+This section is based on the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
 :::
 
 
@@ -41,7 +41,7 @@ This section is largely based on the [neural networks video series by _3Blue1Bro
 ---
 
 ::: aside
-This section is largely based on the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
+This section is based on the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
 :::
 
 
@@ -50,14 +50,29 @@ This section is largely based on the [neural networks video series by _3Blue1Bro
 <!-- ########################################### -->
 # Training and backward pass{#training-and-backward-pass}
 
+---
+
+::: aside
+This section is based on the lecture notes from cs231n available at [cs231n.github.io](https://cs231n.github.io/) and the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
+:::
+
 
 {{< include slides/04_training.qmd >}}
+
+
+
+<!-- ########################################### -->
+# Convolutional neural networks{#cnn}
+
+{{< include slides/05_cnn.qmd >}}
+
 
 ---
 
 ::: aside
-This section is largely based on the lecture notes from cs231n available at [cs231n.github.io](https://cs231n.github.io/) and the [neural networks video series by _3Blue1Brown_](https://youtu.be/aircAruvnKk?si=HdE55UbKbjsPP-A-)
+This section is based on the lecture notes from cs231n available at [cs231n.github.io](https://cs231n.github.io/)
 :::
+
 
 <!-- ########################################### -->
 ## Animal pose estimation

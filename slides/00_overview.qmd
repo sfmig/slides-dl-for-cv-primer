@@ -52,7 +52,7 @@
 - [Anatomy of a neural network](#anatomy-of-a-nn)
 - [Forward pass](#forward-pass)
 - [Training and backward pass](#training-and-backward-pass)
-- Convolutional neural networks  
+- [Convolutional neural networks](#cnn) 
 - CV applications in animal behaviour
 
 
