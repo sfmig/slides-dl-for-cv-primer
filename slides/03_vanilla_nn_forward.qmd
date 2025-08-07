@@ -252,7 +252,7 @@ large enough.
 ::: {.columns}
 ::: {.column}
 
-In a network:
+In an MLP:
 
 - each <em style="color:rgb(137, 225, 65);">connection</em> is associated with a <strong style="color:rgb(137, 225, 65);">weight</strong>
 - each <em style="color:rgb(213, 24, 24);">neuron</em> is associated with a <strong style="color:rgb(213, 24, 24);">bias</strong>
@@ -520,6 +520,207 @@ digraph G {
 }
 ```
 :::
+
+::: {.fragment .fade-in data-fragment-index="4"}
+::: {.fragment .fade-out data-fragment-index="5"}
+```{dot}
+//| fig-width: 2
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", fontcolor="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor=lightblue];
+    
+      h1 [label="h₀⁰"];
+      h2 [label="h₁⁰"];
+      h3 [label="h₂⁰"];
+      h4 [label="h₃⁰"]; 
+      h5 [label="..."];
+      h6 [label="hₙ⁰"];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5; h6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1_prime [label="h₀¹"];
+      h2_prime [label="h₁¹"];
+      h3_prime [label="h₂¹"];
+      h4_prime [label="..."];
+      h5_prime [label="hₖ¹"];
+
+      // Invisible edges to force vertical ordering
+      // bias -> h1_prime [style=invis];
+      h1_prime -> h2_prime [style=invis];
+      h2_prime -> h3_prime [style=invis];
+      h3_prime -> h4_prime [style=invis];
+      h4_prime -> h5_prime [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1_prime; h2_prime; h3_prime; h4_prime; h5_prime;}
+    }
+
+    // subgraph layer_bias {
+    //   node [fillcolor="#7BA4F0"];
+      
+    //   bias [shape=square, label="b₀¹", width=0.06, height=0.06, fillcolor="#D51818"];
+    //   {rank=same; h2_prime; bias;}
+    // }
+
+
+    h1 -> h1_prime;
+    h1 -> h2_prime [color="#89E141", penwidth=2.0];
+    h1 -> h3_prime;
+    h1 -> h4_prime;
+    h1 -> h5_prime;
+
+    h2 -> h1_prime;
+    h2 -> h2_prime [color="#89E141", penwidth=2.0];
+    h2 -> h3_prime;
+    h2 -> h4_prime;
+    h2 -> h5_prime;
+
+    h3 -> h1_prime;
+    h3 -> h2_prime [color="#89E141", penwidth=2.0];
+    h3 -> h3_prime;
+    h3 -> h4_prime;
+    h3 -> h5_prime;
+
+    h4 -> h1_prime;
+    h4 -> h2_prime [color="#89E141", penwidth=2.0];
+    h4 -> h3_prime;
+    h4 -> h4_prime;
+    h4 -> h5_prime;
+
+    h5 -> h1_prime;
+    h5 -> h2_prime [color="#89E141", penwidth=2.0];
+    h5 -> h3_prime;
+    h5 -> h4_prime;
+    h5 -> h5_prime;
+
+    h6 -> h1_prime;
+    h6 -> h2_prime [color="#89E141", penwidth=2.0];
+    h6 -> h3_prime;
+    h6 -> h4_prime;
+    h6 -> h5_prime;
+
+    // bias -> h2_prime [color="#D51818", penwidth=2.0, style="dashed", arrowhead="none"];
+    
+}
+```
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="5"}
+::: {.fragment .fade-out data-fragment-index="6"}
+```{dot}
+//| fig-width: 2
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", fontcolor="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor=lightblue];
+    
+      h1 [label="h₀⁰"];
+      h2 [label="h₁⁰"];
+      h3 [label="h₂⁰"];
+      h4 [label="h₃⁰"]; 
+      h5 [label="..."];
+      h6 [label="hₙ⁰"];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5; h6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1_prime [label="h₀¹"];
+      h2_prime [label="h₁¹"];
+      h3_prime [label="h₂¹"];
+      h4_prime [label="..."];
+      h5_prime [label="hₖ¹"];
+
+      // Invisible edges to force vertical ordering
+      // bias -> h1_prime [style=invis];
+      h1_prime -> h2_prime [style=invis];
+      h2_prime -> h3_prime [style=invis];
+      h3_prime -> h4_prime [style=invis];
+      h4_prime -> h5_prime [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1_prime; h2_prime; h3_prime; h4_prime; h5_prime;}
+    }
+
+    // subgraph layer_bias {
+    //   node [fillcolor="#7BA4F0"];
+      
+    //   bias [shape=square, label="b₀¹", width=0.06, height=0.06, fillcolor="#D51818"];
+    //   {rank=same; h2_prime; bias;}
+    // }
+
+
+    h1 -> h1_prime;
+    h1 -> h2_prime;
+    h1 -> h3_prime;
+    h1 -> h4_prime;
+    h1 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h2 -> h1_prime;
+    h2 -> h2_prime;
+    h2 -> h3_prime;
+    h2 -> h4_prime;
+    h2 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h3 -> h1_prime;
+    h3 -> h2_prime;
+    h3 -> h3_prime;
+    h3 -> h4_prime;
+    h3 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h4 -> h1_prime;
+    h4 -> h2_prime;
+    h4 -> h3_prime;
+    h4 -> h4_prime;
+    h4 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h5 -> h1_prime;
+    h5 -> h2_prime;
+    h5 -> h3_prime;
+    h5 -> h4_prime;
+    h5 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h6 -> h1_prime;
+    h6 -> h2_prime;
+    h6 -> h3_prime;
+    h6 -> h4_prime;
+    h6 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    // bias -> h2_prime [color="#D51818", penwidth=2.0, style="dashed", arrowhead="none"];
+    
+}
+```
+:::
+:::
+
 :::
 
 :::
@@ -556,7 +757,7 @@ $$
 <div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 30px; left: 110px; width: 275px; height: 60px;"></div>
 <div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid  rgba(173, 216, 230, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
 <div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid rgba(213, 24, 24, 0.3); top: 40px; left: 500px; width: 71px; height: 45px;"></div>
-<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 40px; left: 610px; width: 75px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 40px; left: 615px; width: 72px; height: 45px;"></div>
 </div>
 
 :::
@@ -564,6 +765,41 @@ $$
 
 ::: {.fragment .fade-in data-fragment-index="4"}
 ::: {.fragment .fade-out data-fragment-index="5"}
+<div class="equation-container">
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+<div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 90px; left: 110px; width: 275px; height: 60px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid  rgba(173, 216, 230, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
+<div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid rgba(213, 24, 24, 0.3); top: 95px; left: 500px; width: 71px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 95px; left: 615px; width: 72px; height: 45px;"></div>
+</div>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="5"}
+::: {.fragment .fade-out data-fragment-index="6"}
+<div class="equation-container">
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+<div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 150px; left: 110px; width: 275px; height: 60px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid  rgba(173, 216, 230, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
+<div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid rgba(213, 24, 24, 0.3); top: 157px; left: 500px; width: 71px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 157px; left: 615px; width: 72px; height: 45px;"></div>
+</div>
+
+:::
+:::
+
+
+
+
+::: {.fragment .fade-in data-fragment-index="6"}
+::: {.fragment .fade-out data-fragment-index="7"}
 <div class="equation-container">
 $$
 \scriptstyle 
@@ -578,7 +814,8 @@ $$
 :::
 :::
 
-::: {.fragment .fade-in data-fragment-index="5"}
+
+::: {.fragment .fade-in data-fragment-index="7"}
 
 $$
 ReLU(\color{rgb(137, 225, 65)}{\mathbf{W}'} \color{rgb(173, 216, 230)}{h^{0^{\prime}}} ) = \color{rgb(0, 0, 255)}{h^1}
@@ -821,12 +1058,9 @@ classes).
 
 ## Forward pass
 
-<!-- ![](../img/vanilla-nn/temp-6.png){width=100%} -->
-
 
 ::: {.columns}
 
-<!-- ::: {.fragment .fade-in} -->
 ::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%"}
 ::: {.fragment .fade-in data-fragment-index="1"}
 ![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}

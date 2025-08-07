@@ -69,9 +69,9 @@ More specifically, the challenge is to write a program that taxes a grid of 28x2
 
 ## A single neuron {#single-neuron-first-slide}
 
-::: {.fragment .fade-in}
+<!-- ::: {.fragment .fade-in}
 Neurons in a network are organised in **layers**
-:::
+::: -->
 
 ::: {.fragment .fade-in}
 
@@ -132,25 +132,21 @@ MLPs grew out of an effort to improve single-layer perceptrons, which could only
 
 ## A multi-layer perceptron
 
-- An extension to more neurons and more layers
-- Minimum one layer between the first and the last layer
+The simplest neural network
 
+- An extension to more neurons and more layers
+- Requires a non-linear activation function
+- Also **fully‐connected** or **feed-forward** networks
 
 
 ::: {.fragment .fade-in}
 ![](../img/vanilla-nn/mlp-cs231n-diagrams.png){width=90% fig-align="center"}
 
-<div style="position: absolute; bottom: 120px; right: 80px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://cs231n.github.io/neural-networks-1/" target="_blank">
+<div style="position: absolute; bottom: 0px; right: 80px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://cs231n.github.io/neural-networks-1/" target="_blank">
 CS231n lecture notes: neural networks</a></div>
 
 :::
 
-::: {.fragment .fade-in}
-
-<div style="text-align: center; width: 100%; font-size: 0.8em;">
-Also known as **fully‐connected** or **feed-forward** networks
-</div>
-:::
 
 ::: {.notes}
 A multi‐layer perceptron (MLP) is an extension of this to more neurons and more layers
