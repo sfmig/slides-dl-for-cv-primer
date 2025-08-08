@@ -787,6 +787,19 @@ where $\alpha$ is the learning rate. This is actually never used in practice, bu
 
 :::
 
+
+## A reminder
+
+- In training: forward and backward pass
+
+- In testing and inference: only forward pass
+
+
+
+
+
+
+
 ## Additional references
 ::: {.nonincremental style="font-size: 0.6em;"}
 - On validation set and hyperparameter tuning
