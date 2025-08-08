@@ -455,6 +455,15 @@ But the choice of what data augmentation to apply depends on the task and the da
 
 Data augmentation can reduce overfitting and improve model robustness, esp in cases with small or unbalanced datasets.
 
+A note on horizontal flip data augmentation in pose estimation:
+- usually data augmentation transforms will apply the same transformation to the image and the labels (e.g. horizontal flip)
+- so if you have a skeleton with left and right keypoints, and we apply an horizontal flip, the left and right keypoints will be swapped
+- this will render wrong keypoints tho! So often pose estimation frameworks allow you to define symmetric keypoints, to swap them again after mirroring
+- However if the left and right keypoints are not symmetric (e.g. fiddler crabs with dominant and non-dominant claws), you will want to flip the image and the keypoints without the additional swap
+- Basically if the keypoints are not different physically, you need to set them as "symmetric".
+
+See [here](https://deeplabcut.github.io/DeepLabCut/docs/recipes/flip_and_rotate.html#augment-to-reduce-left-right-bias)
+
 :::
 
 
@@ -472,6 +481,7 @@ Data augmentation can reduce overfitting and improve model robustness, esp in ca
 - CS4780: Machine Learning for Intelligent Systems
     - [lecture 20 notes](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote20.pdf)
 - On data augmentation:
+    - [DeepLabCut case study: Improving network performance on unbalanced data via augmentation](https://deeplabcut.github.io/DeepLabCut/docs/recipes/flip_and_rotate.html), specifically the section on "Augment to reduce left-right bias" and "Edit pose_cfg.yaml for fliplr augmentation". A blogpost version is available [here](https://deeplabcut.medium.com/balancing-bats-d3c5bcfb71e1)
     - [https://www.kaggle.com/code/ryanholbrook/data-augmentation](https://www.kaggle.com/code/ryanholbrook/data-augmentation)
     - [https://www.ibm.com/think/topics/data-augmentation](https://www.ibm.com/think/topics/data-augmentation)
 :::
