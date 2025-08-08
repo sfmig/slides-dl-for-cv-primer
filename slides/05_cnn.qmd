@@ -51,24 +51,29 @@ We can also see their neurons as being 3-dimensional, with width, height and dep
 > A simple ConvNet is a sequence of layers, and every layer of a ConvNet transforms one volume of activations [neuron outputs] to another
 :::
 
-
+<!-- -------------------------------- -->
 
 ## Layers used in CNNs
 
-Three common types of layers:
+Three common types:
 
+:::{.nonincremental}
 - Convolutional layer
 - Pooling layer
 - Batch normalisation layer
 - Fully connected layer
+:::
 
 ::: {.notes}
 Fully connected layers are the same as in regular NNs.
 :::
 
+
+<!-- -------------------------------- -->
+
 ## Layers used in CNNs
 
-Three common types of layers:
+Three common types:
 
 :::{.nonincremental}
 - **Convolutional layer**
@@ -78,31 +83,38 @@ Three common types of layers:
 :::
 
 ::: {.notes}
-We will focus on the convolutional layer.
+We will focus on the convolutional layer and the pooling layer.
+
+For the batch normalisation layer it is enought to know that it is a scaling and translation operation that is applied to the output of the convolutional layer, based on the statistics of the batch.
+
+The fully connected layer is the same as in regular NNs.
+
+
 :::
 
 
+<!-- -------------------------------- -->
 
 ## Convolutional layer
 
 ::: {.columns}
 ::: {.column .nonincremental style="width: 50%;"}
 
-:::{.fragment .fade-in data-fragment-index="0"}
+:::{.fragment .fade-in data-fragment-index="1"}
 - A set of _n_ learnable **filters** 
 :::
 
-:::{.fragment .fade-in data-fragment-index="1"}
+:::{.fragment .fade-in data-fragment-index="2"}
 - Each filter is a small matrix of weights + 1 bias
 :::
 
-:::{.fragment .fade-in data-fragment-index="2"}
-- We slide (convolve) each filter across the width and height of the input volume and **take the full depth**
+:::{.fragment .fade-in data-fragment-index="3"}
+- We slide (convolve) each filter across the width and height **and the full depth** of the input volume
 :::
 
-:::{.fragment .fade-in data-fragment-index="3"}
+<!-- :::{.fragment .fade-in data-fragment-index="4"}
 - Parameters are shared
-:::
+::: -->
 
 :::
 :::
@@ -110,7 +122,19 @@ We will focus on the convolutional layer.
 ::: {.column style="width: 40%; margin-left: 5%;"}
 :::{.r-stack}
 :::{.fragment .fade-in data-fragment-index="0"}
-:::{.fragment .fade-out data-fragment-index="2"}
+:::{.fragment .fade-out data-fragment-index="1"}
+<div style="text-align: right; width: 100%; margin: 0 auto;">
+![](../img/overview/cnn-diagram-2.png){width=100%, fig-align="center"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure modified from <a href="https://cs231n.github.io/convolutional-networks/" target="_blank">
+CS231n</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="1"}
+:::{.fragment .fade-out data-fragment-index="3"}
 <div style="text-align: right; width: 100%; margin: 0 auto;">
 ![](../img/cnn/convolution-n-channels.png){width=100%, fig-align="center"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
@@ -121,8 +145,8 @@ CS231n</a>
 :::
 :::
 
-:::{.fragment .fade-in data-fragment-index="2"}
-:::{.fragment .fade-out data-fragment-index="3"}
+:::{.fragment .fade-in data-fragment-index="3"}
+:::{.fragment .fade-out data-fragment-index="4"}
 <div style="text-align: right; width: 80%; margin: 0 auto;">
 ![](../img/cnn/padding_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: 50px;">
@@ -132,7 +156,7 @@ Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" target="_blan
 :::
 :::
 
-:::{.fragment .fade-in data-fragment-index="3"}
+:::{.fragment .fade-in data-fragment-index="4"}
 <div style="text-align: right; width: 100%; margin: 0 auto;">
 ![](../img/cnn/convolution-sharing.png){width=100%, fig-align="center"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
@@ -147,21 +171,29 @@ CS231n</a>
 
 
 ::: {.notes}
-- A set of _n_ learnable **filters** or **kernels**
-- Each filter is a small matrix of weights
+- We have seen that it is useful to see a convolutional layer as a transform between an input volume and an output volume
+- It is defined by a set of _n_ learnable **filters**, also sometimes called **kernels**. 
+  The depth of the output volume is equal to the number of filters.
+- Each filter is a small matrix of weights and one bias parameter
+    - so each slice in the output volume corresponds to a small matrix of weights and a bias parameter
     - small along width and height but always extends to the full depth of the input
     - e.g. a filter on the first layer of a CNN may have size 5x5x3 (+ 1 bias parameter)
 
-- In the forward pass:
-    - we slide (convolve) each filter across the width and height of the input volume and compute dot products
-    - we then would apply a non-linear activation function such as ReLU
-    - the output is a 2D "activation map" that gives the responses of that filter at every position
+- How do we compute the values in each slice of the output volume? 
+    - In the forward pass:
+        - we slide (convolve) each filter across the width and height of the input volume and compute dot products (multiply and sum)
+        - we then would apply a non-linear activation function such as ReLU
+        - the output is a **2D "activation map**" that gives the responses of that filter at every position
     - for a layer with 12 filters, we will stack the 12 activation maps along depth to produce the output volume 
 
-- We can formulate the forward pass as a matrix multiplication
+We can interpret the filter as a **pattern detector**
+> Intuitively, the network will learn filters that activate when they see some type of visual feature such as an edge of some orientation or a blotch of some color on the first layer, or eventually entire honeycomb or wheel-like patterns on higher layers of the network.
 
-Intuitively, the network will learn filters that activate when they see some type of visual feature such as an edge of some orientation or a blotch of some color on the first layer, or eventually entire honeycomb or wheel-like patterns on higher layers of the network.
+We can formulate the forward pass as a **matrix multiplication**
 :::
+
+
+<!-- -------------------------------- -->
 
 ## Convolutional layer
 
@@ -207,11 +239,6 @@ Stride = 2. Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" t
 :::
 
 
-
-
-
-
-
 :::{.notes}
 There are a few hyperparameters involved in the convolutional layer:
 - number of filters: the depth of the output volume
@@ -220,28 +247,63 @@ There are a few hyperparameters involved in the convolutional layer:
     - A stride larger than one will reduce the size of the output volume
 - padding: the number of 0 pixels that are added to the input volume at each side
     - Padding is used to control the size of the output volume
-
-
-
 :::
+
+
+<!-- -------------------------------- -->
 
 
 ## Layers used in CNNs
 
-Three common types of layers:
+Three common types:
 
 :::{.nonincremental}
 - Convolutional layer
-- Pooling layer
+- **Pooling layer**
 - Batch normalisation layer
 - Fully connected layer
 :::
 
 ::: {.notes}
 Briefly explain pooling layer, batch norm. Fully connected layer is the same as in regular NNs.
+:::
 
-> In other words, the most common ConvNet architecture follows the pattern:
-INPUT -> [[CONV -> RELU]*N -> POOL?]*M -> [FC -> RELU]*K -> FC
+
+## Pooling layer
+
+![](../img/cnn/maxpooling2.png){width=100%, fig-align="center"}
+
+
+::: {.notes}
+- A convolutional max filter is applied to each depth slice independently
+- 2 hyperparameters:
+    - filter size
+    - stride
+- It resized the input in width and height --- Pooling layer is a downsampling operation
+- No parameters to learn!
+
+- Common to periodically insert a Pooling layer in-between successive Conv layers
+- Its function is to progressively reduce the spatial size of the representation 
+ - this reduces the amount of parameters and computation in the network, and hence also controls overfitting.
+:::
+
+
+<!-- -------------------------------- -->
+
+## An example CNN architecture: VGG-16
+
+ImageNet 2014 challenge (1000 categories)
+
+<div style="text-align: left; width: 100%; margin: 0 auto;">
+![](../img/cnn/vgg16.png){width=100%, fig-align="center"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://www.neuralception.com/objectdetection-convnetbasics" target="_blank">
+Neuralception</a>
+</div>
+</div>
+
+:::{.notes}
+In the example above, Conv and FC layers include a ReLU activation function.
 
 
 > A simple ConvNet for CIFAR-10 classification could have the architecture [INPUT - CONV - RELU - POOL - FC]. 
@@ -253,64 +315,48 @@ POOL layer will perform a downsampling operation along the spatial dimensions (w
 - FC (i.e. fully-connected) layer will compute the class scores, resulting in volume of size [1x1x10], where each of the 10 numbers correspond to a class score, such as among the 10 categories of CIFAR-10. As with ordinary Neural Networks and as the name implies, each neuron in this layer will be connected to all the numbers in the previous volume.
 :::
 
+## An example CNN architecture: ResNet-18
 
-<!-- ## Layers used in CNNs: pooling
-
-- A convolutional max filter is applied to each depth slice independently
-- 2 hyperparameters:
-    - filter size
-    - stride
-- It resized the input in width and height
-- No parameters to learn!
-
-<div style="text-align: right; width: 80%; margin: 0 auto;">
-![](../img/cnn/maxpooling2.png){width=80%, fig-align="center"}
-<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">    
-Figure modified from <a href="https://cs231n.github.io/convolutional-networks/" target="_blank">
-CS231n</a>
+<div style="text-align: center; width: 100%; margin-top: -25%;">
+![](../img/cnn/resnet-18.png){width=100%, style="transform: rotate(-90deg);"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://learnopencv.com/fully-convolutional-image-classification-on-arbitrary-sized-image/" target="_blank">
+LearnOpenCV</a>
 </div>
 </div>
-
-::: {.notes}
-- common to periodically insert a Pooling layer in-between successive Conv layers
-- most common is max pooling, but also mean
-- Its function is to progressively reduce the spatial size of the representation to reduce the amount of parameters and computation in the network, and hence to also control overfitting.
-::: -->
-
-
 
 
 ## Transfer learning
 
-- Few people train a ConvNet from scratch
+- Few people train a CNN from scratch
 
-- Two common scenarios:
-    - Fine-tuning (very common)
-    - As a feature extractor (less common, e.g. [DINOv2](https://dinov2.metademolab.com/))
+- More common scenarios:
+    - Fine-tune a pretrained model 
+        <span style="font-size: 0.8em; color: var(--link-color);">(e.g. backbones for SLEAP, DLC, etc.)</span>
 
-- Or simply run inference! (e.g. human pose estimation)
+    - Use as a feature extractor 
+        <span style="font-size: 0.8em; color: var(--link-color);">(e.g. [DINOv2](https://dinov2.metademolab.com/))</span>
 
+    - Directly use the model for inference 
+        <span style="font-size: 0.8em; color: var(--link-color);">(e.g. [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose))</span>
 
 ::: {.notes}
-> In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. Instead, it is common to pretrain a ConvNet on a very large dataset (e.g. ImageNet, which contains 1.2 million images with 1000 categories), and then use the ConvNet either as an initialization or a fixed feature extractor for the task of interest. 
+> In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. 
 
-You should look at whatever architecture currently works best on ImageNet, download a pretrained model and finetune it on your data. You should rarely ever have to train a ConvNet from scratch 
+> Instead, it is common to pretrain a CNN on a very large dataset (e.g. ImageNet, which contains 1.2 million images with 1000 categories), and then use the CNN either as an initialization or a fixed feature extractor for the task of interest. 
 
-Fine tuning: use the pretrained model as a weight initialization
-> fine-tune the weights of the pretrained network by continuing the backpropagation. It is possible to fine-tune all the layers of the ConvNet, or it’s possible to keep some of the earlier layers fixed (due to overfitting concerns) and only fine-tune some higher-level portion of the network.
+Fine-tuning may refer to continue training the model on a new dataset, including all or only the last few layers (the rest are considered "frozen").
+> It is possible to fine-tune all the layers of the CNN, or it’s possible to keep some of the earlier layers fixed (due to overfitting concerns) and only fine-tune some higher-level portion of the network.
+- Backbone or feature extractor vs head
 
-As a feature extractor: to compute embeddings for your images
-> Take a ConvNet pretrained on ImageNet, remove the last fully-connected layer (this layer’s outputs are the 1000 class scores for a different task like ImageNet), then treat the rest of the ConvNet as a fixed feature extractor for the new dataset. 
-
-You may even be able to simply run inference on a pretrained model (e.g., human pose estimation)
+As a feature extractor: 
+This may refer to the backbone purpose, or more explicitly to using a pretrained network to compute embeddings for your images
+> Take a CNN pretrained on ImageNet, remove the last fully-connected layer, then treat the rest of the ConvNet as a fixed feature extractor for the new dataset. 
 
 :::
 
-
-## Transfer learning
-
-:::{.columns}
-:::{.column style="width: 50%;"}
+<!-- 
+## Transfer learning{data-visibility="hidden"}
 Common architectures:
 
 - ResNet
@@ -321,41 +367,93 @@ Common architectures:
 - UNet
 - ...
 
-:::
-
-:::{.column style="width: 50%;"}
-
-:::{.fragment .fade-in}
-<div style="text-align: left; width: 100%; margin: 0 auto; margin-left: -10%; margin-top: 30%;">
-![](../img/cnn/vgg16.png){width=100%, fig-align="center"}
-<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
-Figure from <a href="https://www.neuralception.com/objectdetection-convnetbasics" target="_blank">
-Neuralception</a>
-</div>
-</div>
-:::
-
-:::
-:::
-
-
-
 ::: {.notes}
 In animal pose estimation, these architectures are often mentioned as possible "backbones"
-
 Head vs backbone
-:::
+::: -->
 
 
 
 ## Data augmentation
 
+::: {.columns}
+::: {.column .nonincremental style="width: 60%;"}
 
+:::{.fragment .fade-in data-fragment-index="0"}
+- To improve performance, train on more and diverse data. 
+:::
 
+:::{.fragment .fade-in data-fragment-index="1"}
+- One easy way: transform the images we already have, **while preserving the label**
+:::
+
+:::{.fragment .fade-in data-fragment-index="4"}
+- The choice depends on the task and the dataset.
+:::
+
+:::{.fragment .fade-in data-fragment-index="6"}
+- Reduces overfitting and improves robustness.
+:::
+
+:::
+
+::: {.column style="width: 35%;"}
+
+:::{.r-stack}
+:::{.fragment .fade-in data-fragment-index="2"}
+:::{.fragment .fade-out data-fragment-index="3"}
+<div style="text-align: right; width: 100%; margin-top: 10%;">
+![](../img/cnn/mnist-RandomShifts.jpeg){width=100%}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
+Random shifts. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
+https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="3"}
+:::{.fragment .fade-out data-fragment-index="5"}
+<div style="text-align: right; width: 100%; margin-top: 10%;">
+![](../img/cnn/mnist-RandomRotations.jpeg){width=100%}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
+Random rotations. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
+https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="5"}
+<div style="text-align: right; width: 100%; margin-top: 10%;">
+![](../img/cnn/mnist-RandomFlips.jpeg){width=100%}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
+Random flips. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
+https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
+</div>
+</div>
+:::
+
+:::
+
+:::
+:::
 
 
 :::{.notes}
 
+Notes from https://www.kaggle.com/code/ryanholbrook/data-augmentation and https://www.ibm.com/think/topics/data-augmentation 
+
+The best way to improve the performance of a model is to train it on more and diverse data. The more examples that are provided during training, the better it will be able to recognise which differences between images matter and which don't.
+
+One easy way to increase the size of the dataset is to transform the images we already have. Specifically, we apply transformations to the images that preserve the label (or modify it in a way that is consistent with the label). For example in our MNIST case, we would apply transformations such that the image would still be classified as the digit it contains. Common examples: rotation, scaling, shearing, flipping, cropping, color jittering, etc.
+
+That way we teach the model to recognise the digit even if it is rotated, scaled, sheared, flipped, cropped, or otherwise transformed.
+
+
+But the choice of what data augmentation to apply depends on the task and the dataset. For example, a rotation of 180 degrees is not a good idea for a digit classification task, as it may confuse the model between 6s and 9s
+
+Data augmentation can reduce overfitting and improve model robustness, esp in cases with small or unbalanced datasets.
 
 :::
 
@@ -373,4 +471,7 @@ Head vs backbone
     - [https://cs231n.github.io/transfer-learning/](https://cs231n.github.io/transfer-learning/)
 - CS4780: Machine Learning for Intelligent Systems
     - [lecture 20 notes](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote20.pdf)
+- On data augmentation:
+    - [https://www.kaggle.com/code/ryanholbrook/data-augmentation](https://www.kaggle.com/code/ryanholbrook/data-augmentation)
+    - [https://www.ibm.com/think/topics/data-augmentation](https://www.ibm.com/think/topics/data-augmentation)
 :::
