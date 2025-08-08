@@ -75,21 +75,17 @@ This section is based on the lecture notes from cs231n available at [cs231n.gith
 
 
 <!-- ########################################### -->
-## Animal pose estimation
+# CV applications in animal behaviour{#cv-applications-in-animal-behaviour}
 
-A note about old-school DL-based CV vs transformer CV models
 
-<!-- link and preview a webpage -->
-::: {style="text-align: center; margin-top: 1em"}
-[sleap](https://sleap.ai/){preview-link="true" style="text-align: center"}
+{{< include slides/06_applications_behaviour.qmd >}}
+
+
+---
+
+<!-- ::: aside
+This section is based on the lecture notes from cs231n available at [cs231n.github.io](https://cs231n.github.io/)
 :::
 
-
-<!-- ## Use a variable several times
-
-Variables defined in the metadata is re-useable anywhere
-
-* {{< meta my-custom-stuff.my-reuseable-variable >}}
-* {{< meta my-custom-stuff.my-reuseable-variable >}} -->
-
+ -->
 

@@ -53,7 +53,7 @@
 - [Forward pass](#forward-pass)
 - [Training and backward pass](#training-and-backward-pass)
 - [Convolutional neural networks](#cnn) 
-- CV applications in animal behaviour
+- [CV applications in animal behaviour](#cv-applications-in-animal-behaviour)
 
 
 
