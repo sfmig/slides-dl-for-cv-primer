@@ -2,7 +2,7 @@
 ## From layer to layer
 
 
-![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+![](img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
 
 
 <!-- Hidden layers -->
@@ -123,7 +123,7 @@ $$
 
 ::: {.fragment .fade-in}
 
-![](../img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+![](img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
 
 :::
 
@@ -216,10 +216,10 @@ $$
 $$
 
 ::: {.r-stack}
-![](../img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+![](img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
 
 
-![](../img/vanilla-nn/relu-w-bias.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+![](img/vanilla-nn/relu-w-bias.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
 
 :::
 
@@ -260,7 +260,7 @@ In an MLP:
 :::
 
 ::: {.column}
-![](../img/vanilla-nn/network-3b1b.png){width=80% style="margin-left: 20%;"}
+![](img/vanilla-nn/network-3b1b.png){width=80% style="margin-left: 20%;"}
 
 <div style="position: absolute; bottom: 50px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/aircAruvnKk?si=PAb025jmbPGYt7hi&t=757" target="_blank">
 But what is a neural network? | Deep learning chapter 1</a></div>
@@ -298,7 +298,7 @@ $\approx$ 13000 weights and biases
 :::
 
 ::: {.column}
-![](../img/vanilla-nn/network-3b1b.png){width=80% style="margin-left: 20%;"}
+![](img/vanilla-nn/network-3b1b.png){width=80% style="margin-left: 20%;"}
 
 <div style="position: absolute; bottom: 50px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/aircAruvnKk?si=PAb025jmbPGYt7hi&t=757" target="_blank">
 But what is a neural network? | Deep learning chapter 1</a></div>
@@ -1063,7 +1063,7 @@ classes).
 
 ::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%"}
 ::: {.fragment .fade-in data-fragment-index="1"}
-![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
+![](img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
 :::
 :::
 
@@ -1078,7 +1078,7 @@ classes).
 :::
 
 ::: {.column style="width: 45%; text-align: centre; margin-left: -7%; margin-top: 5%"}
-![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
+![](img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
 
 
 ::: {.r-stack}

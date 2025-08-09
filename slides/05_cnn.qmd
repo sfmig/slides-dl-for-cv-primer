@@ -8,7 +8,7 @@
 ::: {.r-stack}
 ::: {.fragment .fade-in-then-out}
 <div style="text-align: right; margin: 0 auto;">
-![](../img/cnn/cnn-transforms.png){}
+![](img/cnn/cnn-transforms.png){}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote20.pdf" target="_blank">
 CS4780 lecture notes</a>
@@ -20,7 +20,7 @@ CS4780 lecture notes</a>
 
 ::: {.fragment .fade-in}
 <div style="text-align: right; width: 80%; margin: 0 auto;">
-![](../img/overview/cnn-diagram-1.png){}
+![](img/overview/cnn-diagram-1.png){}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://cs231n.github.io/convolutional-networks" target="_blank">
 cs231n.github.io/convolutional-networks</a>
@@ -124,7 +124,7 @@ The fully connected layer is the same as in regular NNs.
 :::{.fragment .fade-in data-fragment-index="0"}
 :::{.fragment .fade-out data-fragment-index="1"}
 <div style="text-align: right; width: 100%; margin: 0 auto;">
-![](../img/overview/cnn-diagram-2.png){width=100%, fig-align="center"}
+![](img/overview/cnn-diagram-2.png){width=100%, fig-align="center"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure modified from <a href="https://cs231n.github.io/convolutional-networks/" target="_blank">
 CS231n</a>
@@ -136,7 +136,7 @@ CS231n</a>
 :::{.fragment .fade-in data-fragment-index="1"}
 :::{.fragment .fade-out data-fragment-index="3"}
 <div style="text-align: right; width: 100%; margin: 0 auto;">
-![](../img/cnn/convolution-n-channels.png){width=100%, fig-align="center"}
+![](img/cnn/convolution-n-channels.png){width=100%, fig-align="center"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure modified from <a href="https://cs231n.github.io/convolutional-networks/" target="_blank">
 CS231n</a>
@@ -148,7 +148,7 @@ CS231n</a>
 :::{.fragment .fade-in data-fragment-index="3"}
 :::{.fragment .fade-out data-fragment-index="4"}
 <div style="text-align: right; width: 80%; margin: 0 auto;">
-![](../img/cnn/padding_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
+![](img/cnn/padding_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: 50px;">
 Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" target="_blank">Convolution arithmetic</a>
 </div>
@@ -158,7 +158,7 @@ Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" target="_blan
 
 :::{.fragment .fade-in data-fragment-index="4"}
 <div style="text-align: right; width: 100%; margin: 0 auto;">
-![](../img/cnn/convolution-sharing.png){width=100%, fig-align="center"}
+![](img/cnn/convolution-sharing.png){width=100%, fig-align="center"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure modified from <a href="https://cs231n.github.io/convolutional-networks/" target="_blank">
 CS231n</a>
@@ -216,7 +216,7 @@ A few hyperparameters:
 :::{.r-stack}
 :::{.fragment .fade-in-then-out}
 <div style="text-align: right; width: 80%; margin: 0 auto;">
-![](../img/cnn/same_padding_no_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
+![](img/cnn/same_padding_no_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: 50px;">
 Stride = 1. Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" target="_blank">Convolution arithmetic</a>
 </div>
@@ -226,7 +226,7 @@ Stride = 1. Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" t
 
 :::{.fragment .fade-in}
 <div style="text-align: right; width: 80%; margin: 0 auto;">
-![](../img/cnn/padding_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
+![](img/cnn/padding_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: 50px;">
 Stride = 2. Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" target="_blank">Convolution arithmetic</a>
 </div>
@@ -271,7 +271,7 @@ Briefly explain pooling layer, batch norm. Fully connected layer is the same as 
 
 ## Pooling layer
 
-![](../img/cnn/maxpooling2.png){width=100%, fig-align="center"}
+![](img/cnn/maxpooling2.png){width=100%, fig-align="center"}
 
 
 ::: {.notes}
@@ -295,7 +295,7 @@ Briefly explain pooling layer, batch norm. Fully connected layer is the same as 
 ImageNet 2014 challenge (1000 categories)
 
 <div style="text-align: left; width: 100%; margin: 0 auto;">
-![](../img/cnn/vgg16.png){width=100%, fig-align="center"}
+![](img/cnn/vgg16.png){width=100%, fig-align="center"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://www.neuralception.com/objectdetection-convnetbasics" target="_blank">
 Neuralception</a>
@@ -318,7 +318,7 @@ POOL layer will perform a downsampling operation along the spatial dimensions (w
 ## An example CNN architecture: ResNet-18
 
 <div style="text-align: center; width: 100%; margin-top: -25%;">
-![](../img/cnn/resnet-18.png){width=100%, style="transform: rotate(-90deg);"}
+![](img/cnn/resnet-18.png){width=100%, style="transform: rotate(-90deg);"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://learnopencv.com/fully-convolutional-image-classification-on-arbitrary-sized-image/" target="_blank">
 LearnOpenCV</a>
@@ -403,7 +403,7 @@ Head vs backbone
 :::{.fragment .fade-in data-fragment-index="2"}
 :::{.fragment .fade-out data-fragment-index="3"}
 <div style="text-align: right; width: 100%; margin-top: 10%;">
-![](../img/cnn/mnist-RandomShifts.jpeg){width=100%}
+![](img/cnn/mnist-RandomShifts.jpeg){width=100%}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
 Random shifts. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
 https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
@@ -415,7 +415,7 @@ https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
 :::{.fragment .fade-in data-fragment-index="3"}
 :::{.fragment .fade-out data-fragment-index="5"}
 <div style="text-align: right; width: 100%; margin-top: 10%;">
-![](../img/cnn/mnist-RandomRotations.jpeg){width=100%}
+![](img/cnn/mnist-RandomRotations.jpeg){width=100%}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
 Random rotations. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
 https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
@@ -426,7 +426,7 @@ https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
 
 :::{.fragment .fade-in data-fragment-index="5"}
 <div style="text-align: right; width: 100%; margin-top: 10%;">
-![](../img/cnn/mnist-RandomFlips.jpeg){width=100%}
+![](img/cnn/mnist-RandomFlips.jpeg){width=100%}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
 Random flips. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
 https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>

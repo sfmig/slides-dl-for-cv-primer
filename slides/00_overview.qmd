@@ -5,7 +5,7 @@
 ::: {.column style="text-align: center; width: 50%;"}
 ::: {.fragment .fade-in}
 <div style="font-size: 0.6em;">Vanilla neural network</div>
-![](../img/overview/vanilla-nn.png){width=90%}
+![](img/overview/vanilla-nn.png){width=90%}
 
 :::
 :::
@@ -14,7 +14,7 @@
 ::: {.column style="text-align: center; width: 50%;"}
 ::: {.fragment .fade-in}
 <div style="font-size: 0.6em;">Convolutional neural network</div>
-![](../img/overview/cnn-diagram-1.png){width=90%}
+![](img/overview/cnn-diagram-1.png){width=90%}
 
 :::
 :::
@@ -32,7 +32,7 @@
 ::: {.column style="text-align: center; width: 40%;"}
 ::: {.fragment .fade-in}
 <div style="font-size: 0.6em;">Applications to animal behaviour</div>
-![](../img/overview/pose-estimation.png){width=40%}
+![](img/overview/pose-estimation.png){width=40%}
 
 <div style="position: absolute; bottom: 0px; right: 0px; font-size: 0.3em; color: var(--link-color); max-width: 300px; text-align: right;">Figures from <a href="https://cs231n.github.io/convolutional-networks" target="_blank">cs231n.github.io/convolutional-networks</a> and <a href="https://movement.neuroinformatics.dev" target="_blank">movement.neuroinformatics.dev</a></div>
 
