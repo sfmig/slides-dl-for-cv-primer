@@ -1,0 +1,221 @@
+<!-- A note about old-school DL-based CV vs transformer CV models  -->
+## CV tasks in animal behaviour
+
+. . . 
+
+<br>
+
+What are _tasks_?
+
+- A task is a problem that we want to solve
+- There may be multiple ways to solve a task
+- DL has proven to be very powerful to solve many vision tasks
+
+
+:::{.notes}
+- Tasks are goals or problems that we want (algorithms or models) to solve
+- There may be multiple ways to solve a task
+- Deep learning is a powerful tool to solve many vision tasks
+- The boundaries between tasks are not always clear cut
+:::
+
+
+## CV tasks in animal behaviour
+
+:::{.columns}
+:::{.column .nonincremental style="width: 45%;line-height: 0.8;"}
+:::{.fragment .fade-in data-fragment-index="1"}
+- Image classification
+:::
+
+:::{.fragment .fade-in data-fragment-index="2"}
+- Detection
+:::
+
+:::{.fragment .fade-in data-fragment-index="3"}
+- Segmentation
+:::
+
+:::{.fragment .fade-in data-fragment-index="5"}
+- Pose estimation
+:::
+
+:::{.fragment .fade-in data-fragment-index="6"}
+- Tracking
+:::
+
+:::{.fragment .fade-in data-fragment-index="7"}
+- Behaviour classification
+:::
+
+:::{.fragment .fade-in data-fragment-index="8"}
+- Re-identification
+:::
+
+:::{.fragment .fade-in data-fragment-index="9"}
+- ...
+:::
+
+:::
+
+::: {.column style="width: 15%;"}
+:::
+
+:::{.column style="width: 40%;"}
+:::{.r-stack}
+
+<!-- -- Classification example -->
+:::{.fragment .fade-in data-fragment-index="1"}
+:::{.fragment .fade-out data-fragment-index="2"}
+<div style="text-align: right; width: 100%;">
+_Which species are present in this image?_
+![](../img/behaviour/ss_sample.jpg){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px; text-align: right;">
+Figure from <a href="https://lila.science/datasets/snapshot-serengeti" target="_blank">
+Snapshot Serengeti dataset</a>
+</div>
+</div>
+:::
+:::
+
+
+<!-- -- Detection example -->
+:::{.fragment .fade-in data-fragment-index="2"}
+:::{.fragment .fade-out data-fragment-index="3"}
+<div style="text-align: right; width: 100%;">
+_Where is the animal in this image?_
+![](../img/behaviour/sample_image_armadillo.jpg){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://github.com/google/cameratrapai" target="_blank">
+and there from the Orinoquía Camera Traps dataset (University of Minnesota).</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="3"}
+:::{.fragment .fade-out data-fragment-index="4"}
+<div style="text-align: right; width: 100%;">
+_Where is the animal in this image?_
+![](../img/behaviour/crab-detections.png){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://github.com/SainsburyWellcomeCentre/crabs-exploration" target="_blank">
+Crabs exploration project</a>
+</div>
+</div>
+:::
+:::
+
+
+<!-- -- Instance segmentation example -->
+:::{.fragment .fade-in data-fragment-index="4"}
+:::{.fragment .fade-out data-fragment-index="5"}
+<div style="text-align: right; width: 100%;">
+_Which pixels are <span style="color: magenta;">"mouse"</span>?_
+![](../img/behaviour/semantic-segmentation.png){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Sample image from <a href="https://sainsburywellcomecentre.github.io/aeon_docs/index.html" target="_blank">
+Aeon project</a>
+</div>
+</div>
+:::
+:::
+
+
+<!-- -- Semantic segmentation example -->
+:::{.fragment .fade-in data-fragment-index="5"}
+:::{.fragment .fade-out data-fragment-index="6"}
+<div style="text-align: right; width: 100%;">
+_Which pixels are <span style="color: blue;">"mouse 1"</span>?_
+![](../img/behaviour/instance-segmentation.png){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Sample image from <a href="https://sainsburywellcomecentre.github.io/aeon_docs/index.html" target="_blank">
+Aeon project</a>
+</div>
+</div>
+:::
+:::
+
+
+<!-- -- Pose estimation example -->
+:::{.fragment .fade-in data-fragment-index="6"}
+:::{.fragment .fade-out data-fragment-index="7"}
+<div style="text-align: right; width: 100%;">
+_Where are the keypoints?_
+![](../img/behaviour/superanimal-fox.png){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://www.nature.com/articles/s41467-024-48792-2" target="_blank">
+Ye et al. (2024) _SuperAnimal pretrained pose estimation models for behavioral analysis_</a>
+</div>
+</div>
+:::
+:::
+
+<!-- -- Tracking example -->
+:::{.fragment .fade-in data-fragment-index="7"}
+:::{.fragment .fade-out data-fragment-index="8"}
+<div style="text-align: right; width: 100%;">
+_How do detections in frame f map to frame f+1?_
+![](../img/behaviour/tracking-bees-sleap.png){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://www.nature.com/articles/s41592-022-01426-1" target="_blank">
+Pereira et al. (2022) _SLEAP: A deep learning system for multi-animal pose tracking_</a>
+</div>
+</div>
+:::
+:::
+
+<!-- -- Behaviour classification example -->
+
+:::{.fragment .fade-in data-fragment-index="8"}
+:::{.fragment .fade-out data-fragment-index="9"}
+<div style="text-align: right; width: 100%;">
+_What is the behaviour of the animal in this frame/clip?_
+![](../img/behaviour/syllables_small.png){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://dattalab.github.io/moseq2-website" target="_blank">
+https://dattalab.github.io/moseq2-website/</a>
+</div>
+</div>
+:::
+:::
+
+
+<!-- -- Re-identification example -->
+
+:::{.fragment .fade-in data-fragment-index="9"}
+:::{.fragment .fade-out data-fragment-index="10"}
+<div style="text-align: right; width: 100%;">
+_Which individual is the animal in this frame?_
+![](../img/behaviour/happy-whale.jpg){width=100%;"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://happywhale.com/home" target="_blank">
+Happy Whale dataset</a>
+</div>
+</div>
+:::
+:::
+
+
+:::
+
+:::
+:::
+
+
+:::{.notes}
+- Image classification, can be multiclass
+- Detection, localise an object in the image. Can be linked with classification too. Usually bbox or centroid.
+- Pose estimation, where are the user-defined keypoints of the animal in this image?
+- Behaviour classification, or action segmentation or action recognition
+- Re-identification, identify the same animal across frames/clips
+
+Many more tasks! But these are the most commonly used in animal behaviour.
+:::
+
+
+<!-- ## A quick note on transformers -->
+
+<!-- ## Additional resources
+
+- [A primer on motion capture with deep learning: principles, pitfalls, and perspectives](https://www.cell.com/neuron/pdf/S0896-6273(20)30717-0.pdf) -->

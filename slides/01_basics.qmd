@@ -1,0 +1,333 @@
+<!-- ------------------ -->
+## What is <strong style="color: #daa520;">Deep Learning</strong>? 
+<br> 
+
+. . . 
+
+<text style="color: #daa520;">Deep Learning</text> is:
+
+- an approach to <strong style="color: blue;">Artificial Intelligence</strong>
+- a type of <strong style="color: #32cd32;">Machine Learning</strong> that uses artificial neural networks
+
+::: {.notes}
+Before we dive into the deep learning, let's start with some key definitions.
+
+We are going to go through each of the statements that relate these concepts that
+often go together.
+
+Deep Learning is an approach to Artificial Intelligence.
+
+Deep Learning is a type of Machine Learning based on artificial neural networks.
+- ML enables computers to improve with experience and data
+:::
+
+
+<!-- ------------------ -->
+## Why is it so popular?
+
+<br> 
+
+. . . 
+
+<text style="color: #daa520;">Deep Learning</text> achieves great power and flexibility by:
+
+- gathering **knowledge from experience**
+- being **compositional**
+
+
+
+::: {.notes}
+Deep Learning achieves great power and flexbility by:
+1. Gathering knowledge from experience --> humans don’t formally specify the required knowledge
+2. Being compositional --> representing the world as a nested hierarchy of concepts [many layers, “Deep”]
+
+We are going to go through each of the statements that relate these concepts that
+often go together.
+:::
+
+
+
+<!-- ------------------ -->
+## What is <strong style="color: blue;">Artificial Intelligence</strong>? {data-visibility="hidden"}
+
+<br>
+
+. . .
+
+From [_Wikipedia_](https://en.wikipedia.org/wiki/Artificial_intelligence):
+
+- _Intelligence demonstrated by **machines**_
+- _The study of **intelligent agents**_
+- _Machines that mimic **human cognitive functions**_
+
+::: {.notes}
+- Intelligence demonstrated by machines, in contrast to the natural
+intelligence displayed by humans
+- Agents: any device that perceives its environment and takes actions to maximize
+its chance of successfully achieving its goals
+- human cognitive functions such as such as "learning" and "problem solving".
+:::
+
+<!-- ------------------ -->
+## What is <strong style="color: blue;">Artificial Intelligence</strong>?
+
+. . . 
+
+<br>
+
+Tesler's theorem:
+
+> "AI is whatever hasn't been done yet."
+
+. . .
+
+
+::: {.columns .incremental}
+
+::: {.column style="text-align: center; width: 50%; font-size: 0.3em; "}
+![](../img/basics/ocr-example.png){width=50%}
+
+Figure from [stackoverflow.com](https://stackoverflow.com/questions/55864694/ocr-replace-recognized-text-with-its-translation-like-google-translate)
+
+:::
+
+::: {.column style="text-align: center; width: 50%; font-size: 0.3em;"}
+::: {.fragment .fade-in}
+![](../img/basics/waymo.jpg){width=100%}
+
+Figure from [Waymo](https://www.waymo.com)
+:::
+:::
+:::
+
+
+::: {.notes}
+From Wikipedia
+‐ As machines become increasingly capable, tasks considered to require
+"intelligence" are often removed from the definition of AI, a phenomenon known as
+the AI effect.
+‐ For instance, optical character recognition is frequently excluded from things
+considered to be AI, having become a routine technology.
+‐ Modern machine capabilities generally classified as AI include
+successfully understanding human speech, competing at the highest level in strategic game systems (such as chess and Go), 
+autonomously operating cars, intelligent routing in content delivery networks, and military simulations.
+:::
+
+
+<!-- ------- -->
+## <strong style="color: #daa520;">Deep Learning</strong> as an approach to <strong style="color: blue;">Artificial Intelligence</strong>
+
+<br>
+
+
+- <text style="color: blue;">Early AI</text>: problems that were intellectually challenging for humans, but easy for computers
+- **True challenge**: tasks that are easy for humans but hard to describe formally
+- <text style="color: #daa520;">DL</text> has proven very powerful in solving these **_intuitive problems_** within <text style="color: blue;">AI</text>.
+
+
+::: {.notes}
+:::
+
+<!-- ------------------ -->
+
+## <strong style="color: #daa520;">Deep Learning</strong> is a subset of <strong style="color: #32cd32;">Machine Learning</strong>
+
+::: {.columns}
+::: {.column style="width: 60%"}
+- <text style="color: #32cd32;">ML</text> allows computers to tackle problems **using knowledge (data) from the real world**
+- Algorithms depend heavily on the **representation** of the data
+:::
+
+
+::: {.column .fragment .fade-in style="text-align: right; width: 35%; font-size: 0.3em;"}
+![](../img/basics/dl-as-ml-type-part-1.png){width=100%}
+
+Figure from [Deep Learning book](https://www.deeplearningbook.org/)
+:::
+:::
+
+::: {.notes}
+How "traditional" ML algorithms depend heavily on the representation of the data
+
+- We can see how representation is relevant also in everyday life: it is much easier for us to 
+do arithmetics on arabic numerals vs roman numerals ("People can easily perform arithmetic
+on Arabic numerals but ﬁnd arithmetic on Roman numerals much more timeconsuming.") Another
+nice example is face recognition ([Thatcher effect](https://en.wikipedia.org/wiki/Thatcher_effect))
+
+- E.g. cesarean delivery problem, the algorithm takes certain pieces of
+information that represent the patient adequately for the problem.
+(“features”). Logistic regression learns how these features correlate with various outcomes
+but it cannot influence how these features are defined
+:::
+
+<!-- ------------------ -->
+
+## <strong style="color: #daa520;">Deep Learning</strong> is a subset of <strong style="color: #32cd32;">Machine Learning</strong>
+
+
+::: {.columns}
+::: {.column .nonincremental style="width: 60%"}
+- <text style="color: #32cd32;">ML</text> allows computers to tackle problems **using knowledge (data) from the real world**
+- Algorithms depend heavily on the **representation** of the data
+- <text style="color: #daa520;">DL</text> is a kind of **representation learning**
+:::
+
+
+
+::: {.column style="text-align: right; width: 35%; font-size: 0.3em;"}
+![](../img/basics/dl-as-ml-type-part-2.png){width=100%}
+
+Figure from [Deep Learning book](https://www.deeplearningbook.org/)
+:::
+:::
+
+::: {.notes}
+- Sometimes hand‐designed representations are easy to obtain, but often it is difficult
+to know what features to extract. E.g., detecting cars in photographs
+
+- Representation learning: machine learning discipline that aims to discover not only the mapping 
+from representation to output but also the representation itself. 
+
+- Learnt representations often perform better and make AI systems easier to
+adapt to new tasks. E.g., autoencoder
+:::
+
+
+<!-- ------------------ -->
+## <strong style="color: #daa520;">Deep Learning</strong> is compositional {data-visibility="hidden"}
+
+<br>
+
+::: {.columns}
+::: {.column style="width: 60%"}
+- It is often difficult to know **which features to extract**
+
+- <text style="color: #daa520;">DL</text> solves this by introducing a **hierarchical representation** of the data
+:::
+
+::: {.column style="text-align: right; width: 35%; font-size: 0.3em;"}
+![](../img/basics/dl-as-ml-type-part-2.png){width=100%}
+
+Figure from [Deep Learning book](https://www.deeplearningbook.org/)
+:::
+:::
+
+::: {.notes}
+It may also be that learning an adequate representation is as complicated as solving
+the original problem!
+
+DL solves this by introducing a **hierarchical representation** of the data
+:::
+
+
+<!-- ------------------ -->
+## <strong style="color: #daa520;">Deep Learning</strong> is compositional
+
+
+::: {.columns}
+::: {.column style="width: 70%; font-size: 0.3em;"}
+
+![](../img/basics/dl-compositional.png){width=90%}
+
+Figure from [Deep Learning book](https://www.deeplearningbook.org/)
+
+:::
+
+::: {.column style="width: 20%; font-size: 0.4em; color: #daa520;"}
+
+
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 84%; right: 1%; background-color: transparent; padding: 10px; border-radius: 5px; border: 2px solid #daa520;">
+Variables that we are able to observe.
+</div>
+:::
+
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 52%; right: 1%; background-color: transparent; padding: 10px; border-radius: 5px; border: 2px solid #daa520;">
+Extraction of increasingly abstract features. 
+
+"Hidden" (i.e., not observable)
+</div>
+:::
+
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 22%; right: 1%; background-color: transparent; padding: 10px; border-radius: 5px; border: 2px solid #daa520;">
+Recognition of objects in the image
+</div>
+:::
+
+
+:::
+:::
+
+
+::: {.notes}
+DL solves this by introducing a **hierarchical representation** of the data
+- How does a computer go about understanding the meaning of raw sensory
+input data? An image is just a collection of pixel values
+- DL breaks down the mapping into a series of nested simple mappings, each
+described by a different layer of the network
+
+:::
+
+
+<!-- ------------------ -->
+
+## Recap
+
+. . .
+
+::: {.columns .nonincremental}
+::: {.column .nonincremental style="width: 55%"}
+<text style="color: #daa520;">Deep Learning</text> is: 
+
+- an approach to <text style="color: blue;">AI</text>
+- a subset of <text style="color: #32cd32;">ML</text>
+- well-suited to solve _intuitive_ problems because learns from data and represents the world hierarchically
+
+<!-- Why is <text style="color: #daa520;">Deep Learning</text> well-suited to solve these more intuitive problems?
+
+- Gathers knowledge from experience
+- Represents the world hierarchically -->
+
+:::
+
+::: {.column .nonincremental style="width: 5%"}
+:::
+
+::: {.column .nonincremental style="width: 40%; font-size: 0.3em; text-align: center;"}
+::: {.fragment .fade-in}
+![](../img/basics/ai-venn-diagram.png){width=100%}
+
+Figure modified from [Deep Learning book](https://www.deeplearningbook.org/)
+:::
+:::
+:::
+
+
+
+
+
+## Additional references
+::: {.nonincremental style="font-size: 0.6em;"}
+
+- On the strengths of deep learning:    
+    - [Brains, Minds and Machines summer school 2017 - Deep learning tutorial](https://youtu.be/RTTQctLuTVk?t=507)
+
+- Early AI: 
+    - [Early Work in AI](https://web.archive.org/web/20200814051610/http://www2.psych.utoronto.ca/users/reingold/courses/ai/early.html)
+    - [Logic Theorist - wikipedia](https://en.wikipedia.org/wiki/Logic_Theorist)
+
+- On the challenge of solving "intuitive" tasks: 
+    - [Fei‐Fei Li’s lecture on cs231n 2017](https://youtu.be/vT1JzLTH4G4?list=PL3FW7Lu3i5JvHM8ljYj‐zLfQRF3EO8sYv&t=855)
+    - [The Summer Vision Project](http://people.csail.mit.edu/brooks/idocs/AIM‐100.pdf)
+
+- Deep Learning for Computer Vision course (University of Michigan)
+    - [Winter 2019 (lecture videos public)](https://youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r&si=a74CaQT_KGKz2rbP)
+    - [Winter 2022 (lecture videos not available)](https://web.eecs.umich.edu/~justincj/teaching/eecs498/WI2022/)
+
+- CS231n: Convolutional Neural Networks for Visual Recognition (Stanford University)
+    - [Winter 2017 (lecture videos public)](https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv)
+    - [Spring 2025 (lecture videos not available)](https://cs231n.stanford.edu/)
+
+:::
