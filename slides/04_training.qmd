@@ -6,7 +6,7 @@
 ::: {.r-stack}
 ::: {.fragment .fade-in data-fragment-index="2"}
 ::: {.fragment .fade-out data-fragment-index="5"}
-( ![](../img/vanilla-nn/input-2.png){width=30%} , <span style="color: rgb(213, 6, 6);">2</span>)
+( ![](img/vanilla-nn/input-2.png){width=30%} , <span style="color: rgb(213, 6, 6);">2</span>)
 
 <span style="color: rgb(213, 6, 6);">Labelled data</span>
 
@@ -23,7 +23,7 @@ Supervised learning
 :::
 
 ::: {.fragment .fade-in data-fragment-index="5"}
-( ![](../img/training/train-set.png){width=30%} , <span style="color: rgb(213, 6, 6);">...</span>)
+( ![](img/training/train-set.png){width=30%} , <span style="color: rgb(213, 6, 6);">...</span>)
 
 <span style="color: rgb(213, 6, 6);">Training set</span>
 
@@ -45,7 +45,7 @@ Supervised learning
 
 
 ::: {.column style="width: 45%; text-align: centre; margin-left: -7%; margin-top: 5%"}
-![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
+![](img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
 :::
 
 
@@ -112,7 +112,7 @@ abstraction of concepts, we may be able to train a network that generalises beyo
 ::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%; font-size: 40px; text-align: center;"}
 
 ::: {.fragment .fade-in data-fragment-index="1"}
-![](../img/training/test-set.png){width=60%}
+![](img/training/test-set.png){width=60%}
 
 <span style="color: rgb(1, 1, 1);">Test set</span>
 
@@ -133,7 +133,7 @@ abstraction of concepts, we may be able to train a network that generalises beyo
 
 
 ::: {.column style="width: 45%; text-align: centre; margin-left: -7%; margin-top: 5%"}
-![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
+![](img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
 
 ::: {.fragment .fade-in data-fragment-index="0"}
 <span style="font-size: 100px; color: rgb(210, 7, 7); position: absolute; top: 45%; left: 29%; transform: rotate(-30deg);"> TRAINED </span>
@@ -153,7 +153,7 @@ abstraction of concepts, we may be able to train a network that generalises beyo
 
 ::: {.column style="width: 30%; margin-top: 20%; margin-left: -8%; text-align: center;"}
 ::: {.fragment .fade-in data-fragment-index="3"}
-![](../img/training/accuracy.png){width=40%} 
+![](img/training/accuracy.png){width=40%} 
 
 <span style="color: rgb(1, 1, 1);">Accuracy</span>
 
@@ -189,11 +189,11 @@ We test this by doing the following: after we train the network, we present it w
 
 ::: {.r-stack}
 ::: {.fragment .fade-in data-fragment-index="1"}
-![](../img/training/train-test-split.png){width=100%}
+![](img/training/train-test-split.png){width=100%}
 :::
 
 ::: {.fragment .fade-in data-fragment-index="2"} 
-![](../img/training/train-test-split-heart.png){width=100%}
+![](img/training/train-test-split-heart.png){width=100%}
 :::
 :::
 
@@ -246,25 +246,25 @@ As we said the test set as a very precious resource, as we can use it as a proxy
 
 ::: {.column style="width: 50%;"}
 
-![](../img/training/train-test-split.png){width=100%}
+![](img/training/train-test-split.png){width=100%}
 
 
 :::{.r-stack}
 ::: {.fragment .fade-in data-fragment-index="1"}
 ::: {.fragment .fade-out data-fragment-index="2"}
-![](../img/training/train-val-test-split-arrow.png){width=100%}
+![](img/training/train-val-test-split-arrow.png){width=100%}
 :::
 :::
 
 ::: {.fragment .fade-in data-fragment-index="2"}
-![](../img/training/train-val-test-split-arrow-heart.png){width=100%}
+![](img/training/train-val-test-split-arrow-heart.png){width=100%}
 :::
 
 
 :::
 
 ::: {.fragment .fade-in data-fragment-index="3"}
-![](../img/training/k-fold.png){width=100%}
+![](img/training/k-fold.png){width=100%}
 :::
 
 :::
@@ -314,17 +314,17 @@ In k-fold validation: The training set is split into folds (for example 5 folds)
 ::: {.r-stack style="margin-left: 20%; margin-top: 5%;"}
 
 ::: {.fragment .fade-out data-fragment-index="1"}
-![](../img/training/training-one-sample.png){width=80% style="border: 1px solid black;"}
+![](img/training/training-one-sample.png){width=80% style="border: 1px solid black;"}
 :::
 
 ::: {.fragment .fade-in data-fragment-index="1"}
 ::: {.fragment .fade-out data-fragment-index="3"}
-![](../img/training/loss-intro.png){width=80% style="border: 1px solid black;"}
+![](img/training/loss-intro.png){width=80% style="border: 1px solid black;"}
 :::
 :::
 
 ::: {.fragment .fade-in data-fragment-index="3"}
-![](../img/training/gd-intro.png){width=80% style="border: 1px solid black;"}
+![](img/training/gd-intro.png){width=80% style="border: 1px solid black;"}
 :::
 
 :::
@@ -354,7 +354,7 @@ loss, which is a popular choice but there are many other alternative loss functi
 ::: {.columns}
 ::: {.column style="width: 15%; margin-top: 18%; margin-left: 0%"}
 ::: {.fragment .fade-in data-fragment-index="1"}
-![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
+![](img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
 :::
 :::
 
@@ -362,7 +362,7 @@ loss, which is a popular choice but there are many other alternative loss functi
 
 ::: {.column style="width: 40%; margin-left: 5%"}
 ::: {.fragment .fade-in data-fragment-index="2"}
-![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=100%}
+![](img/vanilla-nn/mlp-3b1b-diagram.png){width=100%}
 :::
 
 ::: {.fragment .fade-in data-fragment-index="3"}
@@ -410,7 +410,7 @@ loss, which is a popular choice but there are many other alternative loss functi
 
 ::: {.column style="width: 10%; margin-top: 20%; margin-left: -15%;"}
 ::: {.fragment .fade-in data-fragment-index="6"}
-![](../img/training/softmax.png){width=100%}
+![](img/training/softmax.png){width=100%}
 :::
 :::
 
@@ -420,7 +420,7 @@ loss, which is a popular choice but there are many other alternative loss functi
 <div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 0px;">Probabilities</div>
 
 <div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
-![](../img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+![](img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
 </div>
 
 :::
@@ -482,20 +482,20 @@ This is exactly what the softmax function does.
 :::
 
 ::: {.column style="width: 10%; margin-top: 20%; margin-left: -10%;"}
-![](../img/training/softmax.png){width=100%}
+![](img/training/softmax.png){width=100%}
 :::
 
 ::: {.column style="width: 15%; margin-top: 8%; margin-left: 2%;"}
 <div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: -30px;">Probabilities _p̂_</div>
 <div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
-![](../img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+![](img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
 </div>
 
 :::
 
 ::: {.column style="width: 10%; margin-top: 21%; margin-left: -4%;"}
 ::: {.fragment .fade-in data-fragment-index="3"}
-![](../img/training/cross-entropy.png){width=100%}
+![](img/training/cross-entropy.png){width=100%}
 :::
 :::
 
@@ -504,7 +504,7 @@ This is exactly what the softmax function does.
 ::: {.fragment .fade-in data-fragment-index="2"}
 <div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: -30px;">Ground truth _p_</div>
 <div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
-![](../img/training/gt-prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+![](img/training/gt-prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
 </div>
 
 :::
@@ -611,7 +611,7 @@ we'll see that in more detail in a few slides.
 
 ::: {.r-stack}
 ::: {.fragment .fade-in data-fragment-index="0"}
-![](../img/training/optim-1d-before.png){width=70%, fig-align="center"}
+![](img/training/optim-1d-before.png){width=70%, fig-align="center"}
 
 <div style="position: absolute; bottom: 30px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/IHZwWFHWa-w?si=Ag4HuuL_IqxIZDkq&t=363" target="_blank">
 Gradient descent, how neural networks learn | Deep Learning Chapter 2</a></div>
@@ -619,7 +619,7 @@ Gradient descent, how neural networks learn | Deep Learning Chapter 2</a></div>
 :::
 
 ::: {.fragment .fade-in data-fragment-index="1"}
-![](../img/training/optim-1d.png){width=70%, fig-align="center"}
+![](img/training/optim-1d.png){width=70%, fig-align="center"}
 :::
 
 
@@ -657,7 +657,7 @@ Note that there is no guarantee that we will find the global minimum, that is a 
 ## Optimisation: intuition
 
 <div style="width: 75%; margin: 0 auto; text-align: right;">
-![](../img/training/optim-2d.png){width=100%}
+![](img/training/optim-2d.png){width=100%}
 
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://youtu.be/IHZwWFHWa-w?si=LZGSqvBlbHsSIqx5&t=511" target="_blank">
@@ -725,7 +725,7 @@ We now have a good intuition on how the optimisation problem is solved, and how 
 ## Seven optimisation takeaways!
 
 <div style="width: 65%; margin: 0 auto; text-align: right;">
-![](../img/training/babysitting.png){width=100%}
+![](img/training/babysitting.png){width=100%}
 
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://cs231n.github.io/neural-networks-3/#update" target="_blank">

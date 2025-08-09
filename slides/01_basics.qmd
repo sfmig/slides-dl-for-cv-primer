@@ -85,7 +85,7 @@ Tesler's theorem:
 ::: {.columns .incremental}
 
 ::: {.column style="text-align: center; width: 50%; font-size: 0.3em; "}
-![](../img/basics/ocr-example.png){width=50%}
+![](img/basics/ocr-example.png){width=50%}
 
 Figure from [stackoverflow.com](https://stackoverflow.com/questions/55864694/ocr-replace-recognized-text-with-its-translation-like-google-translate)
 
@@ -93,7 +93,7 @@ Figure from [stackoverflow.com](https://stackoverflow.com/questions/55864694/ocr
 
 ::: {.column style="text-align: center; width: 50%; font-size: 0.3em;"}
 ::: {.fragment .fade-in}
-![](../img/basics/waymo.jpg){width=100%}
+![](img/basics/waymo.jpg){width=100%}
 
 Figure from [Waymo](https://www.waymo.com)
 :::
@@ -140,7 +140,7 @@ autonomously operating cars, intelligent routing in content delivery networks, a
 
 
 ::: {.column .fragment .fade-in style="text-align: right; width: 35%; font-size: 0.3em;"}
-![](../img/basics/dl-as-ml-type-part-1.png){width=100%}
+![](img/basics/dl-as-ml-type-part-1.png){width=100%}
 
 Figure from [Deep Learning book](https://www.deeplearningbook.org/)
 :::
@@ -175,7 +175,7 @@ but it cannot influence how these features are defined
 
 
 ::: {.column style="text-align: right; width: 35%; font-size: 0.3em;"}
-![](../img/basics/dl-as-ml-type-part-2.png){width=100%}
+![](img/basics/dl-as-ml-type-part-2.png){width=100%}
 
 Figure from [Deep Learning book](https://www.deeplearningbook.org/)
 :::
@@ -206,7 +206,7 @@ adapt to new tasks. E.g., autoencoder
 :::
 
 ::: {.column style="text-align: right; width: 35%; font-size: 0.3em;"}
-![](../img/basics/dl-as-ml-type-part-2.png){width=100%}
+![](img/basics/dl-as-ml-type-part-2.png){width=100%}
 
 Figure from [Deep Learning book](https://www.deeplearningbook.org/)
 :::
@@ -227,7 +227,7 @@ DL solves this by introducing a **hierarchical representation** of the data
 ::: {.columns}
 ::: {.column style="width: 70%; font-size: 0.3em;"}
 
-![](../img/basics/dl-compositional.png){width=90%}
+![](img/basics/dl-compositional.png){width=90%}
 
 Figure from [Deep Learning book](https://www.deeplearningbook.org/)
 
@@ -297,7 +297,7 @@ described by a different layer of the network
 
 ::: {.column .nonincremental style="width: 40%; font-size: 0.3em; text-align: center;"}
 ::: {.fragment .fade-in}
-![](../img/basics/ai-venn-diagram.png){width=100%}
+![](img/basics/ai-venn-diagram.png){width=100%}
 
 Figure modified from [Deep Learning book](https://www.deeplearningbook.org/)
 :::

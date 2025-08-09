@@ -69,7 +69,7 @@ What are _tasks_?
 :::{.fragment .fade-out data-fragment-index="2"}
 <div style="text-align: right; width: 100%;">
 _Which species are present in this image?_
-![](../img/behaviour/ss_sample.jpg){width=100%;"}
+![](img/behaviour/ss_sample.jpg){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px; text-align: right;">
 Figure from <a href="https://lila.science/datasets/snapshot-serengeti" target="_blank">
 Snapshot Serengeti dataset</a>
@@ -84,7 +84,7 @@ Snapshot Serengeti dataset</a>
 :::{.fragment .fade-out data-fragment-index="3"}
 <div style="text-align: right; width: 100%;">
 _Where is the animal in this image?_
-![](../img/behaviour/sample_image_armadillo.jpg){width=100%;"}
+![](img/behaviour/sample_image_armadillo.jpg){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://github.com/google/cameratrapai" target="_blank">
 and there from the Orinoquía Camera Traps dataset (University of Minnesota).</a>
@@ -97,7 +97,7 @@ and there from the Orinoquía Camera Traps dataset (University of Minnesota).</a
 :::{.fragment .fade-out data-fragment-index="4"}
 <div style="text-align: right; width: 100%;">
 _Where is the animal in this image?_
-![](../img/behaviour/crab-detections.png){width=100%;"}
+![](img/behaviour/crab-detections.png){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://github.com/SainsburyWellcomeCentre/crabs-exploration" target="_blank">
 Crabs exploration project</a>
@@ -112,7 +112,7 @@ Crabs exploration project</a>
 :::{.fragment .fade-out data-fragment-index="5"}
 <div style="text-align: right; width: 100%;">
 _Which pixels are <span style="color: magenta;">"mouse"</span>?_
-![](../img/behaviour/semantic-segmentation.png){width=100%;"}
+![](img/behaviour/semantic-segmentation.png){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Sample image from <a href="https://sainsburywellcomecentre.github.io/aeon_docs/index.html" target="_blank">
 Aeon project</a>
@@ -127,7 +127,7 @@ Aeon project</a>
 :::{.fragment .fade-out data-fragment-index="6"}
 <div style="text-align: right; width: 100%;">
 _Which pixels are <span style="color: blue;">"mouse 1"</span>?_
-![](../img/behaviour/instance-segmentation.png){width=100%;"}
+![](img/behaviour/instance-segmentation.png){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Sample image from <a href="https://sainsburywellcomecentre.github.io/aeon_docs/index.html" target="_blank">
 Aeon project</a>
@@ -142,7 +142,7 @@ Aeon project</a>
 :::{.fragment .fade-out data-fragment-index="7"}
 <div style="text-align: right; width: 100%;">
 _Where are the keypoints?_
-![](../img/behaviour/superanimal-fox.png){width=100%;"}
+![](img/behaviour/superanimal-fox.png){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://www.nature.com/articles/s41467-024-48792-2" target="_blank">
 Ye et al. (2024) _SuperAnimal pretrained pose estimation models for behavioral analysis_</a>
@@ -156,7 +156,7 @@ Ye et al. (2024) _SuperAnimal pretrained pose estimation models for behavioral a
 :::{.fragment .fade-out data-fragment-index="8"}
 <div style="text-align: right; width: 100%;">
 _How do detections in frame f map to frame f+1?_
-![](../img/behaviour/tracking-bees-sleap.png){width=100%;"}
+![](img/behaviour/tracking-bees-sleap.png){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://www.nature.com/articles/s41592-022-01426-1" target="_blank">
 Pereira et al. (2022) _SLEAP: A deep learning system for multi-animal pose tracking_</a>
@@ -171,7 +171,7 @@ Pereira et al. (2022) _SLEAP: A deep learning system for multi-animal pose track
 :::{.fragment .fade-out data-fragment-index="9"}
 <div style="text-align: right; width: 100%;">
 _What is the behaviour of the animal in this frame/clip?_
-![](../img/behaviour/syllables_small.png){width=100%;"}
+![](img/behaviour/syllables_small.png){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://dattalab.github.io/moseq2-website" target="_blank">
 https://dattalab.github.io/moseq2-website/</a>
@@ -187,7 +187,7 @@ https://dattalab.github.io/moseq2-website/</a>
 :::{.fragment .fade-out data-fragment-index="10"}
 <div style="text-align: right; width: 100%;">
 _Which individual is the animal in this frame?_
-![](../img/behaviour/happy-whale.jpg){width=100%;"}
+![](img/behaviour/happy-whale.jpg){width=100%;"}
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
 Figure from <a href="https://happywhale.com/home" target="_blank">
 Happy Whale dataset</a>
