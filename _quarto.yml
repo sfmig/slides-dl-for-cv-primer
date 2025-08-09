@@ -2,6 +2,7 @@ project:
   type: website
 resources:
   - slides/
+  - img/
 
 title: Deep learning for computer vision
 subtitle: A primer for the animal behaviour scientist
