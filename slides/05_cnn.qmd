@@ -1,0 +1,487 @@
+## Convolutional neural networks 
+
+<br>
+
+- Regular NN don't scale well to images
+- CNNs take advantage of the fact that their inputs are images
+
+::: {.r-stack}
+::: {.fragment .fade-in-then-out}
+<div style="text-align: right; margin: 0 auto;">
+![](../img/cnn/cnn-transforms.png){}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote20.pdf" target="_blank">
+CS4780 lecture notes</a>
+</div>
+</div>
+
+:::
+
+
+::: {.fragment .fade-in}
+<div style="text-align: right; width: 80%; margin: 0 auto;">
+![](../img/overview/cnn-diagram-1.png){}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://cs231n.github.io/convolutional-networks" target="_blank">
+cs231n.github.io/convolutional-networks</a>
+</div>
+</div>
+
+:::
+:::
+
+
+::: {.notes}
+
+- Regular NNs don't scale well to images
+  - An image of size 200x200x3 would mean a first hidden layer with 120,000 weights per neuron!
+  - The full connectivity is overkill
+
+- CNNs take advantage of the fact that their inputs are images
+  - this means they can make sensible modifications to the architecture. 
+  
+  The modifications to the architecture encode the assumptions of the functions that we want to fit. 
+  
+  For example, if we want to train a network to fit the function that detects if an image contains a cat, when we use a CNN we constrain that space of possible functions to only those that are translation invariant, just by using this architecture.
+
+We can see them as subsequent transformations of the input image.
+
+We can also see their neurons as being 3-dimensional, with width, height and depth (if like before, we consider the neurons to hold the outputs of the computations)
+
+> A simple ConvNet is a sequence of layers, and every layer of a ConvNet transforms one volume of activations [neuron outputs] to another
+:::
+
+<!-- -------------------------------- -->
+
+## Layers used in CNNs
+
+Three common types:
+
+:::{.nonincremental}
+- Convolutional layer
+- Pooling layer
+- Batch normalisation layer
+- Fully connected layer
+:::
+
+::: {.notes}
+Fully connected layers are the same as in regular NNs.
+:::
+
+
+<!-- -------------------------------- -->
+
+## Layers used in CNNs
+
+Three common types:
+
+:::{.nonincremental}
+- **Convolutional layer**
+- Pooling layer
+- Batch normalisation layer
+- Fully connected layer
+:::
+
+::: {.notes}
+We will focus on the convolutional layer and the pooling layer.
+
+For the batch normalisation layer it is enought to know that it is a scaling and translation operation that is applied to the output of the convolutional layer, based on the statistics of the batch.
+
+The fully connected layer is the same as in regular NNs.
+
+
+:::
+
+
+<!-- -------------------------------- -->
+
+## Convolutional layer
+
+::: {.columns}
+::: {.column .nonincremental style="width: 50%;"}
+
+:::{.fragment .fade-in data-fragment-index="1"}
+- A set of _n_ learnable **filters** 
+:::
+
+:::{.fragment .fade-in data-fragment-index="2"}
+- Each filter is a small matrix of weights + 1 bias
+:::
+
+:::{.fragment .fade-in data-fragment-index="3"}
+- We slide (convolve) each filter across the width and height **and the full depth** of the input volume
+:::
+
+<!-- :::{.fragment .fade-in data-fragment-index="4"}
+- Parameters are shared
+::: -->
+
+:::
+:::
+
+::: {.column style="width: 40%; margin-left: 5%;"}
+:::{.r-stack}
+:::{.fragment .fade-in data-fragment-index="0"}
+:::{.fragment .fade-out data-fragment-index="1"}
+<div style="text-align: right; width: 100%; margin: 0 auto;">
+![](../img/overview/cnn-diagram-2.png){width=100%, fig-align="center"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure modified from <a href="https://cs231n.github.io/convolutional-networks/" target="_blank">
+CS231n</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="1"}
+:::{.fragment .fade-out data-fragment-index="3"}
+<div style="text-align: right; width: 100%; margin: 0 auto;">
+![](../img/cnn/convolution-n-channels.png){width=100%, fig-align="center"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure modified from <a href="https://cs231n.github.io/convolutional-networks/" target="_blank">
+CS231n</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="3"}
+:::{.fragment .fade-out data-fragment-index="4"}
+<div style="text-align: right; width: 80%; margin: 0 auto;">
+![](../img/cnn/padding_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 50px;">
+Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" target="_blank">Convolution arithmetic</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="4"}
+<div style="text-align: right; width: 100%; margin: 0 auto;">
+![](../img/cnn/convolution-sharing.png){width=100%, fig-align="center"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure modified from <a href="https://cs231n.github.io/convolutional-networks/" target="_blank">
+CS231n</a>
+</div>
+</div>
+:::
+
+:::
+:::
+
+
+::: {.notes}
+- We have seen that it is useful to see a convolutional layer as a transform between an input volume and an output volume
+- It is defined by a set of _n_ learnable **filters**, also sometimes called **kernels**. 
+  The depth of the output volume is equal to the number of filters.
+- Each filter is a small matrix of weights and one bias parameter
+    - so each slice in the output volume corresponds to a small matrix of weights and a bias parameter
+    - small along width and height but always extends to the full depth of the input
+    - e.g. a filter on the first layer of a CNN may have size 5x5x3 (+ 1 bias parameter)
+
+- How do we compute the values in each slice of the output volume? 
+    - In the forward pass:
+        - we slide (convolve) each filter across the width and height of the input volume and compute dot products (multiply and sum)
+        - we then would apply a non-linear activation function such as ReLU
+        - the output is a **2D "activation map**" that gives the responses of that filter at every position
+    - for a layer with 12 filters, we will stack the 12 activation maps along depth to produce the output volume 
+
+We can interpret the filter as a **pattern detector**
+> Intuitively, the network will learn filters that activate when they see some type of visual feature such as an edge of some orientation or a blotch of some color on the first layer, or eventually entire honeycomb or wheel-like patterns on higher layers of the network.
+
+We can formulate the forward pass as a **matrix multiplication**
+:::
+
+
+<!-- -------------------------------- -->
+
+## Convolutional layer
+
+:::{.columns}
+:::{.column style="width: 50%;"}
+
+A few hyperparameters:
+
+:::{.fragment .fade-in .nonincremental data-fragment-index="0"}
+- number of filters
+- filter size
+- stride
+- padding
+
+:::
+:::
+
+:::{.column style="width: 50%;"}
+
+:::{.r-stack}
+:::{.fragment .fade-in-then-out}
+<div style="text-align: right; width: 80%; margin: 0 auto;">
+![](../img/cnn/same_padding_no_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 50px;">
+Stride = 1. Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" target="_blank">Convolution arithmetic</a>
+</div>
+</div>
+
+:::
+
+:::{.fragment .fade-in}
+<div style="text-align: right; width: 80%; margin: 0 auto;">
+![](../img/cnn/padding_strides.gif){width=80%, fig-align="center" style="transform: rotate(40deg)"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 50px;">
+Stride = 2. Figure from <a href="https://github.com/vdumoulin/conv_arithmetic" target="_blank">Convolution arithmetic</a>
+</div>
+</div>
+:::
+
+:::
+
+:::
+:::
+
+
+:::{.notes}
+There are a few hyperparameters involved in the convolutional layer:
+- number of filters: the depth of the output volume
+- filter size: the size of the filter (width and height)
+- stride: the number of pixels that the filter moves by at each step
+    - A stride larger than one will reduce the size of the output volume
+- padding: the number of 0 pixels that are added to the input volume at each side
+    - Padding is used to control the size of the output volume
+:::
+
+
+<!-- -------------------------------- -->
+
+
+## Layers used in CNNs
+
+Three common types:
+
+:::{.nonincremental}
+- Convolutional layer
+- **Pooling layer**
+- Batch normalisation layer
+- Fully connected layer
+:::
+
+::: {.notes}
+Briefly explain pooling layer, batch norm. Fully connected layer is the same as in regular NNs.
+:::
+
+
+## Pooling layer
+
+![](../img/cnn/maxpooling2.png){width=100%, fig-align="center"}
+
+
+::: {.notes}
+- A convolutional max filter is applied to each depth slice independently
+- 2 hyperparameters:
+    - filter size
+    - stride
+- It resized the input in width and height --- Pooling layer is a downsampling operation
+- No parameters to learn!
+
+- Common to periodically insert a Pooling layer in-between successive Conv layers
+- Its function is to progressively reduce the spatial size of the representation 
+ - this reduces the amount of parameters and computation in the network, and hence also controls overfitting.
+:::
+
+
+<!-- -------------------------------- -->
+
+## An example CNN architecture: VGG-16
+
+ImageNet 2014 challenge (1000 categories)
+
+<div style="text-align: left; width: 100%; margin: 0 auto;">
+![](../img/cnn/vgg16.png){width=100%, fig-align="center"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://www.neuralception.com/objectdetection-convnetbasics" target="_blank">
+Neuralception</a>
+</div>
+</div>
+
+:::{.notes}
+In the example above, Conv and FC layers include a ReLU activation function.
+
+
+> A simple ConvNet for CIFAR-10 classification could have the architecture [INPUT - CONV - RELU - POOL - FC]. 
+- INPUT [32x32x3] will hold the raw pixel values of the image, in this case an image of width 32, height 32, and with three color channels R,G,B.
+- CONV layer will compute the output of neurons that are connected to local regions in the input, each computing a dot product between their weights and a small region they are connected to in the input volume. This may result in volume such as [32x32x12] if we decided to use 12 filters.
+- RELU layer will apply an elementwise activation function, such as the max(0,x)
+ thresholding at zero. This leaves the size of the volume unchanged ([32x32x12]).
+POOL layer will perform a downsampling operation along the spatial dimensions (width, height), resulting in volume such as [16x16x12].
+- FC (i.e. fully-connected) layer will compute the class scores, resulting in volume of size [1x1x10], where each of the 10 numbers correspond to a class score, such as among the 10 categories of CIFAR-10. As with ordinary Neural Networks and as the name implies, each neuron in this layer will be connected to all the numbers in the previous volume.
+:::
+
+## An example CNN architecture: ResNet-18
+
+<div style="text-align: center; width: 100%; margin-top: -25%;">
+![](../img/cnn/resnet-18.png){width=100%, style="transform: rotate(-90deg);"}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://learnopencv.com/fully-convolutional-image-classification-on-arbitrary-sized-image/" target="_blank">
+LearnOpenCV</a>
+</div>
+</div>
+
+
+## Transfer learning
+
+- Few people train a CNN from scratch
+
+- More common scenarios:
+    - Fine-tune a pretrained model 
+        <span style="font-size: 0.8em; color: var(--link-color);">(e.g. backbones for SLEAP, DLC, etc.)</span>
+
+    - Use as a feature extractor 
+        <span style="font-size: 0.8em; color: var(--link-color);">(e.g. [DINOv2](https://dinov2.metademolab.com/))</span>
+
+    - Directly use the model for inference 
+        <span style="font-size: 0.8em; color: var(--link-color);">(e.g. [OpenPose](https://github.com/CMU-Perceptual-Computing-Lab/openpose))</span>
+
+::: {.notes}
+> In practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size. 
+
+> Instead, it is common to pretrain a CNN on a very large dataset (e.g. ImageNet, which contains 1.2 million images with 1000 categories), and then use the CNN either as an initialization or a fixed feature extractor for the task of interest. 
+
+Fine-tuning may refer to continue training the model on a new dataset, including all or only the last few layers (the rest are considered "frozen").
+> It is possible to fine-tune all the layers of the CNN, or it’s possible to keep some of the earlier layers fixed (due to overfitting concerns) and only fine-tune some higher-level portion of the network.
+- Backbone or feature extractor vs head
+
+As a feature extractor: 
+This may refer to the backbone purpose, or more explicitly to using a pretrained network to compute embeddings for your images
+> Take a CNN pretrained on ImageNet, remove the last fully-connected layer, then treat the rest of the ConvNet as a fixed feature extractor for the new dataset. 
+
+:::
+
+<!-- 
+## Transfer learning{data-visibility="hidden"}
+Common architectures:
+
+- ResNet
+- VGG
+- Inception
+- MobileNet
+- EfficientNet
+- UNet
+- ...
+
+::: {.notes}
+In animal pose estimation, these architectures are often mentioned as possible "backbones"
+Head vs backbone
+::: -->
+
+
+
+## Data augmentation
+
+::: {.columns}
+::: {.column .nonincremental style="width: 60%;"}
+
+:::{.fragment .fade-in data-fragment-index="0"}
+- To improve performance, train on more and diverse data. 
+:::
+
+:::{.fragment .fade-in data-fragment-index="1"}
+- One easy way: transform the images we already have, **while preserving the label**
+:::
+
+:::{.fragment .fade-in data-fragment-index="4"}
+- The choice depends on the task and the dataset.
+:::
+
+:::{.fragment .fade-in data-fragment-index="6"}
+- Reduces overfitting and improves robustness.
+:::
+
+:::
+
+::: {.column style="width: 35%;"}
+
+:::{.r-stack}
+:::{.fragment .fade-in data-fragment-index="2"}
+:::{.fragment .fade-out data-fragment-index="3"}
+<div style="text-align: right; width: 100%; margin-top: 10%;">
+![](../img/cnn/mnist-RandomShifts.jpeg){width=100%}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
+Random shifts. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
+https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="3"}
+:::{.fragment .fade-out data-fragment-index="5"}
+<div style="text-align: right; width: 100%; margin-top: 10%;">
+![](../img/cnn/mnist-RandomRotations.jpeg){width=100%}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
+Random rotations. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
+https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
+</div>
+</div>
+:::
+:::
+
+:::{.fragment .fade-in data-fragment-index="5"}
+<div style="text-align: right; width: 100%; margin-top: 10%;">
+![](../img/cnn/mnist-RandomFlips.jpeg){width=100%}
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
+Random flips. Figure from <a href="https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras" target="_blank">
+https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras</a>
+</div>
+</div>
+:::
+
+:::
+
+:::
+:::
+
+
+:::{.notes}
+
+Notes from https://www.kaggle.com/code/ryanholbrook/data-augmentation and https://www.ibm.com/think/topics/data-augmentation 
+
+The best way to improve the performance of a model is to train it on more and diverse data. The more examples that are provided during training, the better it will be able to recognise which differences between images matter and which don't.
+
+One easy way to increase the size of the dataset is to transform the images we already have. Specifically, we apply transformations to the images that preserve the label (or modify it in a way that is consistent with the label). For example in our MNIST case, we would apply transformations such that the image would still be classified as the digit it contains. Common examples: rotation, scaling, shearing, flipping, cropping, color jittering, etc.
+
+That way we teach the model to recognise the digit even if it is rotated, scaled, sheared, flipped, cropped, or otherwise transformed.
+
+
+But the choice of what data augmentation to apply depends on the task and the dataset. For example, a rotation of 180 degrees is not a good idea for a digit classification task, as it may confuse the model between 6s and 9s
+
+Data augmentation can reduce overfitting and improve model robustness, esp in cases with small or unbalanced datasets.
+
+A note on horizontal flip data augmentation in pose estimation:
+- usually data augmentation transforms will apply the same transformation to the image and the labels (e.g. horizontal flip)
+- so if you have a skeleton with left and right keypoints, and we apply an horizontal flip, the left and right keypoints will be swapped
+- this will render wrong keypoints tho! So often pose estimation frameworks allow you to define symmetric keypoints, to swap them again after mirroring
+- However if the left and right keypoints are not symmetric (e.g. fiddler crabs with dominant and non-dominant claws), you will want to flip the image and the keypoints without the additional swap
+- Basically if the keypoints are not different physically, you need to set them as "symmetric".
+
+See [here](https://deeplabcut.github.io/DeepLabCut/docs/recipes/flip_and_rotate.html#augment-to-reduce-left-right-bias)
+
+:::
+
+
+
+
+
+
+
+
+## Additional references
+::: {.nonincremental style="font-size: 0.6em;"}
+- CS231n: Convolutional Neural Networks
+    - [https://cs231n.github.io/convolutional-networks/](https://cs231n.github.io/convolutional-networks/)
+    - [https://cs231n.github.io/transfer-learning/](https://cs231n.github.io/transfer-learning/)
+- CS4780: Machine Learning for Intelligent Systems
+    - [lecture 20 notes](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote20.pdf)
+- On data augmentation:
+    - [DeepLabCut case study: Improving network performance on unbalanced data via augmentation](https://deeplabcut.github.io/DeepLabCut/docs/recipes/flip_and_rotate.html), specifically the section on "Augment to reduce left-right bias" and "Edit pose_cfg.yaml for fliplr augmentation". A blogpost version is available [here](https://deeplabcut.medium.com/balancing-bats-d3c5bcfb71e1)
+    - [https://www.kaggle.com/code/ryanholbrook/data-augmentation](https://www.kaggle.com/code/ryanholbrook/data-augmentation)
+    - [https://www.ibm.com/think/topics/data-augmentation](https://www.ibm.com/think/topics/data-augmentation)
+:::

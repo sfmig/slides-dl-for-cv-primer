@@ -1,0 +1,79 @@
+## Overview
+
+::: {.columns}
+
+::: {.column style="text-align: center; width: 50%;"}
+::: {.fragment .fade-in}
+<div style="font-size: 0.6em;">Vanilla neural network</div>
+![](../img/overview/vanilla-nn.png){width=90%}
+
+:::
+:::
+
+
+::: {.column style="text-align: center; width: 50%;"}
+::: {.fragment .fade-in}
+<div style="font-size: 0.6em;">Convolutional neural network</div>
+![](../img/overview/cnn-diagram-1.png){width=90%}
+
+:::
+:::
+
+
+:::
+
+
+
+::: {.columns}
+
+::: {.column style="text-align: center; width: 30%;"}
+:::
+
+::: {.column style="text-align: center; width: 40%;"}
+::: {.fragment .fade-in}
+<div style="font-size: 0.6em;">Applications to animal behaviour</div>
+![](../img/overview/pose-estimation.png){width=40%}
+
+<div style="position: absolute; bottom: 0px; right: 0px; font-size: 0.3em; color: var(--link-color); max-width: 300px; text-align: right;">Figures from <a href="https://cs231n.github.io/convolutional-networks" target="_blank">cs231n.github.io/convolutional-networks</a> and <a href="https://movement.neuroinformatics.dev" target="_blank">movement.neuroinformatics.dev</a></div>
+
+:::
+:::
+
+::: {.column style="text-align: center; width: 20%;"}
+:::
+:::
+
+
+<!-- ------------- -->
+
+## Overview
+
+- [Preliminary concepts](#preliminaries)
+- [Anatomy of a neural network](#anatomy-of-a-nn)
+- [Forward pass](#forward-pass)
+- [Training and backward pass](#training-and-backward-pass)
+- [Convolutional neural networks](#cnn) 
+- [CV applications in animal behaviour](#cv-applications-in-animal-behaviour)
+
+
+
+
+::: {.notes}
+Hi everyone, my name is Sofía Miñano, and I'm an RSE in the Neuroinformatics Unit, developing tools
+for animal behaviour research.
+
+
+The main objective of this session is to give a general and not-too-hand-wavy intuition of the main 
+concepts behind how neural networks are used in computer vision applications for animal behaviour.
+
+We will start from the basics of neural networks, then expand to convolutional neural networks and 
+finally focus on how these tools are used in animal behaviour research.
+
+The goal is that you understand a bit better what is happening under the hood when you use these tools, to help you use and debug them efficiently.
+
+The content of the slides is based on a few different resources, I will link to them as we go along.
+
+So let's dive in!
+:::
+
+<!-- ------------- -->

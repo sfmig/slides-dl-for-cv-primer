@@ -1,0 +1,1180 @@
+
+## From layer to layer
+
+
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=90% fig-align="center"}
+
+
+<!-- Hidden layers -->
+<div style="position: absolute; top: 40px; right: 300px; font-size: 24px; text-align: left; font-weight: bold; color: rgb(207, 161, 13);">
+  Hidden layers
+</div>
+
+<!-- Rectangle hidden layers -->
+<div style="width: 200px; height: 550px; background-color: transparent; border: 4px solid rgb(207, 161, 13); position: absolute; top: 110px; right: 420px;">
+</div>
+
+
+<!-- ------------------------------------------------------------------------ -->
+
+## From layer to layer: one neuron
+
+<div style="text-align: center; width: 100%;">
+
+```{dot}
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+
+    node [shape=circle, style=filled, fontname="Arial", fontsize=16, width=.7, height=.7];
+    edge [color=lightblue];
+    
+    x1 [fillcolor=lightblue, fontcolor=black, label="x₁"];
+    x2 [fillcolor=lightblue, fontcolor=black, label="x₂"];
+    x3 [fillcolor=lightblue, fontcolor=black, label="x₃"];
+    f [fillcolor=royalblue, fontcolor=royalblue, label="f"];
+    
+    x1 -> f;
+    x2 -> f;
+    x3 -> f;
+}
+```
+
+</div>
+
+
+::: {.fragment .fade-in}
+<div style="position: absolute; top: 260px; right: 50px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
+  <!-- Activation function -->
+  <br>
+  $$
+  f(x_1, x_2, x_3, \ldots) = \mathbf{\color{rgb(225, 174, 65)}h}
+  $$
+  
+</div>
+
+:::
+
+
+::: {.notes}
+For the case of a single neuron, we have seen that each neuron holds a number that
+results from taking all the numbers held at the neurons in the previous layer and 
+applying a certain function. 
+
+We consider a neuron at the first hidden layer. We represent its output by h. We are now going to describe that function
+
+:::
+
+<!-- ------------------------------------------------------------------------ -->
+
+## From layer to layer: one neuron
+
+::: {.columns}
+<!-- ::: {.column width="20%" style="margin-left: -15%; margin-top: 5%;"} -->
+::: {.column style="margin-left: -15%; margin-top: 5%;"}
+
+```{dot}
+//| fig-width: 7
+//| fig-height: 3.5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+
+    node [shape=circle, style=filled, fontname="Arial", fontsize=16, width=.7, height=.7];
+    edge [color="#89E141", fontcolor="#89E141", labeldistance=2.0];
+    
+    x1 [fillcolor=lightblue, fontcolor=black, label="x₁"];
+    x2 [fillcolor=lightblue, fontcolor=black, label="x₂"];
+    x3 [fillcolor=lightblue, fontcolor=black, label="x₃"];
+    f [fillcolor=royalblue, fontcolor=royalblue, label="f"];
+    
+    x1 -> f [label="w₁"];
+    x2 -> f [label="w₂"];
+    x3 -> f [label="w₃"];
+}
+```
+
+<div style="position: absolute; top: 280px; left: 370px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
+  $$
+  \mathbf{\color{rgb(225, 174, 65)}h}
+  $$
+  
+</div>
+
+
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column style="text-align: left;"}
+
+1. Compute weighted sum
+$$
+{\color{rgb(225, 65, 185)}\Sigma} = {\color{rgb(137, 225, 65)}w_1} x_1 + {\color{rgb(137, 225, 65)}w_2} x_2 + {\color{rgb(137, 225, 65)}w_3} x_3
+$$
+
+2. Apply non-linearity
+$$
+\mathbf{\color{rgb(225, 174, 65)}h} = max({\color{rgb(225, 65, 185)}\Sigma}, 0)
+$$
+
+::: {.fragment .fade-in}
+
+![](../img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+
+:::
+
+
+:::
+
+:::
+
+::: {.notes}
+The neuron processes the inputs as follows:
+
+First it computes a weighted sum of the inputs. The weights represent the connections between the neurons. The weighted sum can be seen as the neuron attending to different parts of the input.
+
+Then it applies a non-linear function. For example, the rectified linear unit (ReLU) function. This function will output the final output of the neuron
+
+Choosing the ReLU function is not a totally arbitrary choice: the ReLU function is a 
+common choice due to its properties when it comes to optimization via gradient
+descent. However there are other popular options for activation functions
+
+Note as well that, a non linear function is required for the MLP to be a universal 
+function approximator (along with a hidden layer with enough number of units/neurons)
+
+The activation function is loosely based on biological neurons
+- It represents that the artificial neuron will respond to inputs beyond a certain
+threshold. 
+- As it is now, this threshold would be zero: if the weighted sum is positive the
+neuron will output the result of the weighted sum, if it's negative it will output 
+zero. 
+:::
+
+<!-- ------------------------------------------------------------------------ -->
+
+## From layer to layer: one neuron
+
+::: {.columns }
+::: {.column .nonincremental style="margin-left: -15%; margin-top: 5%;"}
+
+```{dot}
+//| fig-width: 7
+//| fig-height: 3.5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+
+    node [shape=circle, style=filled, fontname="Arial", fontsize=16, width=.7, height=.7];
+    edge [color="#89E141", fontcolor="#89E141", labeldistance=2.0];
+    
+    x1 [fillcolor=lightblue, fontcolor=black, label="x₁"];
+    x2 [fillcolor=lightblue, fontcolor=black, label="x₂"];
+    x3 [fillcolor=lightblue, fontcolor=black, label="x₃"];
+    f [fillcolor=royalblue, fontcolor=royalblue, label="f"];
+
+
+    
+    x1 -> f [label="w₁"];
+    x2 -> f [label="w₂"];
+    x3 -> f [label="w₃"];
+
+    {rank=same; bias; f;}
+    bias [shape=square, label="b", width=0.06, height=0.06, fillcolor="#D51818"];
+    bias -> f [label="+", color="#D51818", fontcolor="#D51818", style=bold];
+    
+}
+```
+
+<div style="position: absolute; top: 280px; left: 370px; font-size: 24px; font-weight: bold; color: #4169E1; z-index: 2; text-align: right;">
+  $$
+  \mathbf{\color{rgb(225, 174, 65)}h}
+  $$
+  
+</div>
+
+
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column .nonincremental style="text-align: left;"}
+
+1. Compute weighted sum
+$$
+{\color{rgb(225, 65, 185)}\Sigma} = {\color{rgb(137, 225, 65)}w_1} x_1 + {\color{rgb(137, 225, 65)}w_2} x_2 + {\color{rgb(137, 225, 65)}w_3} x_3
+$$
+
+2. Apply non-linearity
+$$
+\mathbf{\color{rgb(225, 174, 65)}h} = max({\color{rgb(225, 65, 185)}\Sigma} + {\color{rgb(213, 24, 24)}b}, 0)
+$$
+
+::: {.r-stack}
+![](../img/vanilla-nn/relu.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+
+
+![](../img/vanilla-nn/relu-w-bias.png){width=65% style="text-align: center; margin-left: 20%; margin-top: -10%;"}
+
+:::
+
+
+
+:::
+
+:::
+
+
+
+::: {.notes}
+What if we want a threshold different from zero? One easy way to “control” this
+threshold with a parameter is to introduce a bias term.
+
+
+With a bias term, the ReLU function will output the result of the weighted sum if
+its value is below b, and zero otherwise.
+
+Intuition: the neuron pays attention to certain inputs more than others, if they are 
+large enough.
+
+
+:::
+
+<!-- ------------------------------------------------------------------------ -->
+
+## From layer to layer: many neurons
+
+::: {.columns}
+::: {.column}
+
+In an MLP:
+
+- each <em style="color:rgb(137, 225, 65);">connection</em> is associated with a <strong style="color:rgb(137, 225, 65);">weight</strong>
+- each <em style="color:rgb(213, 24, 24);">neuron</em> is associated with a <strong style="color:rgb(213, 24, 24);">bias</strong>
+
+:::
+
+::: {.column}
+![](../img/vanilla-nn/network-3b1b.png){width=80% style="margin-left: 20%;"}
+
+<div style="position: absolute; bottom: 50px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/aircAruvnKk?si=PAb025jmbPGYt7hi&t=757" target="_blank">
+But what is a neural network? | Deep learning chapter 1</a></div>
+
+:::
+
+:::
+
+
+::: {.notes}
+:::
+
+
+<!-- ------------------------------------------------------------------------ -->
+
+## From layer to layer: many neurons {data-visibility="hidden"}
+
+::: {.columns}
+::: {.column}
+
+In our example MLP:
+<div style="font-size: 0.7em;">
+- 784 neurons in the input layer
+- 16 neurons in the first hidden layer
+- 16 neurons in the second hidden layer
+- 10 neurons in the output layer
+</div>
+
+::: {.fragment .fade-in}
+$\approx$ 13000 weights and biases
+
+:::
+
+
+:::
+
+::: {.column}
+![](../img/vanilla-nn/network-3b1b.png){width=80% style="margin-left: 20%;"}
+
+<div style="position: absolute; bottom: 50px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/aircAruvnKk?si=PAb025jmbPGYt7hi&t=757" target="_blank">
+But what is a neural network? | Deep learning chapter 1</a></div>
+
+:::
+
+
+:::
+
+
+::: {.notes}
+If we extend what we've seen for one neuron to all of the neurons in our sample
+network, we get over 13000 parameters!
+And this is just a small network.... 
+
+Can we write the transformations we've seen for one neuron for all the network, 
+in a more compact form?
+
+We'll make use of matrix notation for that. If you have some knowledge of linear 
+algebra that's excellent, if not it's just enough if you remember there is a compact 
+way of writing these equations
+:::
+
+<!-- ------------------------------------------------------------------------ -->
+
+
+## From layer to layer: many neurons
+
+
+::: {.columns}
+::: {.column style="margin-left: -15%;margin-top: 5%;"}
+
+
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="0"}
+```{dot}
+//| fig-width: 2
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", fontcolor="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor=lightblue];
+    
+      h1 [label="h₀⁰"];
+      h2 [label="h₁⁰"];
+      h3 [label="h₂⁰"];
+      h4 [label="h₃⁰"]; 
+      h5 [label="..."];
+      h6 [label="hₙ⁰"];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5; h6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1_prime [label="h₀¹"];
+      h2_prime [label="h₁¹"];
+      h3_prime [label="h₂¹"];
+      h4_prime [label="..."];
+      h5_prime [label="hₖ¹"];
+
+      // Invisible edges to force vertical ordering
+      // bias -> h1_prime [style=invis];
+      h1_prime -> h2_prime [style=invis];
+      h2_prime -> h3_prime [style=invis];
+      h3_prime -> h4_prime [style=invis];
+      h4_prime -> h5_prime [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1_prime; h2_prime; h3_prime; h4_prime; h5_prime;}
+    }
+
+
+    h1 -> h1_prime;
+    h1 -> h2_prime;
+    h1 -> h3_prime;
+    h1 -> h4_prime;
+    h1 -> h5_prime;
+
+    h2 -> h1_prime;
+    h2 -> h2_prime;
+    h2 -> h3_prime;
+    h2 -> h4_prime;
+    h2 -> h5_prime;
+
+    h3 -> h1_prime;
+    h3 -> h2_prime;
+    h3 -> h3_prime;
+    h3 -> h4_prime;
+    h3 -> h5_prime;
+
+    h4 -> h1_prime;
+    h4 -> h2_prime;
+    h4 -> h3_prime;
+    h4 -> h4_prime;
+    h4 -> h5_prime;
+
+    h5 -> h1_prime;
+    h5 -> h2_prime;
+    h5 -> h3_prime;
+    h5 -> h4_prime;
+    h5 -> h5_prime;
+
+    h6 -> h1_prime;
+    h6 -> h2_prime;
+    h6 -> h3_prime;
+    h6 -> h4_prime;
+    h6 -> h5_prime;
+
+    
+}
+```
+:::
+
+::: {.fragment .fade-in data-fragment-index="1"}
+```{dot}
+//| fig-width: 2
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", fontcolor="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor=lightblue];
+    
+      h1 [label="h₀⁰"];
+      h2 [label="h₁⁰"];
+      h3 [label="h₂⁰"];
+      h4 [label="h₃⁰"]; 
+      h5 [label="..."];
+      h6 [label="hₙ⁰"];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5; h6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1_prime [label="h₀¹"];
+      h2_prime [label="h₁¹"];
+      h3_prime [label="h₂¹"];
+      h4_prime [label="..."];
+      h5_prime [label="hₖ¹"];
+
+      // Invisible edges to force vertical ordering
+      // bias -> h1_prime [style=invis];
+      h1_prime -> h2_prime [style=invis];
+      h2_prime -> h3_prime [style=invis];
+      h3_prime -> h4_prime [style=invis];
+      h4_prime -> h5_prime [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1_prime; h2_prime; h3_prime; h4_prime; h5_prime;}
+    }
+
+    subgraph layer_bias {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=square, label="b₀¹", width=0.06, height=0.06, fillcolor="#D51818"];
+      {rank=same; h1_prime; bias;}
+    }
+
+
+    h1 -> h1_prime [color="#89E141", penwidth=2.0];
+    h1 -> h2_prime;
+    h1 -> h3_prime;
+    h1 -> h4_prime;
+    h1 -> h5_prime;
+
+    h2 -> h1_prime [color="#89E141", penwidth=2.0];
+    h2 -> h2_prime;
+    h2 -> h3_prime;
+    h2 -> h4_prime;
+    h2 -> h5_prime;
+
+    h3 -> h1_prime [color="#89E141", penwidth=2.0];
+    h3 -> h2_prime;
+    h3 -> h3_prime;
+    h3 -> h4_prime;
+    h3 -> h5_prime;
+
+    h4 -> h1_prime [color="#89E141", penwidth=2.0];
+    h4 -> h2_prime;
+    h4 -> h3_prime;
+    h4 -> h4_prime;
+    h4 -> h5_prime;
+
+    h5 -> h1_prime [color="#89E141", penwidth=2.0];
+    h5 -> h2_prime;
+    h5 -> h3_prime;
+    h5 -> h4_prime;
+    h5 -> h5_prime;
+
+    h6 -> h1_prime [color="#89E141", penwidth=2.0];
+    h6 -> h2_prime;
+    h6 -> h3_prime;
+    h6 -> h4_prime;
+    h6 -> h5_prime;
+
+    bias -> h1_prime [color="#D51818", penwidth=2.0, style="dashed", arrowhead="none"];
+    
+}
+```
+:::
+
+::: {.fragment .fade-in data-fragment-index="4"}
+::: {.fragment .fade-out data-fragment-index="5"}
+```{dot}
+//| fig-width: 2
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", fontcolor="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor=lightblue];
+    
+      h1 [label="h₀⁰"];
+      h2 [label="h₁⁰"];
+      h3 [label="h₂⁰"];
+      h4 [label="h₃⁰"]; 
+      h5 [label="..."];
+      h6 [label="hₙ⁰"];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5; h6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1_prime [label="h₀¹"];
+      h2_prime [label="h₁¹"];
+      h3_prime [label="h₂¹"];
+      h4_prime [label="..."];
+      h5_prime [label="hₖ¹"];
+
+      // Invisible edges to force vertical ordering
+      // bias -> h1_prime [style=invis];
+      h1_prime -> h2_prime [style=invis];
+      h2_prime -> h3_prime [style=invis];
+      h3_prime -> h4_prime [style=invis];
+      h4_prime -> h5_prime [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1_prime; h2_prime; h3_prime; h4_prime; h5_prime;}
+    }
+
+    // subgraph layer_bias {
+    //   node [fillcolor="#7BA4F0"];
+      
+    //   bias [shape=square, label="b₀¹", width=0.06, height=0.06, fillcolor="#D51818"];
+    //   {rank=same; h2_prime; bias;}
+    // }
+
+
+    h1 -> h1_prime;
+    h1 -> h2_prime [color="#89E141", penwidth=2.0];
+    h1 -> h3_prime;
+    h1 -> h4_prime;
+    h1 -> h5_prime;
+
+    h2 -> h1_prime;
+    h2 -> h2_prime [color="#89E141", penwidth=2.0];
+    h2 -> h3_prime;
+    h2 -> h4_prime;
+    h2 -> h5_prime;
+
+    h3 -> h1_prime;
+    h3 -> h2_prime [color="#89E141", penwidth=2.0];
+    h3 -> h3_prime;
+    h3 -> h4_prime;
+    h3 -> h5_prime;
+
+    h4 -> h1_prime;
+    h4 -> h2_prime [color="#89E141", penwidth=2.0];
+    h4 -> h3_prime;
+    h4 -> h4_prime;
+    h4 -> h5_prime;
+
+    h5 -> h1_prime;
+    h5 -> h2_prime [color="#89E141", penwidth=2.0];
+    h5 -> h3_prime;
+    h5 -> h4_prime;
+    h5 -> h5_prime;
+
+    h6 -> h1_prime;
+    h6 -> h2_prime [color="#89E141", penwidth=2.0];
+    h6 -> h3_prime;
+    h6 -> h4_prime;
+    h6 -> h5_prime;
+
+    // bias -> h2_prime [color="#D51818", penwidth=2.0, style="dashed", arrowhead="none"];
+    
+}
+```
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="5"}
+::: {.fragment .fade-out data-fragment-index="6"}
+```{dot}
+//| fig-width: 2
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", fontcolor="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor=lightblue];
+    
+      h1 [label="h₀⁰"];
+      h2 [label="h₁⁰"];
+      h3 [label="h₂⁰"];
+      h4 [label="h₃⁰"]; 
+      h5 [label="..."];
+      h6 [label="hₙ⁰"];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5; h6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#7BA4F0"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1_prime [label="h₀¹"];
+      h2_prime [label="h₁¹"];
+      h3_prime [label="h₂¹"];
+      h4_prime [label="..."];
+      h5_prime [label="hₖ¹"];
+
+      // Invisible edges to force vertical ordering
+      // bias -> h1_prime [style=invis];
+      h1_prime -> h2_prime [style=invis];
+      h2_prime -> h3_prime [style=invis];
+      h3_prime -> h4_prime [style=invis];
+      h4_prime -> h5_prime [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1_prime; h2_prime; h3_prime; h4_prime; h5_prime;}
+    }
+
+    // subgraph layer_bias {
+    //   node [fillcolor="#7BA4F0"];
+      
+    //   bias [shape=square, label="b₀¹", width=0.06, height=0.06, fillcolor="#D51818"];
+    //   {rank=same; h2_prime; bias;}
+    // }
+
+
+    h1 -> h1_prime;
+    h1 -> h2_prime;
+    h1 -> h3_prime;
+    h1 -> h4_prime;
+    h1 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h2 -> h1_prime;
+    h2 -> h2_prime;
+    h2 -> h3_prime;
+    h2 -> h4_prime;
+    h2 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h3 -> h1_prime;
+    h3 -> h2_prime;
+    h3 -> h3_prime;
+    h3 -> h4_prime;
+    h3 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h4 -> h1_prime;
+    h4 -> h2_prime;
+    h4 -> h3_prime;
+    h4 -> h4_prime;
+    h4 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h5 -> h1_prime;
+    h5 -> h2_prime;
+    h5 -> h3_prime;
+    h5 -> h4_prime;
+    h5 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    h6 -> h1_prime;
+    h6 -> h2_prime;
+    h6 -> h3_prime;
+    h6 -> h4_prime;
+    h6 -> h5_prime [color="#89E141", penwidth=2.0];
+
+    // bias -> h2_prime [color="#D51818", penwidth=2.0, style="dashed", arrowhead="none"];
+    
+}
+```
+:::
+:::
+
+:::
+
+:::
+
+
+
+::: {.column style="margin-left: -10%;"}
+
+::: {.fragment .fade-in data-fragment-index="1"}
+$$
+\small 
+\qquad \color{rgb(0, 0, 255)}{h_0^1} = ReLU(\sum_{i=0}^{n} \color{rgb(137, 225, 65)}{w_i^{0,1}} \color{rgb(173, 216, 230)}{h_i^0}  + \color{rgb(213, 24, 24)}{b_0^1})
+$$
+:::
+
+
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="2"}
+::: {.fragment .fade-out data-fragment-index="3"}
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="3"}
+::: {.fragment .fade-out data-fragment-index="4"}
+<div class="equation-container">
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+<div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 30px; left: 110px; width: 275px; height: 60px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid  rgba(173, 216, 230, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
+<div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid rgba(213, 24, 24, 0.3); top: 40px; left: 500px; width: 71px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 40px; left: 615px; width: 72px; height: 45px;"></div>
+</div>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="4"}
+::: {.fragment .fade-out data-fragment-index="5"}
+<div class="equation-container">
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+<div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 90px; left: 110px; width: 275px; height: 60px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid  rgba(173, 216, 230, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
+<div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid rgba(213, 24, 24, 0.3); top: 95px; left: 500px; width: 71px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 95px; left: 615px; width: 72px; height: 45px;"></div>
+</div>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="5"}
+::: {.fragment .fade-out data-fragment-index="6"}
+<div class="equation-container">
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} \\ \vdots & \ddots & \vdots \\ w_{k,0} & \cdots & w_{k,n} \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \end{bmatrix} + \begin{bmatrix} b_0^1 \\ \vdots \\ b_k^1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+<div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 150px; left: 110px; width: 275px; height: 60px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid  rgba(173, 216, 230, 0.3); top: 40px; left: 405px; width: 71px; height: 165px;"></div>
+<div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid rgba(213, 24, 24, 0.3); top: 157px; left: 500px; width: 71px; height: 45px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 157px; left: 615px; width: 72px; height: 45px;"></div>
+</div>
+
+:::
+:::
+
+
+
+
+::: {.fragment .fade-in data-fragment-index="6"}
+::: {.fragment .fade-out data-fragment-index="7"}
+<div class="equation-container">
+$$
+\scriptstyle 
+ReLU\left( \begin{bmatrix} w_{0,0} & \cdots & w_{0,n} & b_0^1 \\ \vdots & \ddots & \vdots & \vdots \\ w_{k,0} & \cdots & w_{k,n} & b_k^1 \end{bmatrix} \begin{bmatrix} h_0^0 \\ \vdots \\ h_n^0 \\ 1 \end{bmatrix} \right) = \begin{bmatrix} h_0^1 \\ \vdots \\ h_k^1 \end{bmatrix}
+$$
+<div class="highlight-box" style="background-color: rgba(137, 225, 65, 0.3); border: 2px solid rgba(137, 225, 65, 0.3); top: 55px; left: 110px; width: 275px; height: 60px;"></div>
+<div class="highlight-box" style="background-color: rgba(213, 24, 24, 0.3); border: 2px solid  rgba(213, 24, 24, 0.3); top: 55px; left: 415px; width: 65px; height: 180px;"></div>
+<div class="highlight-box" style="background-color: rgba(173, 216, 230, 0.3); border: 2px solid rgba(173, 216, 230, 0.3); top: 40px; left: 490px; width: 71px; height: 220px;"></div>
+<div class="highlight-box" style="background-color: rgba(0, 0, 255, 0.3); border: 2px solid rgba(0, 0, 255, 0.3) ; top: 55px; left: 600px; width: 75px; height: 180px;"></div>
+</div>
+
+:::
+:::
+
+
+::: {.fragment .fade-in data-fragment-index="7"}
+
+$$
+ReLU(\color{rgb(137, 225, 65)}{\mathbf{W}'} \color{rgb(173, 216, 230)}{h^{0^{\prime}}} ) = \color{rgb(0, 0, 255)}{h^1}
+$$
+
+:::
+
+
+:::
+
+:::
+
+:::
+
+
+::: {.notes}
+We can use matrix multiplication to extend that expression to all the neurons in 
+layer 1.
+
+If you remember matrix multiplication from linear algebra.... you'll see that
+the computation of the first neuron in layer 1 is equivalent to the one above (we multiply
+the first row and the first column to obtain the element at the first row and first
+column, etc.)
+
+We now have a **weight matrix**, that collects all the weights representing the
+connections between all the neurons in layer 0 and all the neurons in layer 1. The first
+row in the weight matrix has the weights required to compute the output of the first
+neuron in layer 1, the second row those required to compute neuron 2, and so on
+until the k-th row to compute the k-th neuron. 
+
+The vector that multiplies with this matrix collects the neurons in the previous layer. 
+To the result of this multiplication we add the bias term of each neuron in layer 1 and 
+then feed the result to a ReLU function to obtain the final number held by the neurons in layer 1
+
+Often the bias vector is included in the weight matrix
+as an additional column for further compactness. 
+
+But note that if we adequately respect the dimensions and add a 1 as a last row in 
+the vector of neurons in the previous layer, both expressions are equivalent
+
+Just remember that there is a compact way that is often preferred to express the
+transition from one layer to the next. And that often making use of this bias trick
+the bias is omitted, but it's implicitly considered within the weight matrix as we've
+seen.
+
+Expressing the transformations as vectorised operations is very convenient for
+computing efficiency (we have specialised hardware that performs this operations
+very fast)
+
+:::
+
+
+<!-- ---------------------------- -->
+
+## A two layer network
+
+::: {.columns}
+::: {.column style="margin-left: -5%;margin-top: 5%;"}
+```{dot}
+//| fig-width: 5
+//| fig-height: 5
+
+digraph G {
+    rankdir=LR;
+    ranksep=1.0;
+    splines=line;
+
+    node [shape=circle, style=filled, fontname="Arial", fontcolor=black, fontsize=16, width=.7, height=.7];
+    edge [color="#E5E4E2", labeldistance=2.0];
+    
+    subgraph layer_0 {
+      node [fillcolor="#5C90E0"];
+
+      x1 [label="x₀"];
+      x2 [label="x₁"];
+      x3 [label="x₂"];
+      x4 [label="x₃"]; 
+      x5 [label="..."];
+      x6 [label="xₙ"];
+
+      // Invisible edges to force vertical ordering
+      x1 -> x2 [style=invis];
+      x2 -> x3 [style=invis];
+      x3 -> x4 [style=invis];
+      x4 -> x5 [style=invis];
+      x5 -> x6 [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; x1; x2; x3; x4; x5; x6;}
+    }
+
+    subgraph layer_1 {
+      node [fillcolor="#CCFFCC"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      h1 [label="h₀"];
+      h2 [label="h₁"];
+      h3 [label="h₂"];
+      h4 [label="..."];
+      h5 [label="hₖ"];
+
+      // Invisible edges to force vertical ordering
+      h1 -> h2 [style=invis];
+      h2 -> h3 [style=invis];
+      h3 -> h4 [style=invis];
+      h4 -> h5 [style=invis];
+
+      // Force specific order within the layer
+      {rank=same; h1; h2; h3; h4; h5;}
+    }
+
+    subgraph layer_2 {
+      node [fillcolor="#FFF8C7"];
+      
+      bias [shape=none, label="", width=0, height=0];
+      y1 [label="y₀"];
+      y2 [label="y₁"];
+      y3 [label="..."];
+      y4 [label="yₘ"];
+
+      // Invisible edges to force vertical ordering
+      y1 -> y2 [style=invis];
+      y2 -> y3 [style=invis];
+      y3 -> y4 [style=invis];
+
+      {rank=same; y1; y2; y3; y4;}
+    }
+
+    // Layer labels (positioned below each layer)
+    input_label [shape=none, label="Input Layer", fontsize=14, fontcolor=black];
+    hidden_label [shape=none, label="Hidden Layer", fontsize=14, fontcolor=black];
+    output_label [shape=none, label="Output Layer", fontsize=14, fontcolor=black];
+
+    x6 -> input_label [style=invis];
+    h5 -> hidden_label [style=invis];
+    y4 -> output_label [style=invis];
+
+    // Position labels below their respective layers
+    {rank=same; input_label; x1; x2; x3; x4; x5; x6;}
+    {rank=same; hidden_label; h1; h2; h3; h4; h5;}
+    {rank=same; output_label; y1; y2; y3; y4;}
+
+    // edges between input and hidden layer
+    x1 -> h1 [color="#A7DBFF"];
+    x1 -> h2 [color="#A7DBFF"];
+    x1 -> h3 [color="#A7DBFF"];
+    x1 -> h4 [color="#A7DBFF"];
+    x1 -> h5 [color="#A7DBFF"];
+
+    x2 -> h1 [color="#A7DBFF"];
+    x2 -> h2 [color="#A7DBFF"];
+    x2 -> h3 [color="#A7DBFF"];
+    x2 -> h4 [color="#A7DBFF"];
+    x2 -> h5 [color="#A7DBFF"];
+
+    x3 -> h1 [color="#A7DBFF"];
+    x3 -> h2 [color="#A7DBFF"];
+    x3 -> h3 [color="#A7DBFF"];
+    x3 -> h4 [color="#A7DBFF"];
+    x3 -> h5 [color="#A7DBFF"];
+
+    x4 -> h1 [color="#A7DBFF"];
+    x4 -> h2 [color="#A7DBFF"];
+    x4 -> h3 [color="#A7DBFF"];
+    x4 -> h4 [color="#A7DBFF"];
+    x4 -> h5 [color="#A7DBFF"];
+
+    x5 -> h1 [color="#A7DBFF"];
+    x5 -> h2 [color="#A7DBFF"];
+    x5 -> h3 [color="#A7DBFF"];
+    x5 -> h4 [color="#A7DBFF"];
+    x5 -> h5 [color="#A7DBFF"];
+
+    x6 -> h1 [color="#A7DBFF"];
+    x6 -> h2 [color="#A7DBFF"];
+    x6 -> h3 [color="#A7DBFF"];
+    x6 -> h4 [color="#A7DBFF"];
+    x6 -> h5 [color="#A7DBFF"];
+
+    // edges between hidden and output layer
+    h1 -> y1 [color="#B8E6B8"];
+    h1 -> y2 [color="#B8E6B8"];
+    h1 -> y3 [color="#B8E6B8"];
+    h1 -> y4 [color="#B8E6B8"];
+
+    h2 -> y1 [color="#B8E6B8"];
+    h2 -> y2 [color="#B8E6B8"];
+    h2 -> y3 [color="#B8E6B8"];
+    h2 -> y4 [color="#B8E6B8"];
+
+    h3 -> y1 [color="#B8E6B8"];
+    h3 -> y2 [color="#B8E6B8"];
+    h3 -> y3 [color="#B8E6B8"];
+    h3 -> y4 [color="#B8E6B8"];
+
+    h4 -> y1 [color="#B8E6B8"];
+    h4 -> y2 [color="#B8E6B8"];
+    h4 -> y3 [color="#B8E6B8"];
+    h4 -> y4 [color="#B8E6B8"];
+
+    h5 -> y1 [color="#B8E6B8"];
+    h5 -> y2 [color="#B8E6B8"];
+    h5 -> y3 [color="#B8E6B8"];
+    h5 -> y4 [color="#B8E6B8"];
+
+
+}
+```
+:::
+
+::: {.column}
+
+<br>
+<br>
+
+::: {.fragment .fade-in}
+$$
+\color{rgb(255, 176, 0)}{y} = \color{rgb(143, 204, 143)}{W_1} \color{rgb(92, 144, 224)}{ReLU({W_0}x)}
+$$
+
+:::
+
+:::
+
+:::
+
+::: {.notes}
+We will do this for as many layers we have in the network. This will result in a nested
+function. For example for a two layer network it would be something like in the slide. 
+
+Two things to note here:
+- first, when counting the number of layers in the neural network, we usually omit
+the input layer since it does not have tunable weights
+- Second, Note that usually the non linear function is not applied at the last output 
+layer (also called readout layer because it's where we read the predictions for the
+classes). 
+
+:::
+
+
+## Forward pass
+
+
+::: {.columns}
+
+::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%"}
+::: {.fragment .fade-in data-fragment-index="1"}
+![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
+:::
+:::
+
+::: {.column style="width: 20%; margin-top: 20%"}
+::: {.fragment .fade-in data-fragment-index="1"}
+<div style="text-align: left; ">
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → </span>
+</div>
+
+:::
+:::
+
+::: {.column style="width: 45%; text-align: centre; margin-left: -7%; margin-top: 5%"}
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
+
+
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="2"}
+::: {.fragment .fade-out data-fragment-index="4"}
+<div style="text-align: left; margin-left: -30%; margin-top: -30%">
+$$
+\scriptstyle
+ReLU(W h^n) = h^{n+1}
+$$
+</div>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="4"}
+<div style="text-align: left; margin-left: -30%; margin-top: -30%">
+$$
+\scriptstyle
+ReLU(\color{rgb(255,0,0)}{W} h^n) = h^{n+1}
+$$
+</div>
+
+:::
+:::
+
+:::
+
+
+::: {.column style="width: 30%; margin-top: 20%; margin-left: -20%"}
+::: {.fragment .fade-in data-fragment-index="3"}
+<div style="text-align: right; margin-left: -10%; ">
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → 2</span>
+</div>
+
+:::
+
+
+::: {.fragment .fade-in data-fragment-index="5"}
+<div style="text-align: left; margin-left: 40%; margin-top: 30%">
+  <span style="font-size: 40px; color: rgb(255, 0, 0);">
+  How to choose them?
+  </span>
+</div>
+
+:::
+
+
+:::
+
+:::
+
+
+
+
+
+::: {.notes}
+Ok so we've now seen how we go from a certain input (in our case a greyscale image
+with a digit), across all layers applying the corresponding transformations, until the
+output layer, where we will obtain 'scores' representing how much the model thinks
+the input represents each class. This whole process is usually called forward pass, 
+since the information flows from input to output
+
+
+We've also seen that each layer has a collection of weights and biases that along with
+the activation function, define the transformation taking place across that layer. The
+weights and biases of all the layers constitute the network parameters, and they
+determine what the network "does". 
+
+With an ideal set of parameters, we would feed a certain image, for example one
+representing a 3, and the transformations across the layers should end up in the class
+"3" having the highest score in the output layer.
+
+How do we choose these parameters? We would like to obtain the weights and 
+biases that perform best in the task of recognising digits. 
+
+We can formulate this as an optimisation problem: we want to obtain the weights
+and biases that minimise the error when recognising digits.
+
+This is what we basically do when we train the network, which is the next part of the
+session.
+
+:::
+
+
+
+
+
+## Additional references
+::: {.nonincremental style="font-size: 0.6em;"}
+- On neural networks being universal function approximators
+  - Deep learning book section 6.4 
+  [http://www.deeplearningbook.org/contents/mlp.html](http://www.deeplearningbook.org/contents/mlp.html)
+  - CS231n notes [https://cs231n.github.io/neural-networks-1/#power](https://cs231n.github.io/neural-networks-1/#power)
+  - Michael Nielsen’s book [http://neuralnetworksanddeeplearning.com/chap4.html](http://neuralnetworksanddeeplearning.com/chap4.html)
+
+
+:::

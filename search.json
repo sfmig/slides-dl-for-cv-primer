@@ -1,0 +1,394 @@
+[
+  {
+    "objectID": "index.html#overview-1",
+    "href": "index.html#overview-1",
+    "title": "Deep learning for computer vision",
+    "section": "Overview",
+    "text": "Overview\n\n\n\n\nVanilla neural network\n\n\n\n\n\n\nConvolutional neural network\n\n\n\n\n\n\n\n\n\n\nApplications to animal behaviour\n\n\n\nFigures from cs231n.github.io/convolutional-networks and movement.neuroinformatics.dev"
+  },
+  {
+    "objectID": "index.html#overview-2",
+    "href": "index.html#overview-2",
+    "title": "Deep learning for computer vision",
+    "section": "Overview",
+    "text": "Overview\n\nPreliminary concepts\nAnatomy of a neural network\nForward pass\nTraining and backward pass\nConvolutional neural networks\nCV applications in animal behaviour\n\n\nHi everyone, my name is Sofía Miñano, and I’m an RSE in the Neuroinformatics Unit, developing tools for animal behaviour research.\nThe main objective of this session is to give a general and not-too-hand-wavy intuition of the main concepts behind how neural networks are used in computer vision applications for animal behaviour.\nWe will start from the basics of neural networks, then expand to convolutional neural networks and finally focus on how these tools are used in animal behaviour research.\nThe goal is that you understand a bit better what is happening under the hood when you use these tools, to help you use and debug them efficiently.\nThe content of the slides is based on a few different resources, I will link to them as we go along.\nSo let’s dive in!"
+  },
+  {
+    "objectID": "index.html#what-is-deep-learning",
+    "href": "index.html#what-is-deep-learning",
+    "title": "Deep learning for computer vision",
+    "section": "What is Deep Learning?",
+    "text": "What is Deep Learning?\n\n\nDeep Learning is:\n\nan approach to Artificial Intelligence\na type of Machine Learning that uses artificial neural networks\n\n\nBefore we dive into the deep learning, let’s start with some key definitions.\nWe are going to go through each of the statements that relate these concepts that often go together.\nDeep Learning is an approach to Artificial Intelligence.\nDeep Learning is a type of Machine Learning based on artificial neural networks. - ML enables computers to improve with experience and data"
+  },
+  {
+    "objectID": "index.html#why-is-it-so-popular",
+    "href": "index.html#why-is-it-so-popular",
+    "title": "Deep learning for computer vision",
+    "section": "Why is it so popular?",
+    "text": "Why is it so popular?\n\n\nDeep Learning achieves great power and flexibility by:\n\ngathering knowledge from experience\nbeing compositional\n\n\nDeep Learning achieves great power and flexbility by: 1. Gathering knowledge from experience –&gt; humans don’t formally specify the required knowledge 2. Being compositional –&gt; representing the world as a nested hierarchy of concepts [many layers, “Deep”]\nWe are going to go through each of the statements that relate these concepts that often go together."
+  },
+  {
+    "objectID": "index.html#what-is-artificial-intelligence-1",
+    "href": "index.html#what-is-artificial-intelligence-1",
+    "title": "Deep learning for computer vision",
+    "section": "What is Artificial Intelligence?",
+    "text": "What is Artificial Intelligence?\n\n\nTesler’s theorem:\n\n“AI is whatever hasn’t been done yet.”\n\n\n\n\n\n\nFigure from stackoverflow.com\n\n\n\nFigure from Waymo\n\n\n\nFrom Wikipedia ‐ As machines become increasingly capable, tasks considered to require “intelligence” are often removed from the definition of AI, a phenomenon known as the AI effect. ‐ For instance, optical character recognition is frequently excluded from things considered to be AI, having become a routine technology. ‐ Modern machine capabilities generally classified as AI include successfully understanding human speech, competing at the highest level in strategic game systems (such as chess and Go), autonomously operating cars, intelligent routing in content delivery networks, and military simulations."
+  },
+  {
+    "objectID": "index.html#deep-learning-as-an-approach-to-artificial-intelligence",
+    "href": "index.html#deep-learning-as-an-approach-to-artificial-intelligence",
+    "title": "Deep learning for computer vision",
+    "section": "Deep Learning as an approach to Artificial Intelligence",
+    "text": "Deep Learning as an approach to Artificial Intelligence\n\n\nEarly AI: problems that were intellectually challenging for humans, but easy for computers\nTrue challenge: tasks that are easy for humans but hard to describe formally\nDL has proven very powerful in solving these intuitive problems within AI."
+  },
+  {
+    "objectID": "index.html#deep-learning-is-a-subset-of-machine-learning",
+    "href": "index.html#deep-learning-is-a-subset-of-machine-learning",
+    "title": "Deep learning for computer vision",
+    "section": "Deep Learning is a subset of Machine Learning",
+    "text": "Deep Learning is a subset of Machine Learning\n\n\n\nML allows computers to tackle problems using knowledge (data) from the real world\nAlgorithms depend heavily on the representation of the data\n\n\n\nFigure from Deep Learning book\n\n\nHow “traditional” ML algorithms depend heavily on the representation of the data\n\nWe can see how representation is relevant also in everyday life: it is much easier for us to do arithmetics on arabic numerals vs roman numerals (“People can easily perform arithmetic on Arabic numerals but ﬁnd arithmetic on Roman numerals much more timeconsuming.”) Another nice example is face recognition (Thatcher effect)\nE.g. cesarean delivery problem, the algorithm takes certain pieces of information that represent the patient adequately for the problem. (“features”). Logistic regression learns how these features correlate with various outcomes but it cannot influence how these features are defined"
+  },
+  {
+    "objectID": "index.html#deep-learning-is-a-subset-of-machine-learning-1",
+    "href": "index.html#deep-learning-is-a-subset-of-machine-learning-1",
+    "title": "Deep learning for computer vision",
+    "section": "Deep Learning is a subset of Machine Learning",
+    "text": "Deep Learning is a subset of Machine Learning\n\n\n\nML allows computers to tackle problems using knowledge (data) from the real world\nAlgorithms depend heavily on the representation of the data\nDL is a kind of representation learning\n\n\n\nFigure from Deep Learning book\n\n\n\nSometimes hand‐designed representations are easy to obtain, but often it is difficult to know what features to extract. E.g., detecting cars in photographs\nRepresentation learning: machine learning discipline that aims to discover not only the mapping from representation to output but also the representation itself.\nLearnt representations often perform better and make AI systems easier to adapt to new tasks. E.g., autoencoder"
+  },
+  {
+    "objectID": "index.html#deep-learning-is-compositional-1",
+    "href": "index.html#deep-learning-is-compositional-1",
+    "title": "Deep learning for computer vision",
+    "section": "Deep Learning is compositional",
+    "text": "Deep Learning is compositional\n\n\n\nFigure from Deep Learning book\n\n\n\nVariables that we are able to observe.\n\n\n\n\nExtraction of increasingly abstract features.\n“Hidden” (i.e., not observable)\n\n\n\n\nRecognition of objects in the image\n\n\n\n\nDL solves this by introducing a hierarchical representation of the data - How does a computer go about understanding the meaning of raw sensory input data? An image is just a collection of pixel values - DL breaks down the mapping into a series of nested simple mappings, each described by a different layer of the network"
+  },
+  {
+    "objectID": "index.html#recap",
+    "href": "index.html#recap",
+    "title": "Deep learning for computer vision",
+    "section": "Recap",
+    "text": "Recap\n\n\n\nDeep Learning is:\n\nan approach to AI\na subset of ML\nwell-suited to solve intuitive problems because learns from data and represents the world hierarchically\n\n\n\n\n\n\n\nFigure modified from Deep Learning book"
+  },
+  {
+    "objectID": "index.html#additional-references",
+    "href": "index.html#additional-references",
+    "title": "Deep learning for computer vision",
+    "section": "Additional references",
+    "text": "Additional references\n\n\nOn the strengths of deep learning:\n\nBrains, Minds and Machines summer school 2017 - Deep learning tutorial\n\nEarly AI:\n\nEarly Work in AI\nLogic Theorist - wikipedia\n\nOn the challenge of solving “intuitive” tasks:\n\nFei‐Fei Li’s lecture on cs231n 2017\nThe Summer Vision Project\n\nDeep Learning for Computer Vision course (University of Michigan)\n\nWinter 2019 (lecture videos public)\nWinter 2022 (lecture videos not available)\n\nCS231n: Convolutional Neural Networks for Visual Recognition (Stanford University)\n\nWinter 2017 (lecture videos public)\nSpring 2025 (lecture videos not available)"
+  },
+  {
+    "objectID": "index.html#what-is-a-neural-network",
+    "href": "index.html#what-is-a-neural-network",
+    "title": "Deep learning for computer vision",
+    "section": "What is a neural network?",
+    "text": "What is a neural network?\n\n\nDeep learning and neural networks\nDigit recognition task as an intuitive problem\nMultilayer perceptron\n\n\nWe have mentioned that Deep learning is a typeof ML based on artificial neural networks, and we have hinted at deep learning relying on many stacked layers of abstraction.\nWe will see in this section that these layers of abstractions and transformations are formalised as NN, which are basically stacks of linear transformations, with nonlinear layers in between.\n\nFor the sake of clarity we are going to focus on the problem of digit recognition, a classic example for neural network applications\nDigit recognition is one of those intuitive tasks that we’ve talked about (easy to humans, hard to formalise). We’ll use this example to introduce the multilayer perceptron, the simplest type of NN.\nNote that we focus on the classification task (but NN can also address regression and many other kinds of tasks)"
+  },
+  {
+    "objectID": "index.html#our-task",
+    "href": "index.html#our-task",
+    "title": "Deep learning for computer vision",
+    "section": "Our task",
+    "text": "Our task\n\n\n\nFigure from  But what is a neural network? | Deep learning chapter 1\n\n\n\nMore specifically, the challenge is to write a program that taxes a grid of 28x28 pixels and outputs a single number between 0 and 9."
+  },
+  {
+    "objectID": "index.html#single-neuron-first-slide",
+    "href": "index.html#single-neuron-first-slide",
+    "title": "Deep learning for computer vision",
+    "section": "A single neuron",
+    "text": "A single neuron\n\n\n\n\n\n\n\n\n\n\nG\n\n\n\nx1\n\nx₁\n\n\n\nf\n\nf\n\n\n\nx1-&gt;f\n\n\n\n\n\nx2\n\nx₂\n\n\n\nx2-&gt;f\n\n\n\n\n\nx3\n\nx₃\n\n\n\nx3-&gt;f\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNeurons in a neural network are organised in layers (remember the hierarchy of concepts characteristic of DL).\nIn this simple case we have an initial layer of 3 neurons and a second layer with only one neuron.\nWe can visualise each neuron as holding a number. - The initial layer holds the input values. - The neuron in the second layer holds the output of a certain function, that takes as input the output of all the neurons in the previous layer - This function is called ‘activation function’. There are different types of activation function and we will go into detail later"
+  },
+  {
+    "objectID": "index.html#a-multi-layer-perceptron",
+    "href": "index.html#a-multi-layer-perceptron",
+    "title": "Deep learning for computer vision",
+    "section": "A multi-layer perceptron",
+    "text": "A multi-layer perceptron\nThe simplest neural network\n\nAn extension to more neurons and more layers\nRequires a non-linear activation function\nAlso fully‐connected or feed-forward networks\n\n\n\n\n\n\n\n\nFigure from  CS231n lecture notes: neural networks\n\n\n\nA multi‐layer perceptron (MLP) is an extension of this to more neurons and more layers - MLPs have at least one layer between the first and the last layer, each of which with a relatively large number of neurons - The number of layers and neurons varies per application and it often based on what has worked well in the past (there are methods for comparing performance across different architectures to make choices).\nEvery neuron behaves exactly as we saw in the simple case: - at each layer after the input layer, each neuron receives as input all the neurons in the previous layer, computes a certain function, and outputs a value. - This is carried out at every layer until the output layer. - These networks are also called fully‐connected, since all the neurons in one layer are connected to all previous ones"
+  },
+  {
+    "objectID": "index.html#layers",
+    "href": "index.html#layers",
+    "title": "Deep learning for computer vision",
+    "section": "Layers",
+    "text": "Layers\n\n\n\n\nInput layer\n\n\n\n\n\n\n\n\n\nOutput layer\n\n\n\n\n\n\n\n\n\nHidden layers\n\n\n\n\n\n\n\nIn our example case, let’s assume we use this MLP to classify handwritten digits.\nFrom this description of the workflow we can already see there are three types of layers - The Input layer, that hold the input values - Some hidden layers, where subsequent transformations occur - Output layer, which hold the classification decision\nWe will address first the input and output layers before going into detail about what’s going on in the hidden layers. For now, it’s sufficient to know that these are transformations analogous to the one we’ve seen for a neuron but extended to many many neurons."
+  },
+  {
+    "objectID": "index.html#layers-input-layer",
+    "href": "index.html#layers-input-layer",
+    "title": "Deep learning for computer vision",
+    "section": "Layers: input layer",
+    "text": "Layers: input layer\n\n\n\n\n\n\n\n\n\n→ np.reshape(28*28, 1)\n\n\n\n\n\n\n\n\nThe input layer simply holds the input values.\nWe have seen that for our problem the input image is a greyscale image of size 28x28.\nThat means that we have an array of numbers organised in 28 rows and 28 columns, each of which with a value between 0 and 1, where 0 is black and 1 is white.\nThe first layer in our neural network will hold these values, stretched out in 784 different neurons (we reshape the 2D array as a vector)"
+  },
+  {
+    "objectID": "index.html#layers-output-layer",
+    "href": "index.html#layers-output-layer",
+    "title": "Deep learning for computer vision",
+    "section": "Layers: output layer",
+    "text": "Layers: output layer\n\n\n\n\n\n\n\n\n\n\n\n\n\n0\n\n\n1\n\n\n2\n\n\n3\n\n\n4\n\n\n5\n\n\n6\n\n\n7\n\n\n8\n\n\n9\n\n\n\n\n → 2\n\n\n\nAs we mentioned at the output layer we would like to have the classification decision.\nWhat digit is represented in the image? - A convenient way to output this decision is to have as many neurons as classes we are considering. - In this case any input image can be 1 in 10 classes, corresponding to the digits from 0 to 9.\nTherefore in the output layer, each of the neurons would hold a number that represents how much the model thinks that the input image represents the corresponding class (digits in our case). [In an image classification task, it could be whether or not a cat, dog, car is present in the image]\nSo now we just need to understand what kind of transformations are happening in the hidden layers."
+  },
+  {
+    "objectID": "index.html#additional-references-1",
+    "href": "index.html#additional-references-1",
+    "title": "Deep learning for computer vision",
+    "section": "Additional references",
+    "text": "Additional references\n\n\nOn the single and multi-layer perceptron:\n\nDeep Learning book sections 1.2.1 and 6.6\nBrains, Minds and Machines summer school 2017 - Deep learning tutorial\n\nOn the network’s architecture\n\nCS231n - Neural networks\nDeep Learning book chapter 6, especially section 6.4"
+  },
+  {
+    "objectID": "index.html#from-layer-to-layer",
+    "href": "index.html#from-layer-to-layer",
+    "title": "Deep learning for computer vision",
+    "section": "From layer to layer",
+    "text": "From layer to layer\n\n\n\nHidden layers"
+  },
+  {
+    "objectID": "index.html#from-layer-to-layer-one-neuron",
+    "href": "index.html#from-layer-to-layer-one-neuron",
+    "title": "Deep learning for computer vision",
+    "section": "From layer to layer: one neuron",
+    "text": "From layer to layer: one neuron\n\n\n\n\n\n\n\n\nG\n\n\n\nx1\n\nx₁\n\n\n\nf\n\nf\n\n\n\nx1-&gt;f\n\n\n\n\n\nx2\n\nx₂\n\n\n\nx2-&gt;f\n\n\n\n\n\nx3\n\nx₃\n\n\n\nx3-&gt;f\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \\[\n  f(x_1, x_2, x_3, \\ldots) = \\mathbf{\\color{rgb(225, 174, 65)}h}\n  \\]\n\n\n\nFor the case of a single neuron, we have seen that each neuron holds a number that results from taking all the numbers held at the neurons in the previous layer and applying a certain function.\nWe consider a neuron at the first hidden layer. We represent its output by h. We are now going to describe that function"
+  },
+  {
+    "objectID": "index.html#from-layer-to-layer-one-neuron-1",
+    "href": "index.html#from-layer-to-layer-one-neuron-1",
+    "title": "Deep learning for computer vision",
+    "section": "From layer to layer: one neuron",
+    "text": "From layer to layer: one neuron\n\n\n\n\n\n\n\n\n\nG\n\n\n\nx1\n\nx₁\n\n\n\nf\n\nf\n\n\n\nx1-&gt;f\n\n\nw₁\n\n\n\nx2\n\nx₂\n\n\n\nx2-&gt;f\n\n\nw₂\n\n\n\nx3\n\nx₃\n\n\n\nx3-&gt;f\n\n\nw₃\n\n\n\n\n\n\n\n\n\n\\[\n  \\mathbf{\\color{rgb(225, 174, 65)}h}\n  \\]\n\n\n\n\n\nCompute weighted sum \\[\n{\\color{rgb(225, 65, 185)}\\Sigma} = {\\color{rgb(137, 225, 65)}w_1} x_1 + {\\color{rgb(137, 225, 65)}w_2} x_2 + {\\color{rgb(137, 225, 65)}w_3} x_3\n\\]\nApply non-linearity \\[\n\\mathbf{\\color{rgb(225, 174, 65)}h} = max({\\color{rgb(225, 65, 185)}\\Sigma}, 0)\n\\]\n\n\n\n\n\n\nThe neuron processes the inputs as follows:\nFirst it computes a weighted sum of the inputs. The weights represent the connections between the neurons. The weighted sum can be seen as the neuron attending to different parts of the input.\nThen it applies a non-linear function. For example, the rectified linear unit (ReLU) function. This function will output the final output of the neuron\nChoosing the ReLU function is not a totally arbitrary choice: the ReLU function is a common choice due to its properties when it comes to optimization via gradient descent. However there are other popular options for activation functions\nNote as well that, a non linear function is required for the MLP to be a universal function approximator (along with a hidden layer with enough number of units/neurons)\nThe activation function is loosely based on biological neurons - It represents that the artificial neuron will respond to inputs beyond a certain threshold. - As it is now, this threshold would be zero: if the weighted sum is positive the neuron will output the result of the weighted sum, if it’s negative it will output zero."
+  },
+  {
+    "objectID": "index.html#from-layer-to-layer-one-neuron-2",
+    "href": "index.html#from-layer-to-layer-one-neuron-2",
+    "title": "Deep learning for computer vision",
+    "section": "From layer to layer: one neuron",
+    "text": "From layer to layer: one neuron\n\n\n\n\n\n\n\n\n\nG\n\n\n\nx1\n\nx₁\n\n\n\nf\n\nf\n\n\n\nx1-&gt;f\n\n\nw₁\n\n\n\nx2\n\nx₂\n\n\n\nx2-&gt;f\n\n\nw₂\n\n\n\nx3\n\nx₃\n\n\n\nx3-&gt;f\n\n\nw₃\n\n\n\nbias\n\nb\n\n\n\nbias-&gt;f\n\n\n+\n\n\n\n\n\n\n\n\n\n\\[\n  \\mathbf{\\color{rgb(225, 174, 65)}h}\n  \\]\n\n\n\n\n\nCompute weighted sum \\[\n{\\color{rgb(225, 65, 185)}\\Sigma} = {\\color{rgb(137, 225, 65)}w_1} x_1 + {\\color{rgb(137, 225, 65)}w_2} x_2 + {\\color{rgb(137, 225, 65)}w_3} x_3\n\\]\nApply non-linearity \\[\n\\mathbf{\\color{rgb(225, 174, 65)}h} = max({\\color{rgb(225, 65, 185)}\\Sigma} + {\\color{rgb(213, 24, 24)}b}, 0)\n\\]\n\n\n\n\n\n\n\nWhat if we want a threshold different from zero? One easy way to “control” this threshold with a parameter is to introduce a bias term.\nWith a bias term, the ReLU function will output the result of the weighted sum if its value is below b, and zero otherwise.\nIntuition: the neuron pays attention to certain inputs more than others, if they are large enough."
+  },
+  {
+    "objectID": "index.html#from-layer-to-layer-many-neurons",
+    "href": "index.html#from-layer-to-layer-many-neurons",
+    "title": "Deep learning for computer vision",
+    "section": "From layer to layer: many neurons",
+    "text": "From layer to layer: many neurons\n\n\nIn an MLP:\n\neach connection is associated with a weight\neach neuron is associated with a bias\n\n\n\n\nFigure from  But what is a neural network? | Deep learning chapter 1"
+  },
+  {
+    "objectID": "index.html#from-layer-to-layer-many-neurons-2",
+    "href": "index.html#from-layer-to-layer-many-neurons-2",
+    "title": "Deep learning for computer vision",
+    "section": "From layer to layer: many neurons",
+    "text": "From layer to layer: many neurons\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\n\nh1\n\nh₀⁰\n\n\n\nh1_prime\n\nh₀¹\n\n\n\nh1-&gt;h1_prime\n\n\n\n\n\nh2_prime\n\nh₁¹\n\n\n\nh1-&gt;h2_prime\n\n\n\n\n\nh3_prime\n\nh₂¹\n\n\n\nh1-&gt;h3_prime\n\n\n\n\n\nh4_prime\n\n...\n\n\n\nh1-&gt;h4_prime\n\n\n\n\n\nh5_prime\n\nhₖ¹\n\n\n\nh1-&gt;h5_prime\n\n\n\n\n\nh2\n\nh₁⁰\n\n\n\nh2-&gt;h1_prime\n\n\n\n\n\nh2-&gt;h2_prime\n\n\n\n\n\nh2-&gt;h3_prime\n\n\n\n\n\nh2-&gt;h4_prime\n\n\n\n\n\nh2-&gt;h5_prime\n\n\n\n\n\nh3\n\nh₂⁰\n\n\n\nh3-&gt;h1_prime\n\n\n\n\n\nh3-&gt;h2_prime\n\n\n\n\n\nh3-&gt;h3_prime\n\n\n\n\n\nh3-&gt;h4_prime\n\n\n\n\n\nh3-&gt;h5_prime\n\n\n\n\n\nh4\n\nh₃⁰\n\n\n\nh4-&gt;h1_prime\n\n\n\n\n\nh4-&gt;h2_prime\n\n\n\n\n\nh4-&gt;h3_prime\n\n\n\n\n\nh4-&gt;h4_prime\n\n\n\n\n\nh4-&gt;h5_prime\n\n\n\n\n\nh5\n\n...\n\n\n\nh5-&gt;h1_prime\n\n\n\n\n\nh5-&gt;h2_prime\n\n\n\n\n\nh5-&gt;h3_prime\n\n\n\n\n\nh5-&gt;h4_prime\n\n\n\n\n\nh5-&gt;h5_prime\n\n\n\n\n\nh6\n\nhₙ⁰\n\n\n\nh6-&gt;h1_prime\n\n\n\n\n\nh6-&gt;h2_prime\n\n\n\n\n\nh6-&gt;h3_prime\n\n\n\n\n\nh6-&gt;h4_prime\n\n\n\n\n\nh6-&gt;h5_prime\n\n\n\n\n\nbias\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\n\nh1\n\nh₀⁰\n\n\n\nh1_prime\n\nh₀¹\n\n\n\nh1-&gt;h1_prime\n\n\n\n\n\nh2_prime\n\nh₁¹\n\n\n\nh1-&gt;h2_prime\n\n\n\n\n\nh3_prime\n\nh₂¹\n\n\n\nh1-&gt;h3_prime\n\n\n\n\n\nh4_prime\n\n...\n\n\n\nh1-&gt;h4_prime\n\n\n\n\n\nh5_prime\n\nhₖ¹\n\n\n\nh1-&gt;h5_prime\n\n\n\n\n\nh2\n\nh₁⁰\n\n\n\nh2-&gt;h1_prime\n\n\n\n\n\nh2-&gt;h2_prime\n\n\n\n\n\nh2-&gt;h3_prime\n\n\n\n\n\nh2-&gt;h4_prime\n\n\n\n\n\nh2-&gt;h5_prime\n\n\n\n\n\nh3\n\nh₂⁰\n\n\n\nh3-&gt;h1_prime\n\n\n\n\n\nh3-&gt;h2_prime\n\n\n\n\n\nh3-&gt;h3_prime\n\n\n\n\n\nh3-&gt;h4_prime\n\n\n\n\n\nh3-&gt;h5_prime\n\n\n\n\n\nh4\n\nh₃⁰\n\n\n\nh4-&gt;h1_prime\n\n\n\n\n\nh4-&gt;h2_prime\n\n\n\n\n\nh4-&gt;h3_prime\n\n\n\n\n\nh4-&gt;h4_prime\n\n\n\n\n\nh4-&gt;h5_prime\n\n\n\n\n\nh5\n\n...\n\n\n\nh5-&gt;h1_prime\n\n\n\n\n\nh5-&gt;h2_prime\n\n\n\n\n\nh5-&gt;h3_prime\n\n\n\n\n\nh5-&gt;h4_prime\n\n\n\n\n\nh5-&gt;h5_prime\n\n\n\n\n\nh6\n\nhₙ⁰\n\n\n\nh6-&gt;h1_prime\n\n\n\n\n\nh6-&gt;h2_prime\n\n\n\n\n\nh6-&gt;h3_prime\n\n\n\n\n\nh6-&gt;h4_prime\n\n\n\n\n\nh6-&gt;h5_prime\n\n\n\n\n\nbias\n\nb₀¹\n\n\n\nbias-&gt;h1_prime\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\n\nh1\n\nh₀⁰\n\n\n\nh1_prime\n\nh₀¹\n\n\n\nh1-&gt;h1_prime\n\n\n\n\n\nh2_prime\n\nh₁¹\n\n\n\nh1-&gt;h2_prime\n\n\n\n\n\nh3_prime\n\nh₂¹\n\n\n\nh1-&gt;h3_prime\n\n\n\n\n\nh4_prime\n\n...\n\n\n\nh1-&gt;h4_prime\n\n\n\n\n\nh5_prime\n\nhₖ¹\n\n\n\nh1-&gt;h5_prime\n\n\n\n\n\nh2\n\nh₁⁰\n\n\n\nh2-&gt;h1_prime\n\n\n\n\n\nh2-&gt;h2_prime\n\n\n\n\n\nh2-&gt;h3_prime\n\n\n\n\n\nh2-&gt;h4_prime\n\n\n\n\n\nh2-&gt;h5_prime\n\n\n\n\n\nh3\n\nh₂⁰\n\n\n\nh3-&gt;h1_prime\n\n\n\n\n\nh3-&gt;h2_prime\n\n\n\n\n\nh3-&gt;h3_prime\n\n\n\n\n\nh3-&gt;h4_prime\n\n\n\n\n\nh3-&gt;h5_prime\n\n\n\n\n\nh4\n\nh₃⁰\n\n\n\nh4-&gt;h1_prime\n\n\n\n\n\nh4-&gt;h2_prime\n\n\n\n\n\nh4-&gt;h3_prime\n\n\n\n\n\nh4-&gt;h4_prime\n\n\n\n\n\nh4-&gt;h5_prime\n\n\n\n\n\nh5\n\n...\n\n\n\nh5-&gt;h1_prime\n\n\n\n\n\nh5-&gt;h2_prime\n\n\n\n\n\nh5-&gt;h3_prime\n\n\n\n\n\nh5-&gt;h4_prime\n\n\n\n\n\nh5-&gt;h5_prime\n\n\n\n\n\nh6\n\nhₙ⁰\n\n\n\nh6-&gt;h1_prime\n\n\n\n\n\nh6-&gt;h2_prime\n\n\n\n\n\nh6-&gt;h3_prime\n\n\n\n\n\nh6-&gt;h4_prime\n\n\n\n\n\nh6-&gt;h5_prime\n\n\n\n\n\nbias\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nG\n\n\n\nh1\n\nh₀⁰\n\n\n\nh1_prime\n\nh₀¹\n\n\n\nh1-&gt;h1_prime\n\n\n\n\n\nh2_prime\n\nh₁¹\n\n\n\nh1-&gt;h2_prime\n\n\n\n\n\nh3_prime\n\nh₂¹\n\n\n\nh1-&gt;h3_prime\n\n\n\n\n\nh4_prime\n\n...\n\n\n\nh1-&gt;h4_prime\n\n\n\n\n\nh5_prime\n\nhₖ¹\n\n\n\nh1-&gt;h5_prime\n\n\n\n\n\nh2\n\nh₁⁰\n\n\n\nh2-&gt;h1_prime\n\n\n\n\n\nh2-&gt;h2_prime\n\n\n\n\n\nh2-&gt;h3_prime\n\n\n\n\n\nh2-&gt;h4_prime\n\n\n\n\n\nh2-&gt;h5_prime\n\n\n\n\n\nh3\n\nh₂⁰\n\n\n\nh3-&gt;h1_prime\n\n\n\n\n\nh3-&gt;h2_prime\n\n\n\n\n\nh3-&gt;h3_prime\n\n\n\n\n\nh3-&gt;h4_prime\n\n\n\n\n\nh3-&gt;h5_prime\n\n\n\n\n\nh4\n\nh₃⁰\n\n\n\nh4-&gt;h1_prime\n\n\n\n\n\nh4-&gt;h2_prime\n\n\n\n\n\nh4-&gt;h3_prime\n\n\n\n\n\nh4-&gt;h4_prime\n\n\n\n\n\nh4-&gt;h5_prime\n\n\n\n\n\nh5\n\n...\n\n\n\nh5-&gt;h1_prime\n\n\n\n\n\nh5-&gt;h2_prime\n\n\n\n\n\nh5-&gt;h3_prime\n\n\n\n\n\nh5-&gt;h4_prime\n\n\n\n\n\nh5-&gt;h5_prime\n\n\n\n\n\nh6\n\nhₙ⁰\n\n\n\nh6-&gt;h1_prime\n\n\n\n\n\nh6-&gt;h2_prime\n\n\n\n\n\nh6-&gt;h3_prime\n\n\n\n\n\nh6-&gt;h4_prime\n\n\n\n\n\nh6-&gt;h5_prime\n\n\n\n\n\nbias\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[\n\\small\n\\qquad \\color{rgb(0, 0, 255)}{h_0^1} = ReLU(\\sum_{i=0}^{n} \\color{rgb(137, 225, 65)}{w_i^{0,1}} \\color{rgb(173, 216, 230)}{h_i^0}  + \\color{rgb(213, 24, 24)}{b_0^1})\n\\]\n\n\n\n\n\\[\n\\scriptstyle\nReLU\\left( \\begin{bmatrix} w_{0,0} & \\cdots & w_{0,n} \\\\ \\vdots & \\ddots & \\vdots \\\\ w_{k,0} & \\cdots & w_{k,n} \\end{bmatrix} \\begin{bmatrix} h_0^0 \\\\ \\vdots \\\\ h_n^0 \\end{bmatrix} + \\begin{bmatrix} b_0^1 \\\\ \\vdots \\\\ b_k^1 \\end{bmatrix} \\right) = \\begin{bmatrix} h_0^1 \\\\ \\vdots \\\\ h_k^1 \\end{bmatrix}\n\\]\n\n\n\n\n\n\\[\n\\scriptstyle\nReLU\\left( \\begin{bmatrix} w_{0,0} & \\cdots & w_{0,n} \\\\ \\vdots & \\ddots & \\vdots \\\\ w_{k,0} & \\cdots & w_{k,n} \\end{bmatrix} \\begin{bmatrix} h_0^0 \\\\ \\vdots \\\\ h_n^0 \\end{bmatrix} + \\begin{bmatrix} b_0^1 \\\\ \\vdots \\\\ b_k^1 \\end{bmatrix} \\right) = \\begin{bmatrix} h_0^1 \\\\ \\vdots \\\\ h_k^1 \\end{bmatrix}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[\n\\scriptstyle\nReLU\\left( \\begin{bmatrix} w_{0,0} & \\cdots & w_{0,n} \\\\ \\vdots & \\ddots & \\vdots \\\\ w_{k,0} & \\cdots & w_{k,n} \\end{bmatrix} \\begin{bmatrix} h_0^0 \\\\ \\vdots \\\\ h_n^0 \\end{bmatrix} + \\begin{bmatrix} b_0^1 \\\\ \\vdots \\\\ b_k^1 \\end{bmatrix} \\right) = \\begin{bmatrix} h_0^1 \\\\ \\vdots \\\\ h_k^1 \\end{bmatrix}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[\n\\scriptstyle\nReLU\\left( \\begin{bmatrix} w_{0,0} & \\cdots & w_{0,n} \\\\ \\vdots & \\ddots & \\vdots \\\\ w_{k,0} & \\cdots & w_{k,n} \\end{bmatrix} \\begin{bmatrix} h_0^0 \\\\ \\vdots \\\\ h_n^0 \\end{bmatrix} + \\begin{bmatrix} b_0^1 \\\\ \\vdots \\\\ b_k^1 \\end{bmatrix} \\right) = \\begin{bmatrix} h_0^1 \\\\ \\vdots \\\\ h_k^1 \\end{bmatrix}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[\n\\scriptstyle\nReLU\\left( \\begin{bmatrix} w_{0,0} & \\cdots & w_{0,n} & b_0^1 \\\\ \\vdots & \\ddots & \\vdots & \\vdots \\\\ w_{k,0} & \\cdots & w_{k,n} & b_k^1 \\end{bmatrix} \\begin{bmatrix} h_0^0 \\\\ \\vdots \\\\ h_n^0 \\\\ 1 \\end{bmatrix} \\right) = \\begin{bmatrix} h_0^1 \\\\ \\vdots \\\\ h_k^1 \\end{bmatrix}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[\nReLU(\\color{rgb(137, 225, 65)}{\\mathbf{W}'} \\color{rgb(173, 216, 230)}{h^{0^{\\prime}}} ) = \\color{rgb(0, 0, 255)}{h^1}\n\\]\n\n\n\n\nWe can use matrix multiplication to extend that expression to all the neurons in layer 1.\nIf you remember matrix multiplication from linear algebra…. you’ll see that the computation of the first neuron in layer 1 is equivalent to the one above (we multiply the first row and the first column to obtain the element at the first row and first column, etc.)\nWe now have a weight matrix, that collects all the weights representing the connections between all the neurons in layer 0 and all the neurons in layer 1. The first row in the weight matrix has the weights required to compute the output of the first neuron in layer 1, the second row those required to compute neuron 2, and so on until the k-th row to compute the k-th neuron.\nThe vector that multiplies with this matrix collects the neurons in the previous layer. To the result of this multiplication we add the bias term of each neuron in layer 1 and then feed the result to a ReLU function to obtain the final number held by the neurons in layer 1\nOften the bias vector is included in the weight matrix as an additional column for further compactness.\nBut note that if we adequately respect the dimensions and add a 1 as a last row in the vector of neurons in the previous layer, both expressions are equivalent\nJust remember that there is a compact way that is often preferred to express the transition from one layer to the next. And that often making use of this bias trick the bias is omitted, but it’s implicitly considered within the weight matrix as we’ve seen.\nExpressing the transformations as vectorised operations is very convenient for computing efficiency (we have specialised hardware that performs this operations very fast)"
+  },
+  {
+    "objectID": "index.html#a-two-layer-network",
+    "href": "index.html#a-two-layer-network",
+    "title": "Deep learning for computer vision",
+    "section": "A two layer network",
+    "text": "A two layer network\n\n\n\n\n\n\n\n\n\nG\n\n\n\nx1\n\nx₀\n\n\n\nx2\n\nx₁\n\n\n\n\nh1\n\nh₀\n\n\n\nx1-&gt;h1\n\n\n\n\n\nh2\n\nh₁\n\n\n\nx1-&gt;h2\n\n\n\n\n\nh3\n\nh₂\n\n\n\nx1-&gt;h3\n\n\n\n\n\nh4\n\n...\n\n\n\nx1-&gt;h4\n\n\n\n\n\nh5\n\nhₖ\n\n\n\nx1-&gt;h5\n\n\n\n\n\nx3\n\nx₂\n\n\n\n\nx2-&gt;h1\n\n\n\n\n\nx2-&gt;h2\n\n\n\n\n\nx2-&gt;h3\n\n\n\n\n\nx2-&gt;h4\n\n\n\n\n\nx2-&gt;h5\n\n\n\n\n\nx4\n\nx₃\n\n\n\n\nx3-&gt;h1\n\n\n\n\n\nx3-&gt;h2\n\n\n\n\n\nx3-&gt;h3\n\n\n\n\n\nx3-&gt;h4\n\n\n\n\n\nx3-&gt;h5\n\n\n\n\n\nx5\n\n...\n\n\n\n\nx4-&gt;h1\n\n\n\n\n\nx4-&gt;h2\n\n\n\n\n\nx4-&gt;h3\n\n\n\n\n\nx4-&gt;h4\n\n\n\n\n\nx4-&gt;h5\n\n\n\n\n\nx6\n\nxₙ\n\n\n\n\nx5-&gt;h1\n\n\n\n\n\nx5-&gt;h2\n\n\n\n\n\nx5-&gt;h3\n\n\n\n\n\nx5-&gt;h4\n\n\n\n\n\nx5-&gt;h5\n\n\n\n\n\nx6-&gt;h1\n\n\n\n\n\nx6-&gt;h2\n\n\n\n\n\nx6-&gt;h3\n\n\n\n\n\nx6-&gt;h4\n\n\n\n\n\nx6-&gt;h5\n\n\n\n\n\ninput_label\n\nInput Layer\n\n\n\n\nbias\n\n\n\n\n\ny1\n\ny₀\n\n\n\nh1-&gt;y1\n\n\n\n\n\ny2\n\ny₁\n\n\n\nh1-&gt;y2\n\n\n\n\n\ny3\n\n...\n\n\n\nh1-&gt;y3\n\n\n\n\n\ny4\n\nyₘ\n\n\n\nh1-&gt;y4\n\n\n\n\n\n\nh2-&gt;y1\n\n\n\n\n\nh2-&gt;y2\n\n\n\n\n\nh2-&gt;y3\n\n\n\n\n\nh2-&gt;y4\n\n\n\n\n\n\nh3-&gt;y1\n\n\n\n\n\nh3-&gt;y2\n\n\n\n\n\nh3-&gt;y3\n\n\n\n\n\nh3-&gt;y4\n\n\n\n\n\n\nh4-&gt;y1\n\n\n\n\n\nh4-&gt;y2\n\n\n\n\n\nh4-&gt;y3\n\n\n\n\n\nh4-&gt;y4\n\n\n\n\n\nh5-&gt;y1\n\n\n\n\n\nh5-&gt;y2\n\n\n\n\n\nh5-&gt;y3\n\n\n\n\n\nh5-&gt;y4\n\n\n\n\n\nhidden_label\n\nHidden Layer\n\n\n\n\n\n\n\noutput_label\n\nOutput Layer\n\n\n\n\n\n\n\n\n\n\n \n\n\\[\n\\color{rgb(255, 176, 0)}{y} = \\color{rgb(143, 204, 143)}{W_1} \\color{rgb(92, 144, 224)}{ReLU({W_0}x)}\n\\]\n\n\n\nWe will do this for as many layers we have in the network. This will result in a nested function. For example for a two layer network it would be something like in the slide.\nTwo things to note here: - first, when counting the number of layers in the neural network, we usually omit the input layer since it does not have tunable weights - Second, Note that usually the non linear function is not applied at the last output layer (also called readout layer because it’s where we read the predictions for the classes)."
+  },
+  {
+    "objectID": "index.html#forward-pass-1",
+    "href": "index.html#forward-pass-1",
+    "title": "Deep learning for computer vision",
+    "section": "Forward pass",
+    "text": "Forward pass\n\n\n\n\n\n\n\n\n\n\n\n\n → \n\n\n\n\n\n\n\n\n\\[\n\\scriptstyle\nReLU(W h^n) = h^{n+1}\n\\]\n\n\n\n\n\n\\[\n\\scriptstyle\nReLU(\\color{rgb(255,0,0)}{W} h^n) = h^{n+1}\n\\]\n\n\n\n\n\n\n → 2\n\n\n\n\n How to choose them? \n\n\n\n\nOk so we’ve now seen how we go from a certain input (in our case a greyscale image with a digit), across all layers applying the corresponding transformations, until the output layer, where we will obtain ‘scores’ representing how much the model thinks the input represents each class. This whole process is usually called forward pass, since the information flows from input to output\nWe’ve also seen that each layer has a collection of weights and biases that along with the activation function, define the transformation taking place across that layer. The weights and biases of all the layers constitute the network parameters, and they determine what the network “does”.\nWith an ideal set of parameters, we would feed a certain image, for example one representing a 3, and the transformations across the layers should end up in the class “3” having the highest score in the output layer.\nHow do we choose these parameters? We would like to obtain the weights and biases that perform best in the task of recognising digits.\nWe can formulate this as an optimisation problem: we want to obtain the weights and biases that minimise the error when recognising digits.\nThis is what we basically do when we train the network, which is the next part of the session."
+  },
+  {
+    "objectID": "index.html#additional-references-2",
+    "href": "index.html#additional-references-2",
+    "title": "Deep learning for computer vision",
+    "section": "Additional references",
+    "text": "Additional references\n\n\nOn neural networks being universal function approximators\n\nDeep learning book section 6.4 http://www.deeplearningbook.org/contents/mlp.html\nCS231n notes https://cs231n.github.io/neural-networks-1/#power\nMichael Nielsen’s book http://neuralnetworksanddeeplearning.com/chap4.html"
+  },
+  {
+    "objectID": "index.html#training-intuition",
+    "href": "index.html#training-intuition",
+    "title": "Deep learning for computer vision",
+    "section": "Training: intuition",
+    "text": "Training: intuition\n\n\n\n\n\n(  , 2)\nLabelled data\n\n\n\n\n Supervised learning \n\n\n\n(  , …)\nTraining set\n\n\n\n\n\n → \n\n\n\n\n\n\n\n\n\n →   7?\n\n\n\n\n\n →   …\n\n\n\n\n\nThe main idea of training: During training we will feed labelled data to the network. It is called ‘labelled data’ because for each image we have a label (in red) that contains the ground truth. This is basically the answer to the problem we want to solve (here, the digit it represents). - Remember that with the neural network we want to capture that mapping from inputs to labels, from images to digits. - We are focusing on supervised learning, in which labelled data is available, but be aware that there are other approaches to learning too.\nFor each training sample, the network will just execute a normal forward pass, ignoring the label. After going through all the layers, the network will output a prediction for the given input. Then we will compare it to the ground truth label.\nDepending on how far off the prediction is, the network will adapt its weights and biases so that it improves its performance, and its predictions become closer and closer to the ground truth.\nThe complete set of images that we present during training constitutes the training set. The hope is that with this layered approach of the network and its hierarchical abstraction of concepts, we may be able to train a network that generalises beyond the training set."
+  },
+  {
+    "objectID": "index.html#testing-intuition",
+    "href": "index.html#testing-intuition",
+    "title": "Deep learning for computer vision",
+    "section": "Testing: intuition",
+    "text": "Testing: intuition\n\n\n\n\nTest set\n\n\n\n\n → \n\n\n\n\n\n TRAINED \n\n\n\n\n → \n\n\n\n\n\nAccuracy\n\n\n\nWe test this by doing the following: after we train the network, we present it with a new set of images that the network hasn’t seen during training. We call this the test set. On this test set we check the performance of the network. In our case, the accuracy of the classification (number of correct predictions over total)."
+  },
+  {
+    "objectID": "index.html#dataset-split",
+    "href": "index.html#dataset-split",
+    "title": "Deep learning for computer vision",
+    "section": "Dataset split",
+    "text": "Dataset split\n\n\n\n\nHyperparameters\nKeep test set aside! ⚠️\n\n\n\n\n\n\n\n\n\n\n\n\nFigures modified from  CS231n lecture notes: neural networks\n\n\nBefore we dive into the details of training, le’t make an important note about the test set.\nWe have seen how in the paradigm I just described, there are two subsets within the full set of labelled data: the training set and the test set. The test set is indeed a very valuable resource to assess how our model performs in deployment / in the wild. As such, it should be treated with care.\nBut what does this mean in practice? To explain this better, we need to talk first about hyperparameters, a common feature of ML algorithms.\nYou may have noticed that in the development of our simple MLP we made a few design choices, such as the number of neurons per layer, the number of hidden layers, the activation function etc. These are called hyperparameters - basically all the parameters in the network that are not weights and biases (i.e. not learnt, not tuned during training) can be considered hyperparameters. We will see more examples of hyperparameters in the next slides too.\nHow do hyperparameters relate to the test set? Well it’s often not obvious what values/settings one should choose, and a reasonable suggestion would be to try a few different values and see which one works best. This is indeed what we do in practice, but we need to be careful. In particular, we cannot use the test set for the purpose of tweaking hyperparameters.\nWhy? As we said the test set as a very precious resource, as we can use it as a proxy for measuring the generalization of your model. If we tune our hyperparameters to work well on the test set, we will overfit to it, and when we deploy our model we could see a significantly reduced performance. We will loose our only metric of realistic performance in the wild."
+  },
+  {
+    "objectID": "index.html#dataset-split-1",
+    "href": "index.html#dataset-split-1",
+    "title": "Deep learning for computer vision",
+    "section": "Dataset split",
+    "text": "Dataset split\n\n\n\n\nHyperparameters\nKeep test set aside! ⚠️\nSo then how?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigures modified from  CS231n lecture notes: neural networks\n\n\nSo how do we go about this? Usually people split the data into three sets: training, validation and test. - The training set is used to train the model. - The validation set is used to select the best hyperparameters. - The test set is only used once, at the end, to evaluate the performance of the model with the selected hyperparameters. This way it remains a good proxy for measuring the generalization of our model.\nIn cases where the size of your training data (and therefore also the validation data) might be small, it is common practice to do what is called k-fold validation.\nIn k-fold validation: The training set is split into folds (for example 5 folds). The folds 1-4 become the training set. One fold (e.g. fold 5 here in yellow) is denoted as the Validation fold and is used to tune the hyperparameters. Cross-validation goes a step further and iterates over the choice of which fold is the validation fold, separately from 1-5. This would be referred to as 5-fold cross-validation. In the very end once the model is trained and all the best hyperparameters are determined, the model is evaluated a single time on the test data (red).\nIn animal pose estimation, most frameworks make it very easy to do a slight variant of this. Instead of fixed folds, people often do random samples for the training and the test set (in DLC for examplethese are called “shuffles”)."
+  },
+  {
+    "objectID": "index.html#training-as-an-optimisation-problem",
+    "href": "index.html#training-as-an-optimisation-problem",
+    "title": "Deep learning for computer vision",
+    "section": "Training as an optimisation problem",
+    "text": "Training as an optimisation problem\n\n\nLoss function\n\n\n\nGradient descent\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSo we need to further define two aspects of this process: - first, how is the comparison between prediction and labels carried out and how does it evaluate the performance of the network? We will capture this via the loss function - Second, we need to specify a way of updating the values of the weights and biases based on how well or how badly the model is performing so that they perform better in future passes. We will approach this by optimising their values with gradient descent Let’s start off with the loss function. In this lecture we will focus on the cross-entropy loss, which is a popular choice but there are many other alternative loss functions."
+  },
+  {
+    "objectID": "index.html#loss-function",
+    "href": "index.html#loss-function",
+    "title": "Deep learning for computer vision",
+    "section": "Loss function",
+    "text": "Loss function\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n0\n\n\n1\n\n\n2\n\n\n3\n\n\n4\n\n\n5\n\n\n6\n\n\n7\n\n\n8\n\n\n9\n\n\n\n\n\n\n\nRaw scores\n\n\n\n-6.8\n\n\n2.6\n\n\n6.7\n\n\n5.9\n\n\n1.9\n\n\n-1.3\n\n\n-5.7\n\n\n3.2\n\n\n1.3\n\n\n1.0\n\n\n\n\n\n\n\n\n\n\n\nProbabilities\n\n\n\n\n\n\n\nThe loss function describes how good a certain collection of weights and biases is. Sometimes called cost function, objective function.\nTo describe the loss function let’s look at what happens at the end of a forward pass during training. After we go through all the layers we arrive at the output layer or readout layer, where the scores for each of the classes are collected in the neurons.\nWe would like the score for the correct class, in this case “2”, to be very high, and best highest than the other classes.\nBut these numbers at the output layer are just ‘raw’ scores. They are unnormalised (we interpret them as unnormalised log probabilities). It would be very nice for interpretability if these scores could represent something like a probability distribution across the classes, reflecting the network’s prediction.\nThis is exactly what the softmax function does."
+  },
+  {
+    "objectID": "index.html#loss-function-1",
+    "href": "index.html#loss-function-1",
+    "title": "Deep learning for computer vision",
+    "section": "Loss function",
+    "text": "Loss function\n\n\n\n\nRaw scores z\n\n\n\n-6.8\n\n\n2.6\n\n\n6.7\n\n\n5.9\n\n\n1.9\n\n\n-1.3\n\n\n-5.7\n\n\n3.2\n\n\n1.3\n\n\n1.0\n\n\n\n\n\n\n\nProbabilities p̂\n\n\n\n\n\n\n\n\n\n\n\nGround truth p\n\n\n\n\n\n\n\nSoftmax:\n\n\\[\n\\tiny\n\\widehat{p} (z_{j}) = \\frac{e^{z_j}}{\\sum_{k} e^{z_k}}\n\\]\n\n\n\nCross-entropy:\n\n\\[\n\\tiny\n\\text{H}(p, q) = -\\sum_{k} p_k \\log(\\widehat{p}_{k})\n\\]\n\n\n\nLoss:  \\[\n\\tiny\n\\text{L}_{i} = - \\log(\\widehat{p} (z_{j=y_i}) )\n\\]\n\n\n\n\\[\n\\tiny\n\\text{L} = \\frac{1}{N} \\sum_{i} \\text{L}_{i}\n\\]\n\n\n\n\nThis is exactly what the softmax function does. It is a function that takes as inputs K real numbers, and transforms them so that they fulfill the minimum requirements for a probability distribution (numbers from 0 to 1 that add up to 1). In the result, each prob is proportional to the exp of the raw score. So after the softmax each score will be now between 0 and 1 and all of them will add up to 1.\nNow we have a probability distribution over the classes that represent the network’s predictions. However because we have the labels, we actually know the true probability distribution, or the ground truth. This distribution is “1” at the correct label class, and zero elsewhere.\nHow can we compare the set of two probability distributions?\nWe can use tools from information theory to quantify how far off these distributions are. If we call the true probability distribution \\(\\hat{p}(x)\\) and the one estimated by the network \\(p(x)\\), the cross entropy between them is defined as shown in the slide.\nYou can go into further detail about interpretation of cross‐entropy but for now it’s enough to know that it measures how far off the true and the estimated distributions are. This is great because we can already use this as our loss function! It indeed tells us how good or bad we are doing, which is what we were looking for.\nNote that the cross‐entropy function spits out a scalar (i.e., a number) for the probabilities we obtain for one input image.\nWith a bit of reordering of the cross-entropy expression we can define the loss per input image as shown in the slide.\nHowever the full loss of the complete dataset would be the average over the losses for each of the training samples. If the training samples are too many, so much that it slows down the training process, often a small portion of samples is considered, but we’ll see that in more detail in a few slides."
+  },
+  {
+    "objectID": "index.html#optimisation-intuition",
+    "href": "index.html#optimisation-intuition",
+    "title": "Deep learning for computer vision",
+    "section": "Optimisation: intuition",
+    "text": "Optimisation: intuition\n\n\n\n\n\n\n\n\nFigure from  Gradient descent, how neural networks learn | Deep Learning Chapter 2\n\n\n\n\n\n\n\n\n\n\n\nGoing back to the two aspects of training we wanted to further define: - We have talked about the loss function and how it allows us to quantify how well/ how badly our network is doing, given a certain set of weights and a bunch of input images - Now we are going to talk about the last aspect of the training process: the optimisation of the weights and biases, or how we go about adapting the parameters of the network to improve performance\nLet’s consider a simple case of a loss function with one input (corresponding to something like a hypothetical network with single parameter). Remember that the loss function always returns a scalar value (i.e., one output). We want to find the value of the parameter that minimises the loss.\nIf we solved this with gradient descent, the process would be approximately as follows:\n\nWe initialise our parameter in a random point\nWe compute the derivative of the loss function with respect to the parameter (i.e., the slope). The derivative tells us in which direction we decrease the loss.\nWe take a small step in that direction and repeat the process: at every point we compute the slope, we take a small step following the slope in the adequate direction, and then repeat.\nIf we move every time an amount proportional to the slope we will prevent overshooting the minimum, since as we approach the minimum the slope becomes flatter and flatter.\n\nNote that there is no guarantee that we will find the global minimum, that is a hard problem, but we are fine with a local minimum!"
+  },
+  {
+    "objectID": "index.html#optimisation-intuition-1",
+    "href": "index.html#optimisation-intuition-1",
+    "title": "Deep learning for computer vision",
+    "section": "Optimisation: intuition",
+    "text": "Optimisation: intuition\n\n\n\nFigure from  Gradient descent, how neural networks learn | Deep Learning Chapter 2\n\n\n\nWe can expand this intuition to higher dimensions, - first to a loss function that takes two inputs, and then to a loss function that takes many more inputs.\nIn higher dimensions, the gradient fulfills the role of the slope.\nFor those of you who remember from calculus, in a function of multiple inputs and one output (i.e. a multivariate scalar function), computing the gradient at a certain point tells us the direction in which the function increases most.\nSo you may already see that for the loss function (whose inputs are the network’s weights and biases), the gradient will be a vector that will tell us at each point, how much to vary the weights and biases so as to decrease more steeply the loss."
+  },
+  {
+    "objectID": "index.html#seven-optimisation-takeaways",
+    "href": "index.html#seven-optimisation-takeaways",
+    "title": "Deep learning for computer vision",
+    "section": "Seven optimisation takeaways!",
+    "text": "Seven optimisation takeaways!\n\n\nThe loss function as a high-dimensional “surface”.\nThe gradient is a vector that at any point in the loss “surface” gives us the direction of steepest ascent.\nThe negative gradient gives us the direction of steepest descent.\nGradient descent is an optimisation procedure that iteratively adjusts the parameters based on the gradient.\n\n\nUntil when?….\n\n\n\nWe now have a good intuition on how the optimisation problem is solved, and how we adjust the weights and biases in the network to minimise our loss. Let’s consolidate what we’ve seen a bit more formally, in the form of 6 Main Optimisation Takeaways\n\nLoss function as a high-dimensional “surface”, where each point in the surface corresponds to a set of weights and biases.\nThe gradient, a vector that at any point in the loss “surface” gives us the direction of steepest ascent (i.e. the direction in which the loss increases most).\nThe negative gradient gives us the direction of steepest descent (i.e. the direction in which the loss decreases most).\nWe optimise (i.e. find the parameters that make the loss function minimal) the loss function iteratively, starting off with a random set of parameters and adjusting them until the loss is below a certain threshold."
+  },
+  {
+    "objectID": "index.html#seven-optimisation-takeaways-1",
+    "href": "index.html#seven-optimisation-takeaways-1",
+    "title": "Deep learning for computer vision",
+    "section": "Seven optimisation takeaways!",
+    "text": "Seven optimisation takeaways!\n\n\n\nFigure from  CS231n lecture notes\n\n\n\nIn practice, you would monitor the loss function or your accuracy on both the training and the validation set during training, and stop when the validation error stops improving.\n\nThe gap between the training and validation accuracy indicates the amount of overfitting. Two possible cases are shown in the diagram on the left. The blue validation error curve shows very small validation accuracy compared to the training accuracy, indicating strong overfitting (note, it’s possible for the validation accuracy to even start to go down after some point). When you see this in practice you probably want to increase regularization (stronger L2 weight penalty, more dropout, etc.) or collect more data."
+  },
+  {
+    "objectID": "index.html#seven-optimisation-takeaways-2",
+    "href": "index.html#seven-optimisation-takeaways-2",
+    "title": "Deep learning for computer vision",
+    "section": "Seven optimisation takeaways!",
+    "text": "Seven optimisation takeaways!\n\n\nTo update the parameters we take a small step in the direction of the negative gradient. \\[\nW_{new} = W_{old} - \\alpha \\nabla \\text{L}_W\n\\]\nStochastic gradient descent is a more efficient variant of gradient descent which computes the gradient on batches of training samples.\nAn epoch is a single pass through the complete training set. A training process will consist of multiple epochs.\n\n\n\n\nThe simplest form of parameter update is to take a small step in the direction of the negative gradient. \\[\nW_{new} = W_{old} - \\alpha \\nabla \\text{L}_W\n\\] where \\(\\alpha\\) is the learning rate. This is actually never used in practice, but it’s the main idea behind all methods for parameter updates.\nIn gradient descent, a parameter update takes place when we compute the full loss (i.e. across the entire training set). However due to vectorisation, it is much more efficient to do stochastic gradient descent. In this case, we update the parameters more frequently, and compute the gradient on a small subset of the training set, called a batch.\n\n“True” stochastic gradient descent is when we compute the gradient and perform an update on every single sample. But a batch of samples has better convergence properties. &gt; A compromise between computing the true gradient and the gradient at a single sample is to compute the gradient against more than one training sample (called a “mini-batch”) at each step. This can perform significantly better than “true” stochastic gradient descent described, because the code can make use of vectorization libraries rather than computing each step separately as was first shown in [6] where it was called “the bunch-mode back-propagation algorithm”. It may also result in smoother convergence, as the gradient computed at each step is averaged over more training samples. [From https://en.wikipedia.org/wiki/Stochastic_gradient_descent]\n\nThis [single-example parameter updates] is relatively less common to see because in practice due to vectorized code optimizations it can be computationally much more efficient to evaluate the gradient for 100 examples, than the gradient for one example 100 times. [From https://cs231n.github.io/optimization-1/ ]\n\n\nThe size of the mini-batch is a hyperparameter but it is not very common to cross-validate it. It is usually based on memory constraints (if any), or set to some value, e.g. 32, 64 or 128. We use powers of 2 in practice because many vectorized operation implementations work faster when their inputs are sized in powers of 2. [From https://cs231n.github.io/optimization-1/ ]\n\n\nThere are other ways of performing the optimization (e.g. LBFGS), but Gradient Descent is currently by far the most common and established way of optimizing Neural Network loss function. [From https://cs231n.github.io/optimization-1/ ]"
+  },
+  {
+    "objectID": "index.html#a-reminder",
+    "href": "index.html#a-reminder",
+    "title": "Deep learning for computer vision",
+    "section": "A reminder",
+    "text": "A reminder\n\nIn training: forward and backward pass\nIn testing and inference: only forward pass"
+  },
+  {
+    "objectID": "index.html#additional-references-3",
+    "href": "index.html#additional-references-3",
+    "title": "Deep learning for computer vision",
+    "section": "Additional references",
+    "text": "Additional references\n\n\nOn validation set and hyperparameter tuning\n\nCS231n: Classification\n\nOn cross-entropy loss and other information theory concepts\n\nDeep learning book chapter 3 http://www.deeplearningbook.org/contents/prob.html\n\nOn weight initialisation\n\nhttps://cs231n.github.io/neural-networks-2/\n\nOn methods for gradient update\n\nhttps://cs231n.github.io/neural‐networks‐3/#update\n\nOn babysitting the training process\n\nhttps://cs231n.github.io/neural-networks-3/#baby\n\nOn optimisation\n\nhttps://cs231n.github.io/optimization-1/\n\nOn precisely how the gradient is computed\n\nBackpropagation, intuitively | Deep Learning Chapter 3\nBackpropagation calculus | Deep Learning Chapter 4\n\nNeural networks and an interesting insight into stochastic gradient descent\n\nMachine Learning for Intelligent Systems CS4780 (Cornell University)\nsee lectures 20 and 21"
+  },
+  {
+    "objectID": "index.html#convolutional-neural-networks",
+    "href": "index.html#convolutional-neural-networks",
+    "title": "Deep learning for computer vision",
+    "section": "Convolutional neural networks",
+    "text": "Convolutional neural networks\n\n\nRegular NN don’t scale well to images\nCNNs take advantage of the fact that their inputs are images\n\n\n\n\n\n\nFigure from  CS4780 lecture notes\n\n\n\n\n\n\n\nFigure from  cs231n.github.io/convolutional-networks\n\n\n\n\n\n\nRegular NNs don’t scale well to images\n\nAn image of size 200x200x3 would mean a first hidden layer with 120,000 weights per neuron!\nThe full connectivity is overkill\n\nCNNs take advantage of the fact that their inputs are images\n\nthis means they can make sensible modifications to the architecture.\n\nThe modifications to the architecture encode the assumptions of the functions that we want to fit.\nFor example, if we want to train a network to fit the function that detects if an image contains a cat, when we use a CNN we constrain that space of possible functions to only those that are translation invariant, just by using this architecture.\n\nWe can see them as subsequent transformations of the input image.\nWe can also see their neurons as being 3-dimensional, with width, height and depth (if like before, we consider the neurons to hold the outputs of the computations)\n\nA simple ConvNet is a sequence of layers, and every layer of a ConvNet transforms one volume of activations [neuron outputs] to another"
+  },
+  {
+    "objectID": "index.html#layers-used-in-cnns",
+    "href": "index.html#layers-used-in-cnns",
+    "title": "Deep learning for computer vision",
+    "section": "Layers used in CNNs",
+    "text": "Layers used in CNNs\nThree common types:\n\nConvolutional layer\nPooling layer\nBatch normalisation layer\nFully connected layer\n\n\nFully connected layers are the same as in regular NNs."
+  },
+  {
+    "objectID": "index.html#layers-used-in-cnns-1",
+    "href": "index.html#layers-used-in-cnns-1",
+    "title": "Deep learning for computer vision",
+    "section": "Layers used in CNNs",
+    "text": "Layers used in CNNs\nThree common types:\n\nConvolutional layer\nPooling layer\nBatch normalisation layer\nFully connected layer\n\n\nWe will focus on the convolutional layer and the pooling layer.\nFor the batch normalisation layer it is enought to know that it is a scaling and translation operation that is applied to the output of the convolutional layer, based on the statistics of the batch.\nThe fully connected layer is the same as in regular NNs."
+  },
+  {
+    "objectID": "index.html#convolutional-layer",
+    "href": "index.html#convolutional-layer",
+    "title": "Deep learning for computer vision",
+    "section": "Convolutional layer",
+    "text": "Convolutional layer\n\n\n\n\nA set of n learnable filters\n\n\n\n\nEach filter is a small matrix of weights + 1 bias\n\n\n\n\nWe slide (convolve) each filter across the width and height and the full depth of the input volume\n\n\n\n\n\n\n\n\n\n\n\nFigure modified from  CS231n\n\n\n\n\n\n\n\n\n\nFigure modified from  CS231n\n\n\n\n\n\n\n\n\n\nFigure from Convolution arithmetic\n\n\n\n\n\n\n\n\nFigure modified from  CS231n\n\n\n\n\n\n\nWe have seen that it is useful to see a convolutional layer as a transform between an input volume and an output volume\nIt is defined by a set of n learnable filters, also sometimes called kernels. The depth of the output volume is equal to the number of filters.\nEach filter is a small matrix of weights and one bias parameter\n\nso each slice in the output volume corresponds to a small matrix of weights and a bias parameter\nsmall along width and height but always extends to the full depth of the input\ne.g. a filter on the first layer of a CNN may have size 5x5x3 (+ 1 bias parameter)\n\nHow do we compute the values in each slice of the output volume?\n\nIn the forward pass:\n\nwe slide (convolve) each filter across the width and height of the input volume and compute dot products (multiply and sum)\nwe then would apply a non-linear activation function such as ReLU\nthe output is a 2D “activation map” that gives the responses of that filter at every position\n\nfor a layer with 12 filters, we will stack the 12 activation maps along depth to produce the output volume\n\n\nWe can interpret the filter as a pattern detector &gt; Intuitively, the network will learn filters that activate when they see some type of visual feature such as an edge of some orientation or a blotch of some color on the first layer, or eventually entire honeycomb or wheel-like patterns on higher layers of the network.\nWe can formulate the forward pass as a matrix multiplication"
+  },
+  {
+    "objectID": "index.html#convolutional-layer-1",
+    "href": "index.html#convolutional-layer-1",
+    "title": "Deep learning for computer vision",
+    "section": "Convolutional layer",
+    "text": "Convolutional layer\n\n\nA few hyperparameters:\n\n\nnumber of filters\nfilter size\nstride\npadding\n\n\n\n\n\n\n\n\nStride = 1. Figure from Convolution arithmetic\n\n\n\n\n\n\n\nStride = 2. Figure from Convolution arithmetic\n\n\n\n\n\n\nThere are a few hyperparameters involved in the convolutional layer: - number of filters: the depth of the output volume - filter size: the size of the filter (width and height) - stride: the number of pixels that the filter moves by at each step - A stride larger than one will reduce the size of the output volume - padding: the number of 0 pixels that are added to the input volume at each side - Padding is used to control the size of the output volume"
+  },
+  {
+    "objectID": "index.html#layers-used-in-cnns-2",
+    "href": "index.html#layers-used-in-cnns-2",
+    "title": "Deep learning for computer vision",
+    "section": "Layers used in CNNs",
+    "text": "Layers used in CNNs\nThree common types:\n\nConvolutional layer\nPooling layer\nBatch normalisation layer\nFully connected layer\n\n\nBriefly explain pooling layer, batch norm. Fully connected layer is the same as in regular NNs."
+  },
+  {
+    "objectID": "index.html#pooling-layer",
+    "href": "index.html#pooling-layer",
+    "title": "Deep learning for computer vision",
+    "section": "Pooling layer",
+    "text": "Pooling layer\n\n\n\nA convolutional max filter is applied to each depth slice independently\n2 hyperparameters:\n\nfilter size\nstride\n\nIt resized the input in width and height — Pooling layer is a downsampling operation\nNo parameters to learn!\nCommon to periodically insert a Pooling layer in-between successive Conv layers\nIts function is to progressively reduce the spatial size of the representation\nthis reduces the amount of parameters and computation in the network, and hence also controls overfitting."
+  },
+  {
+    "objectID": "index.html#an-example-cnn-architecture-vgg-16",
+    "href": "index.html#an-example-cnn-architecture-vgg-16",
+    "title": "Deep learning for computer vision",
+    "section": "An example CNN architecture: VGG-16",
+    "text": "An example CNN architecture: VGG-16\nImageNet 2014 challenge (1000 categories)\n\n\n\nFigure from  Neuralception\n\n\n\nIn the example above, Conv and FC layers include a ReLU activation function.\n\nA simple ConvNet for CIFAR-10 classification could have the architecture [INPUT - CONV - RELU - POOL - FC]. - INPUT [32x32x3] will hold the raw pixel values of the image, in this case an image of width 32, height 32, and with three color channels R,G,B. - CONV layer will compute the output of neurons that are connected to local regions in the input, each computing a dot product between their weights and a small region they are connected to in the input volume. This may result in volume such as [32x32x12] if we decided to use 12 filters. - RELU layer will apply an elementwise activation function, such as the max(0,x) thresholding at zero. This leaves the size of the volume unchanged ([32x32x12]). POOL layer will perform a downsampling operation along the spatial dimensions (width, height), resulting in volume such as [16x16x12]. - FC (i.e. fully-connected) layer will compute the class scores, resulting in volume of size [1x1x10], where each of the 10 numbers correspond to a class score, such as among the 10 categories of CIFAR-10. As with ordinary Neural Networks and as the name implies, each neuron in this layer will be connected to all the numbers in the previous volume."
+  },
+  {
+    "objectID": "index.html#an-example-cnn-architecture-resnet-18",
+    "href": "index.html#an-example-cnn-architecture-resnet-18",
+    "title": "Deep learning for computer vision",
+    "section": "An example CNN architecture: ResNet-18",
+    "text": "An example CNN architecture: ResNet-18\n\n\n\nFigure from  LearnOpenCV"
+  },
+  {
+    "objectID": "index.html#transfer-learning",
+    "href": "index.html#transfer-learning",
+    "title": "Deep learning for computer vision",
+    "section": "Transfer learning",
+    "text": "Transfer learning\n\nFew people train a CNN from scratch\nMore common scenarios:\n\nFine-tune a pretrained model (e.g. backbones for SLEAP, DLC, etc.)\nUse as a feature extractor (e.g. DINOv2)\nDirectly use the model for inference (e.g. OpenPose)\n\n\n\n\nIn practice, very few people train an entire Convolutional Network from scratch (with random initialization), because it is relatively rare to have a dataset of sufficient size.\n\n\nInstead, it is common to pretrain a CNN on a very large dataset (e.g. ImageNet, which contains 1.2 million images with 1000 categories), and then use the CNN either as an initialization or a fixed feature extractor for the task of interest.\n\nFine-tuning may refer to continue training the model on a new dataset, including all or only the last few layers (the rest are considered “frozen”). &gt; It is possible to fine-tune all the layers of the CNN, or it’s possible to keep some of the earlier layers fixed (due to overfitting concerns) and only fine-tune some higher-level portion of the network. - Backbone or feature extractor vs head\nAs a feature extractor: This may refer to the backbone purpose, or more explicitly to using a pretrained network to compute embeddings for your images &gt; Take a CNN pretrained on ImageNet, remove the last fully-connected layer, then treat the rest of the ConvNet as a fixed feature extractor for the new dataset."
+  },
+  {
+    "objectID": "index.html#data-augmentation",
+    "href": "index.html#data-augmentation",
+    "title": "Deep learning for computer vision",
+    "section": "Data augmentation",
+    "text": "Data augmentation\n\n\n\n\nTo improve performance, train on more and diverse data.\n\n\n\n\nOne easy way: transform the images we already have, while preserving the label\n\n\n\n\nThe choice depends on the task and the dataset.\n\n\n\n\nReduces overfitting and improves robustness.\n\n\n\n\n\n\n\n\n\nRandom shifts. Figure from  https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras\n\n\n\n\n\n\n\n\n\nRandom rotations. Figure from  https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras\n\n\n\n\n\n\n\n\nRandom flips. Figure from  https://github.com/Prachi-Gopalani13/Image-Augmentation-Using-Keras\n\n\n\n\n\n\nNotes from https://www.kaggle.com/code/ryanholbrook/data-augmentation and https://www.ibm.com/think/topics/data-augmentation\nThe best way to improve the performance of a model is to train it on more and diverse data. The more examples that are provided during training, the better it will be able to recognise which differences between images matter and which don’t.\nOne easy way to increase the size of the dataset is to transform the images we already have. Specifically, we apply transformations to the images that preserve the label (or modify it in a way that is consistent with the label). For example in our MNIST case, we would apply transformations such that the image would still be classified as the digit it contains. Common examples: rotation, scaling, shearing, flipping, cropping, color jittering, etc.\nThat way we teach the model to recognise the digit even if it is rotated, scaled, sheared, flipped, cropped, or otherwise transformed.\nBut the choice of what data augmentation to apply depends on the task and the dataset. For example, a rotation of 180 degrees is not a good idea for a digit classification task, as it may confuse the model between 6s and 9s\nData augmentation can reduce overfitting and improve model robustness, esp in cases with small or unbalanced datasets.\nA note on horizontal flip data augmentation in pose estimation: - usually data augmentation transforms will apply the same transformation to the image and the labels (e.g. horizontal flip) - so if you have a skeleton with left and right keypoints, and we apply an horizontal flip, the left and right keypoints will be swapped - this will render wrong keypoints tho! So often pose estimation frameworks allow you to define symmetric keypoints, to swap them again after mirroring - However if the left and right keypoints are not symmetric (e.g. fiddler crabs with dominant and non-dominant claws), you will want to flip the image and the keypoints without the additional swap - Basically if the keypoints are not different physically, you need to set them as “symmetric”.\nSee here"
+  },
+  {
+    "objectID": "index.html#additional-references-4",
+    "href": "index.html#additional-references-4",
+    "title": "Deep learning for computer vision",
+    "section": "Additional references",
+    "text": "Additional references\n\n\nCS231n: Convolutional Neural Networks\n\nhttps://cs231n.github.io/convolutional-networks/\nhttps://cs231n.github.io/transfer-learning/\n\nCS4780: Machine Learning for Intelligent Systems\n\nlecture 20 notes\n\nOn data augmentation:\n\nDeepLabCut case study: Improving network performance on unbalanced data via augmentation, specifically the section on “Augment to reduce left-right bias” and “Edit pose_cfg.yaml for fliplr augmentation”. A blogpost version is available here\nhttps://www.kaggle.com/code/ryanholbrook/data-augmentation\nhttps://www.ibm.com/think/topics/data-augmentation"
+  },
+  {
+    "objectID": "index.html#cv-tasks-in-animal-behaviour",
+    "href": "index.html#cv-tasks-in-animal-behaviour",
+    "title": "Deep learning for computer vision",
+    "section": "CV tasks in animal behaviour",
+    "text": "CV tasks in animal behaviour\n\n\nWhat are tasks?\n\nA task is a problem that we want to solve\nThere may be multiple ways to solve a task\nDL has proven to be very powerful to solve many vision tasks\n\n\n\nTasks are goals or problems that we want (algorithms or models) to solve\nThere may be multiple ways to solve a task\nDeep learning is a powerful tool to solve many vision tasks\nThe boundaries between tasks are not always clear cut"
+  },
+  {
+    "objectID": "index.html#cv-tasks-in-animal-behaviour-1",
+    "href": "index.html#cv-tasks-in-animal-behaviour-1",
+    "title": "Deep learning for computer vision",
+    "section": "CV tasks in animal behaviour",
+    "text": "CV tasks in animal behaviour\n\n\n\n\nImage classification\n\n\n\n\nDetection\n\n\n\n\nSegmentation\n\n\n\n\nPose estimation\n\n\n\n\nTracking\n\n\n\n\nBehaviour classification\n\n\n\n\nRe-identification\n\n\n\n\n…\n\n\n\n\n\n\n\n\n\n\nWhich species are present in this image? \n\nFigure from  Snapshot Serengeti dataset\n\n\n\n\n\n\n\n\nWhere is the animal in this image? \n\nFigure from  and there from the Orinoquía Camera Traps dataset (University of Minnesota).\n\n\n\n\n\n\n\nWhere is the animal in this image? \n\nFigure from  Crabs exploration project\n\n\n\n\n\n\n\n\nWhich pixels are “mouse”? \n\nSample image from  Aeon project\n\n\n\n\n\n\n\n\nWhich pixels are “mouse 1”? \n\nSample image from  Aeon project\n\n\n\n\n\n\n\n\nWhere are the keypoints? \n\nFigure from  Ye et al. (2024) SuperAnimal pretrained pose estimation models for behavioral analysis\n\n\n\n\n\n\n\n\nHow do detections in frame f map to frame f+1? \n\nFigure from  Pereira et al. (2022) SLEAP: A deep learning system for multi-animal pose tracking\n\n\n\n\n\n\n\n\nWhat is the behaviour of the animal in this frame/clip? \n\nFigure from  https://dattalab.github.io/moseq2-website/\n\n\n\n\n\n\n\n\nWhich individual is the animal in this frame? \n\nFigure from  Happy Whale dataset\n\n\n\n\n\n\n\n\nImage classification, can be multiclass\nDetection, localise an object in the image. Can be linked with classification too. Usually bbox or centroid.\nPose estimation, where are the user-defined keypoints of the animal in this image?\nBehaviour classification, or action segmentation or action recognition\nRe-identification, identify the same animal across frames/clips\n\nMany more tasks! But these are the most commonly used in animal behaviour."
+  }
+]

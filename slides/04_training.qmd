@@ -1,0 +1,824 @@
+## Training: intuition
+
+::: {.columns}
+
+::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%; font-size: 40px;"}
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="2"}
+::: {.fragment .fade-out data-fragment-index="5"}
+( ![](../img/vanilla-nn/input-2.png){width=30%} , <span style="color: rgb(213, 6, 6);">2</span>)
+
+<span style="color: rgb(213, 6, 6);">Labelled data</span>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="3"}
+::: {.fragment .fade-out data-fragment-index="4"}
+<span style="color: rgb(1, 1, 1); position: absolute; top: 90%; left: 0%;">
+Supervised learning
+</span>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="5"}
+( ![](../img/training/train-set.png){width=30%} , <span style="color: rgb(213, 6, 6);">...</span>)
+
+<span style="color: rgb(213, 6, 6);">Training set</span>
+
+:::
+:::
+
+:::
+
+
+::: {.column style="width: 20%; margin-top: 20%"}
+::: {.fragment .fade-in data-fragment-index="2"}
+<div style="text-align: left; ">
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → </span>
+</div>
+
+:::
+:::
+
+
+::: {.column style="width: 45%; text-align: centre; margin-left: -7%; margin-top: 5%"}
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
+:::
+
+
+::: {.column style="width: 30%; margin-top: 20%; margin-left: -17%"}
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="4"}
+::: {.fragment .fade-out data-fragment-index="5"}
+<div>
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → </span> 
+  <span style="color: rgba(6, 78, 213, 0.81);"> 7?</span>
+</div>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="5"}
+<div>
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → </span> 
+  <span style="color: rgba(6, 78, 213, 0.81);"> ...</span>
+</div>
+
+:::
+:::
+
+:::
+
+
+:::  
+
+
+
+::: {.notes}    
+The main idea of training:
+During training we will feed labelled data to the network. It is called 'labelled data' 
+because for each image we have a label (in red) that contains the ground truth. This is
+basically the answer to the problem we want to solve (here, the digit it represents). 
+- Remember that with the neural network we want to capture that mapping from
+inputs to labels, from images to digits. 
+- We are focusing on **supervised learning**, in which labelled data is available, but be 
+aware that there are other approaches to learning too. 
+
+For each training sample, the network will just execute a normal forward pass, 
+ignoring the label. After going through all the layers, the network will output a 
+prediction for the given input. Then we will compare it to the **ground truth label**. 
+
+Depending on how far off the prediction is, the network will adapt its weights and 
+biases so that it improves its performance, and its predictions become closer and 
+closer to the ground truth.
+
+The complete set of images that we present during training constitutes the **training set**. 
+The hope is that with this layered approach of the network and its hierarchical
+abstraction of concepts, we may be able to train a network that generalises beyond the training set. 
+
+:::
+
+<!-- ------------------------------------------------------------ -->
+
+## Testing: intuition
+
+::: {.columns}
+
+::: {.column style="width: 20%; margin-top: 18%; margin-left: 0%; font-size: 40px; text-align: center;"}
+
+::: {.fragment .fade-in data-fragment-index="1"}
+![](../img/training/test-set.png){width=60%}
+
+<span style="color: rgb(1, 1, 1);">Test set</span>
+
+:::
+
+:::
+
+
+::: {.column style="width: 20%; margin-top: 20%"}
+::: {.fragment .fade-in data-fragment-index="1"}
+<div style="text-align: left; ">
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → </span>
+</div>
+
+:::
+:::
+
+
+::: {.column style="width: 45%; text-align: centre; margin-left: -7%; margin-top: 5%"}
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=75%}
+
+::: {.fragment .fade-in data-fragment-index="0"}
+<span style="font-size: 100px; color: rgb(210, 7, 7); position: absolute; top: 45%; left: 29%; transform: rotate(-30deg);"> TRAINED </span>
+:::
+
+:::
+
+
+::: {.column style="width: 10%; margin-top: 20%; margin-left: -10%; text-align: center;"}
+::: {.fragment .fade-in data-fragment-index="3"}
+<div style="display: flex; align-items: center; justify-content: center;">
+  <span style="font-size: 100px; color: rgb(102, 178, 102);">
+  → </span> 
+</div> 
+:::
+:::
+
+::: {.column style="width: 30%; margin-top: 20%; margin-left: -8%; text-align: center;"}
+::: {.fragment .fade-in data-fragment-index="3"}
+![](../img/training/accuracy.png){width=40%} 
+
+<span style="color: rgb(1, 1, 1);">Accuracy</span>
+
+:::
+:::
+
+
+
+:::  
+
+
+::: {.notes}
+
+We test this by doing the following: after we train the network, we present it with a new set of images that the network hasn't seen during training. We call this the test set. On this test set we check the performance of the network. In our case, the accuracy of the classification (number of correct predictions over total). 
+
+:::
+
+<!-- ------------------------------------------------------------ -->
+
+## Dataset split
+
+<br>
+
+::: {.columns}
+
+::: {.column style="width: 50%;"}
+- Hyperparameters
+- Keep test set aside! ⚠️
+
+:::
+
+::: {.column style="width: 50%;"}
+
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="1"}
+![](../img/training/train-test-split.png){width=100%}
+:::
+
+::: {.fragment .fade-in data-fragment-index="2"} 
+![](../img/training/train-test-split-heart.png){width=100%}
+:::
+:::
+
+
+:::
+
+:::
+
+<div style="position: absolute; bottom: 0px; right: 0px; font-size: 0.3em; color: var(--link-color);">Figures modified from <a href="https://cs231n.github.io/classification/#validation-sets-for-hyperparameter-tuning" target="_blank">
+CS231n lecture notes: neural networks</a></div>
+
+
+::: {.notes}
+Before we dive into the details of training, le't make an important note about the test set.
+
+We have seen how in the paradigm I just described, there are two subsets within the full set of labelled data: the training set and the test set. The test set is indeed a very valuable resource to assess how our model performs in deployment / in the wild. As such, it should be treated with care.
+
+
+But what does this mean in practice? 
+To explain this better, we need to talk first about **hyperparameters**, a common feature of ML algorithms.
+
+You may have noticed that in the development of our simple MLP we made a few design choices, such as the number of neurons per layer, the number of hidden layers, the activation function etc. These are called **hyperparameters** - basically all the parameters in the network that are not weights and biases (i.e. not learnt, not tuned during training) can be considered hyperparameters. We will see more examples of hyperparameters in the next slides too. 
+
+
+How do hyperparameters relate to the test set? 
+Well it’s often not obvious what values/settings one should choose, and a reasonable suggestion would be to try a few different values and see which one works best. This is indeed what we do in practice, but we need to be careful. In particular, we **cannot use the test set for the purpose of tweaking hyperparameters**. 
+
+
+Why?
+As we said the test set as a very precious resource, as we can use it as a proxy for measuring the generalization of your model. If we tune our hyperparameters to work well on the test set, we will overfit to it, and when we deploy our model we could see a significantly reduced performance. We will loose our only metric of realistic performance in the wild.
+
+:::
+
+
+<!-- ------------------------------------------------------------ -->
+
+
+
+## Dataset split
+
+<br>
+
+::: {.columns}
+
+::: {.column .nonincremental style="width: 50%;"}
+- Hyperparameters
+- Keep test set aside! ⚠️
+- So then how?
+:::
+
+::: {.column style="width: 50%;"}
+
+![](../img/training/train-test-split.png){width=100%}
+
+
+:::{.r-stack}
+::: {.fragment .fade-in data-fragment-index="1"}
+::: {.fragment .fade-out data-fragment-index="2"}
+![](../img/training/train-val-test-split-arrow.png){width=100%}
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="2"}
+![](../img/training/train-val-test-split-arrow-heart.png){width=100%}
+:::
+
+
+:::
+
+::: {.fragment .fade-in data-fragment-index="3"}
+![](../img/training/k-fold.png){width=100%}
+:::
+
+:::
+
+:::
+
+<div style="position: absolute; bottom: 0px; right: 0px; font-size: 0.3em; color: var(--link-color);">Figures modified from <a href="https://cs231n.github.io/classification/#validation-sets-for-hyperparameter-tuning" target="_blank">
+CS231n lecture notes: neural networks</a></div>
+
+
+::: {.notes}
+
+So how do we go about this?
+Usually people split the data into three sets: training, validation and test. 
+- The training set is used to train the model.
+- The validation set is used to select the best hyperparameters. 
+- The test set is only used once, at the end, to evaluate the performance of the model with the selected hyperparameters. This way it remains a good proxy for measuring the generalization of our model.
+
+
+In cases where the size of your training data (and therefore also the validation data) might be small, it is common practice to do what is called **k-fold validation**.
+
+In k-fold validation: The training set is split into folds (for example 5 folds). The folds 1-4 become the training set. One fold (e.g. fold 5 here in yellow) is denoted as the Validation fold and is used to tune the hyperparameters. Cross-validation goes a step further and iterates over the choice of which fold is the validation fold, separately from 1-5. This would be referred to as 5-fold cross-validation. In the very end once the model is trained and all the best hyperparameters are determined, the model is evaluated a single time on the test data (red).
+
+
+**In animal pose estimation**, most frameworks make it very easy to do a slight variant of this. Instead of fixed folds, people often do random samples for the training and the test set (in DLC for examplethese are called "shuffles").
+
+:::
+
+<!-- ------------------------------------------------------------ -->
+
+## Training as an optimisation problem
+
+::: {.fragment .fade-in data-fragment-index="2"}
+::: {.fragment .fade-out data-fragment-index="3"}
+<text><span style="color: rgb(231, 133, 34); position: absolute; top: 25%; left: 45%;">Loss function</span></text>
+
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="4"}
+<text><span style="color: rgb(231, 133, 34); position: absolute; top: 25%; left: 43%;">Gradient descent</span></text>
+:::
+
+
+
+
+::: {.r-stack style="margin-left: 20%; margin-top: 5%;"}
+
+::: {.fragment .fade-out data-fragment-index="1"}
+![](../img/training/training-one-sample.png){width=80% style="border: 1px solid black;"}
+:::
+
+::: {.fragment .fade-in data-fragment-index="1"}
+::: {.fragment .fade-out data-fragment-index="3"}
+![](../img/training/loss-intro.png){width=80% style="border: 1px solid black;"}
+:::
+:::
+
+::: {.fragment .fade-in data-fragment-index="3"}
+![](../img/training/gd-intro.png){width=80% style="border: 1px solid black;"}
+:::
+
+:::
+
+
+
+::: {.notes}
+So we need to further define two aspects of this process:
+- first, how is the comparison between prediction and labels carried out and how
+does it evaluate the performance of the network? We will capture this via the loss
+function
+- Second, we need to specify a way of updating the values of the weights and biases
+based on how well or how badly the model is performing so that they perform
+better in future passes. We will approach this by optimising their values with gradient
+descent
+Let’s start off with the loss function. In this lecture we will focus on the cross-entropy
+loss, which is a popular choice but there are many other alternative loss functions.
+
+:::
+
+
+<!-- ------------------------------------------------------------ -->
+
+
+## Loss function
+
+::: {.columns}
+::: {.column style="width: 15%; margin-top: 18%; margin-left: 0%"}
+::: {.fragment .fade-in data-fragment-index="1"}
+![](../img/vanilla-nn/input-2.png){width=100%, fig-align="center"}
+:::
+:::
+
+
+
+::: {.column style="width: 40%; margin-left: 5%"}
+::: {.fragment .fade-in data-fragment-index="2"}
+![](../img/vanilla-nn/mlp-3b1b-diagram.png){width=100%}
+:::
+
+::: {.fragment .fade-in data-fragment-index="3"}
+
+<!-- ---- Class positions ---- -->
+<div style="width: 40px; height: 270px; background-color: transparent; border: 4px solid rgb(103, 152, 205); position: absolute; top: 220px; right: 435px;">
+  <div style="position: absolute; top: -1.5%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">0</div>
+  <div style="position: absolute; top: 8.5%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">1</div>
+  <div style="position: absolute; top: 19%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">2</div>
+  <div style="position: absolute; top: 29%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">3</div>
+  <div style="position: absolute; top: 39%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">4</div>
+  <div style="position: absolute; top: 49%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">5</div>
+  <div style="position: absolute; top: 58%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">6</div>
+  <div style="position: absolute; top: 69%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">7</div>
+  <div style="position: absolute; top: 78%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">8</div>
+  <div style="position: absolute; top: 88%; left: 150%; transform: translateX(-50%); font-size: 26px; color: rgb(103, 152, 205);">9</div>
+</div>
+
+:::
+:::
+
+::: {.column style="width: 30%; margin-top: 8%; margin-left: -2%;"}
+::: {.fragment .fade-in data-fragment-index="4" }
+<div style="text-align: left;">
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 45px;">Raw scores</div>
+
+<div style="font-family: 'Courier New', monospace; font-size: 15px; font-weight: bold; line-height: 1.9; margin-top: 10px; margin-left: 40px;">
+<div style="text-align: right; width: 80px;">-6.8</div>
+<div style="text-align: right; width: 80px;"> 2.6</div>
+<div style="text-align: right; width: 80px; font-weight: bold; color: rgb(103, 152, 205);"> 6.7</div>
+<div style="text-align: right; width: 80px;"> 5.9</div>
+<div style="text-align: right; width: 80px;"> 1.9</div>
+<div style="text-align: right; width: 80px;">-1.3</div>
+<div style="text-align: right; width: 80px;">-5.7</div>
+<div style="text-align: right; width: 80px;"> 3.2</div>
+<div style="text-align: right; width: 80px;"> 1.3</div>
+<div style="text-align: right; width: 80px;"> 1.0</div>
+
+</div>
+</div>
+
+:::
+
+:::
+
+::: {.column style="width: 10%; margin-top: 20%; margin-left: -15%;"}
+::: {.fragment .fade-in data-fragment-index="6"}
+![](../img/training/softmax.png){width=100%}
+:::
+:::
+
+::: {.column style="width: 5%; margin-top: 8%; margin-left: 0%;"}
+::: {.fragment .fade-in data-fragment-index="5"}
+
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 0px;">Probabilities</div>
+
+<div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
+![](../img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+</div>
+
+:::
+:::
+
+
+:::
+
+
+::: {.notes}
+The loss function describes how good a certain collection of weights and biases is. 
+Sometimes called cost function, objective function.
+
+To describe the loss function let’s look at what happens at the end of a forward pass
+during training. After we go through all the layers we arrive at the output layer or
+readout layer, where the scores for each of the classes are collected in the neurons. 
+
+We would like the score for the correct class, in this case “2”, to be very high, and 
+best highest than the other classes. 
+
+But these numbers at the output layer are just ‘raw’ scores. They are unnormalised
+(we interpret them as unnormalised log probabilities). It would be very nice for
+interpretability if these scores could represent something like a probability distribution
+across the classes, reflecting the network’s prediction.
+
+This is exactly what the softmax function does. 
+
+
+:::
+
+
+<!-- ------------------------------------------------------------ -->
+
+
+
+## Loss function
+
+::: {.columns}
+
+::: {.column style="width: 25%; margin-top: 8%; margin-left: -4%;"}
+<div style="text-align: left;">
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: 45px;">Raw scores _z_</div>
+
+<div style="font-family: 'Courier New', monospace; font-size: 15px; font-weight: bold; line-height: 1.9; margin-top: 10px; margin-left: 40px;">
+<div style="text-align: right; width: 80px;">-6.8</div>
+<div style="text-align: right; width: 80px;"> 2.6</div>
+<div style="text-align: right; width: 80px; font-weight: bold; color: rgb(103, 152, 205);"> 6.7</div>
+<div style="text-align: right; width: 80px;"> 5.9</div>
+<div style="text-align: right; width: 80px;"> 1.9</div>
+<div style="text-align: right; width: 80px;">-1.3</div>
+<div style="text-align: right; width: 80px;">-5.7</div>
+<div style="text-align: right; width: 80px;"> 3.2</div>
+<div style="text-align: right; width: 80px;"> 1.3</div>
+<div style="text-align: right; width: 80px;"> 1.0</div>
+
+</div>
+</div>
+
+:::
+
+::: {.column style="width: 10%; margin-top: 20%; margin-left: -10%;"}
+![](../img/training/softmax.png){width=100%}
+:::
+
+::: {.column style="width: 15%; margin-top: 8%; margin-left: 2%;"}
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: -30px;">Probabilities _p̂_</div>
+<div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
+![](../img/training/prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+</div>
+
+:::
+
+::: {.column style="width: 10%; margin-top: 21%; margin-left: -4%;"}
+::: {.fragment .fade-in data-fragment-index="3"}
+![](../img/training/cross-entropy.png){width=100%}
+:::
+:::
+
+
+::: {.column style="width: 15%; margin-top: 8%; margin-left: 2%;"}
+::: {.fragment .fade-in data-fragment-index="2"}
+<div style="font-weight: bold; font-size: 22px; margin-bottom: 0px; margin-left: -30px;">Ground truth _p_</div>
+<div style="width: 150px; height: 310px; margin-top: -27px; margin-left: -10%;">
+![](../img/training/gt-prob-bar-plot.png){style="border-left: 1px solid #d3d3d3;height: 310px; width: 150px;"}
+</div>
+
+:::
+:::
+
+
+::: {.column style="width: 30%; margin-top: 0%; margin-left: 5%; text-align: left; font-size: 32px;"}
+
+::: {.fragment .fade-in data-fragment-index="1"}
+Softmax:
+<div style="background-color: rgba(77, 214, 24, 0.3); width: 60%; height: 40%; text-align: center;margin: 0 auto; padding: 3; display: block;">
+
+$$
+\tiny
+\widehat{p} (z_{j}) = \frac{e^{z_j}}{\sum_{k} e^{z_k}}
+$$
+</div>
+
+:::
+
+::: {.fragment .fade-in data-fragment-index="3"}
+Cross-entropy:
+<div style="background-color: rgba(233, 97, 7, 0.3); width: 80%; height: 40%; text-align: center;margin: 0 auto; padding: 3; display: block;">
+
+$$
+\tiny
+\text{H}(p, q) = -\sum_{k} p_k \log(\widehat{p}_{k})
+$$
+</div>
+
+:::
+
+::: {.fragment .fade-in data-fragment-index="4"}
+Loss:
+<!-- <div style="border: 2px solid #333;"> -->
+$$
+\tiny
+\text{L}_{i} = - \log(\widehat{p} (z_{j=y_i}) )
+$$
+:::
+
+
+::: {.fragment .fade-in data-fragment-index="5"}
+<div style="border: 2px solid rgba(70, 73, 68, 0.27); width: 50%; height: 30%; text-align: center; margin: 0 auto; display: block;">
+$$
+\tiny
+\text{L} = \frac{1}{N} \sum_{i} \text{L}_{i}
+$$
+</div>
+:::
+
+
+
+
+
+:::
+:::
+
+
+::: {.notes}
+
+This is exactly what the softmax function does. It is a function that takes as inputs K 
+real numbers, and transforms them so that they fulfill the minimum requirements for a probability distribution 
+(numbers from 0 to 1 that add up to 1). In the result, each prob is proportional to the exp of the raw score. 
+So after the softmax each score will be now between 0 and 1 and all of them will add up to 1.
+
+
+Now we have a probability distribution over the classes that represent the
+network’s predictions. However because we have the labels, we actually know the
+true probability distribution, or the ground truth. This distribution is “1” at the correct
+label class, and zero elsewhere. 
+
+How can we compare the set of two probability distributions? 
+
+We can use tools from information theory to quantify how far off these distributions are. 
+If we call the true probability distribution $\hat{p}(x)$ and the one estimated by the network $p(x)$, the cross
+entropy between them is defined as shown in the slide. 
+
+You can go into further detail about interpretation of cross‐entropy but for now it’s
+enough to know that it measures how far off the true and the estimated distributions
+are. This is great because we can already use this as our loss function! It indeed tells
+us how good or bad we are doing, which is what we were looking for.
+
+
+Note that the cross‐entropy function **spits out a scalar (i.e., a number) for the
+probabilities we obtain for one input image.**
+
+With a bit of reordering of the cross-entropy expression we can define the loss per 
+input image as shown in the slide.
+
+However the full loss of the complete dataset would be the average over the losses
+for each of the training samples. If the training samples are too many, so much that it
+slows down the training process, often a small portion of samples is considered, but
+we'll see that in more detail in a few slides.
+
+:::
+
+
+<!-- ----------------- -->
+
+
+
+## Optimisation: intuition
+
+::: {.r-stack}
+::: {.fragment .fade-in data-fragment-index="0"}
+![](../img/training/optim-1d-before.png){width=70%, fig-align="center"}
+
+<div style="position: absolute; bottom: 30px; right: 7px; font-size: 0.3em; color: var(--link-color);">Figure from <a href="https://youtu.be/IHZwWFHWa-w?si=Ag4HuuL_IqxIZDkq&t=363" target="_blank">
+Gradient descent, how neural networks learn | Deep Learning Chapter 2</a></div>
+
+:::
+
+::: {.fragment .fade-in data-fragment-index="1"}
+![](../img/training/optim-1d.png){width=70%, fig-align="center"}
+:::
+
+
+
+:::
+
+
+
+::: {.notes}
+Going back to the two aspects of training we wanted to further define:
+- We have talked about the loss function and how it allows us to quantify how well/ 
+how badly our network is doing, **given a certain set of weights** and a bunch of input 
+images
+- Now we are going to talk about the last aspect of the training process: the
+optimisation of the weights and biases, or how we go about adapting the parameters
+of the network to improve performance
+
+Let's consider a simple case of a loss function with one input (corresponding to something like a 
+hypothetical network with single parameter). Remember that the loss function always 
+returns a scalar value (i.e., one output). We want to find the value of the parameter that minimises the loss. 
+
+If we solved this with gradient descent, the process would be approximately as follows:
+
+- We initialise our parameter in a random point
+- We compute the derivative of the loss function with respect to the parameter (i.e., the slope). The derivative tells us in which direction we decrease the loss.
+- We take a small step in that direction and repeat the process: at every point we compute the slope, we take a small step following the slope in the adequate direction, and then repeat. 
+- If we move every time an amount proportional to the slope we will prevent overshooting the minimum, since as we approach the minimum the slope becomes flatter and flatter.
+
+Note that there is no guarantee that we will find the global minimum, that is a hard problem, but we are fine with a local minimum!
+
+:::
+
+
+
+## Optimisation: intuition
+
+<div style="width: 75%; margin: 0 auto; text-align: right;">
+![](../img/training/optim-2d.png){width=100%}
+
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://youtu.be/IHZwWFHWa-w?si=LZGSqvBlbHsSIqx5&t=511" target="_blank">
+Gradient descent, how neural networks learn | Deep Learning Chapter 2</a>
+</div>
+</div>
+
+
+
+
+
+::: {.notes}
+
+We can expand this intuition to higher dimensions, 
+- first to a loss function that takes two inputs, and then to a loss function that takes
+many more inputs. 
+
+In higher dimensions, the **gradient** fulfills the role of the slope.
+
+For those of you who remember from calculus, in a function of multiple inputs and 
+one output (i.e. a multivariate scalar function), computing the gradient at a certain point tells us the direction in which
+the function increases most. 
+
+So you may already see that for the loss function (whose inputs are the network's weights and biases), the gradient will be a vector that will tell us at each point, how much to vary the weights and biases so as to decrease more steeply the loss.
+
+
+:::
+
+
+## Seven optimisation takeaways!
+
+<div style="font-size: 1em; margin-left: 10px; margin-right: 50px; line-height: 1.5;">
+
+1. The loss function as a **high-dimensional "surface"**.
+
+2. The **gradient** is a vector that at any point in the loss "surface" gives us the direction of steepest ascent.
+
+3. The **negative gradient** gives us the direction of steepest descent.
+
+4. **Gradient descent** is an optimisation procedure that iteratively adjusts the parameters based on the gradient. 
+
+::: {.fragment .fade-in}
+Until when?....
+:::
+
+</div>
+
+
+::: {.notes}
+We now have a good intuition on how the optimisation problem is solved, and how we adjust the weights and biases in the network to minimise our loss. Let’s consolidate what we’ve seen a bit more formally, in the form of 6 Main Optimisation Takeaways
+
+
+1. Loss function as a **high-dimensional "surface"**, where each point in the surface corresponds to a set of weights and biases.
+
+2. The **gradient**, a vector that at any point in the loss "surface" gives us the direction of steepest ascent (i.e. the direction in which the loss increases most).
+
+3. The **negative gradient** gives us the direction of steepest descent (i.e. the direction in which the loss decreases most).
+
+
+4. We optimise (i.e. find the parameters that make the loss function minimal) the loss function iteratively, starting off with a random set of parameters and adjusting them until the loss is below a certain threshold.
+
+:::
+
+
+## Seven optimisation takeaways!
+
+<div style="width: 65%; margin: 0 auto; text-align: right;">
+![](../img/training/babysitting.png){width=100%}
+
+<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+Figure from <a href="https://cs231n.github.io/neural-networks-3/#update" target="_blank">
+CS231n lecture notes</a>
+</div>
+</div>
+
+
+::: {.notes}
+
+In practice, you would monitor the loss function or your accuracy on both the training and the validation set during training, and stop when the validation error stops improving.
+
+
+> The gap between the training and validation accuracy indicates the amount of overfitting. Two possible cases are shown in the diagram on the left. The blue validation error curve shows very small validation accuracy compared to the training accuracy, indicating strong overfitting (note, it's possible for the validation accuracy to even start to go down after some point). When you see this in practice you probably want to increase regularization (stronger L2 weight penalty, more dropout, etc.) or collect more data. 
+
+:::
+
+
+
+## Seven optimisation takeaways!
+
+<div style="font-size: 1em; margin-left: 10px; margin-right: 50px; line-height: 1.5;">
+5. To **update the parameters** we take a small step in the direction of the negative gradient.
+$$
+W_{new} = W_{old} - \alpha \nabla \text{L}_W
+$$
+
+7. **Stochastic gradient descent** is a more efficient variant of gradient descent which computes the gradient on **batches** of training samples.
+
+7. An **epoch** is a single pass through the complete training set. A training process will consist of multiple epochs.
+
+</div>
+
+
+::: {.notes}
+
+5. The simplest form of parameter update is to take a small step in the direction of the negative gradient.
+$$
+W_{new} = W_{old} - \alpha \nabla \text{L}_W
+$$
+where $\alpha$ is the learning rate. This is actually never used in practice, but it's the main idea behind all methods for parameter updates.
+
+
+7. In gradient descent, a parameter update takes place when we compute the full loss (i.e. across the entire training set). However due to vectorisation, it is much more efficient to do **stochastic gradient descent**. In this case, we update the parameters more frequently, and compute the gradient on a small subset of the training set, called a **batch**.
+
+"True" stochastic gradient descent is when we compute the gradient and perform an update on every single sample. But a batch of samples has better convergence properties.
+> A compromise between computing the true gradient and the gradient at a single sample is to compute the gradient against more than one training sample (called a "mini-batch") at each step. This can perform significantly better than "true" stochastic gradient descent described, because the code can make use of vectorization libraries rather than computing each step separately as was first shown in [6] where it was called "the bunch-mode back-propagation algorithm". It may also result in smoother convergence, as the gradient computed at each step is averaged over more training samples. [From https://en.wikipedia.org/wiki/Stochastic_gradient_descent]
+
+> This [single-example parameter updates] is relatively less common to see because in practice due to vectorized code optimizations it can be computationally much more efficient to evaluate the gradient for 100 examples, than the gradient for one example 100 times. [From https://cs231n.github.io/optimization-1/ ]
+
+
+
+> The size of the mini-batch is a hyperparameter but it is not very common to cross-validate it. It is usually based on memory constraints (if any), or set to some value, e.g. 32, 64 or 128. We use powers of 2 in practice because many vectorized operation implementations work faster when their inputs are sized in powers of 2. [From https://cs231n.github.io/optimization-1/ ]
+
+
+
+
+> There are other ways of performing the optimization (e.g. LBFGS), but Gradient Descent is currently by far the most common and established way of optimizing Neural Network loss function. [From https://cs231n.github.io/optimization-1/ ]
+
+:::
+
+
+## A reminder
+
+- In training: forward and backward pass
+
+- In testing and inference: only forward pass
+
+
+
+
+
+
+
+## Additional references
+::: {.nonincremental style="font-size: 0.6em;"}
+- On validation set and hyperparameter tuning
+  - [CS231n: Classification](https://cs231n.github.io/classification/#validation-sets-for-hyperparameter-tuning)
+- On cross-entropy loss and other information theory concepts
+  - Deep learning book chapter 3
+  [http://www.deeplearningbook.org/contents/prob.html](http://www.deeplearningbook.org/contents/prob.html)
+- On weight initialisation
+  - [https://cs231n.github.io/neural-networks-2/](https://cs231n.github.io/neural-networks-2/) 
+- On methods for gradient update
+  - [https://cs231n.github.io/neural‐networks‐3/#update](https://cs231n.github.io/neural-networks-3/#update) 
+- On babysitting the training process
+  - [https://cs231n.github.io/neural-networks-3/#baby](https://cs231n.github.io/neural-networks-3/#baby) 
+- On optimisation
+  - [https://cs231n.github.io/optimization-1/](https://cs231n.github.io/optimization-1/) 
+- On precisely how the gradient is computed
+    - [Backpropagation, intuitively | Deep Learning Chapter 3](https://youtu.be/Ilg3gGewQ5U?si=3gMshup9ctIzRc2_)
+    - [Backpropagation calculus | Deep Learning Chapter 4](https://youtu.be/tIeHLnjs5U8?si=E6emafp6dsAXutW5)
+- Neural networks and an interesting insight into stochastic gradient descent
+    - [Machine Learning for Intelligent Systems CS4780 (Cornell University)](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/)
+    - see lectures 20 and 21
+:::
