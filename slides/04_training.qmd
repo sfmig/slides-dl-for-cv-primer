@@ -724,12 +724,14 @@ We now have a good intuition on how the optimisation problem is solved, and how 
 
 ## Seven optimisation takeaways!
 
-<div style="width: 65%; margin: 0 auto; text-align: right;">
-![](img/training/babysitting.png){width=100%}
+<br>
+
+<div style="width: 75%; margin: 0 auto; text-align: right;">
+![](img/training/loss.png){width=100%}
 
 <div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
-Figure from <a href="https://cs231n.github.io/neural-networks-3/#update" target="_blank">
-CS231n lecture notes</a>
+Figure from <a href="https://www.kaggle.com/code/ryanholbrook/overfitting-and-underfitting" target="_blank">
+Kaggle tutorial: Overfitting and Underfitting</a>
 </div>
 </div>
 
