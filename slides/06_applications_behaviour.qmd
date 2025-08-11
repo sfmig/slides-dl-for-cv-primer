@@ -36,23 +36,23 @@ What are _tasks_?
 - Segmentation
 :::
 
-:::{.fragment .fade-in data-fragment-index="5"}
+:::{.fragment .fade-in data-fragment-index="4"}
 - Pose estimation
 :::
 
-:::{.fragment .fade-in data-fragment-index="6"}
+:::{.fragment .fade-in data-fragment-index="5"}
 - Tracking
 :::
 
-:::{.fragment .fade-in data-fragment-index="7"}
+:::{.fragment .fade-in data-fragment-index="6"}
 - Behaviour classification
 :::
 
-:::{.fragment .fade-in data-fragment-index="8"}
+:::{.fragment .fade-in data-fragment-index="7"}
 - Re-identification
 :::
 
-:::{.fragment .fade-in data-fragment-index="9"}
+:::{.fragment .fade-in data-fragment-index="8"}
 - ...
 :::
 
@@ -93,7 +93,7 @@ and there from the Orinoquía Camera Traps dataset (University of Minnesota).</a
 :::
 :::
 
-:::{.fragment .fade-in data-fragment-index="3"}
+<!-- :::{.fragment .fade-in data-fragment-index="3"}
 :::{.fragment .fade-out data-fragment-index="4"}
 <div style="text-align: right; width: 100%;">
 _Where is the animal in this image?_
@@ -104,12 +104,12 @@ Crabs exploration project</a>
 </div>
 </div>
 :::
-:::
+::: -->
 
 
 <!-- -- Instance segmentation example -->
-:::{.fragment .fade-in data-fragment-index="4"}
-:::{.fragment .fade-out data-fragment-index="5"}
+:::{.fragment .fade-in data-fragment-index="3"}
+:::{.fragment .fade-out data-fragment-index="4"}
 <div style="text-align: right; width: 100%;">
 _Which pixels are <span style="color: magenta;">"mouse"</span>?_
 ![](img/behaviour/semantic-segmentation.png){width=100%;"}
@@ -123,8 +123,8 @@ Aeon project</a>
 
 
 <!-- -- Semantic segmentation example -->
-:::{.fragment .fade-in data-fragment-index="5"}
-:::{.fragment .fade-out data-fragment-index="6"}
+:::{.fragment .fade-in data-fragment-index="4"}
+:::{.fragment .fade-out data-fragment-index="5"}
 <div style="text-align: right; width: 100%;">
 _Which pixels are <span style="color: blue;">"mouse 1"</span>?_
 ![](img/behaviour/instance-segmentation.png){width=100%;"}
@@ -138,8 +138,8 @@ Aeon project</a>
 
 
 <!-- -- Pose estimation example -->
-:::{.fragment .fade-in data-fragment-index="6"}
-:::{.fragment .fade-out data-fragment-index="7"}
+:::{.fragment .fade-in data-fragment-index="5"}
+:::{.fragment .fade-out data-fragment-index="6"}
 <div style="text-align: right; width: 100%;">
 _Where are the keypoints?_
 ![](img/behaviour/superanimal-fox.png){width=100%;"}
@@ -152,8 +152,8 @@ Ye et al. (2024) _SuperAnimal pretrained pose estimation models for behavioral a
 :::
 
 <!-- -- Tracking example -->
-:::{.fragment .fade-in data-fragment-index="7"}
-:::{.fragment .fade-out data-fragment-index="8"}
+:::{.fragment .fade-in data-fragment-index="6"}
+:::{.fragment .fade-out data-fragment-index="7"}
 <div style="text-align: right; width: 100%;">
 _How do detections in frame f map to frame f+1?_
 ![](img/behaviour/tracking-bees-sleap.png){width=100%;"}
@@ -167,8 +167,8 @@ Pereira et al. (2022) _SLEAP: A deep learning system for multi-animal pose track
 
 <!-- -- Behaviour classification example -->
 
-:::{.fragment .fade-in data-fragment-index="8"}
-:::{.fragment .fade-out data-fragment-index="9"}
+:::{.fragment .fade-in data-fragment-index="7"}
+:::{.fragment .fade-out data-fragment-index="8"}
 <div style="text-align: right; width: 100%;">
 _What is the behaviour of the animal in this frame/clip?_
 ![](img/behaviour/syllables_small.png){width=100%;"}
@@ -183,8 +183,8 @@ https://dattalab.github.io/moseq2-website/</a>
 
 <!-- -- Re-identification example -->
 
-:::{.fragment .fade-in data-fragment-index="9"}
-:::{.fragment .fade-out data-fragment-index="10"}
+:::{.fragment .fade-in data-fragment-index="8"}
+:::{.fragment .fade-out data-fragment-index="9"}
 <div style="text-align: right; width: 100%;">
 _Which individual is the animal in this frame?_
 ![](img/behaviour/happy-whale.jpg){width=100%;"}
