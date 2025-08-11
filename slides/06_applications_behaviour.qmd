@@ -36,23 +36,23 @@ What are _tasks_?
 - Segmentation
 :::
 
-:::{.fragment .fade-in data-fragment-index="4"}
+:::{.fragment .fade-in data-fragment-index="5"}
 - Pose estimation
 :::
 
-:::{.fragment .fade-in data-fragment-index="5"}
+:::{.fragment .fade-in data-fragment-index="6"}
 - Tracking
 :::
 
-:::{.fragment .fade-in data-fragment-index="6"}
+:::{.fragment .fade-in data-fragment-index="7"}
 - Behaviour classification
 :::
 
-:::{.fragment .fade-in data-fragment-index="7"}
+:::{.fragment .fade-in data-fragment-index="8"}
 - Re-identification
 :::
 
-:::{.fragment .fade-in data-fragment-index="8"}
+:::{.fragment .fade-in data-fragment-index="9"}
 - ...
 :::
 
