@@ -270,7 +270,7 @@
     "href": "index.html#seven-optimisation-takeaways-1",
     "title": "Deep learning for computer vision",
     "section": "Seven optimisation takeaways!",
-    "text": "Seven optimisation takeaways!\n\n\n\nFigure from  CS231n lecture notes\n\n\n\nIn practice, you would monitor the loss function or your accuracy on both the training and the validation set during training, and stop when the validation error stops improving.\n\nThe gap between the training and validation accuracy indicates the amount of overfitting. Two possible cases are shown in the diagram on the left. The blue validation error curve shows very small validation accuracy compared to the training accuracy, indicating strong overfitting (note, it’s possible for the validation accuracy to even start to go down after some point). When you see this in practice you probably want to increase regularization (stronger L2 weight penalty, more dropout, etc.) or collect more data."
+    "text": "Seven optimisation takeaways!\n\n\n\n\nFigure from  Kaggle tutorial: Overfitting and Underfitting\n\n\n\nIn practice, you would monitor the loss function or your accuracy on both the training and the validation set during training, and stop when the validation error stops improving.\n\nThe gap between the training and validation accuracy indicates the amount of overfitting. Two possible cases are shown in the diagram on the left. The blue validation error curve shows very small validation accuracy compared to the training accuracy, indicating strong overfitting (note, it’s possible for the validation accuracy to even start to go down after some point). When you see this in practice you probably want to increase regularization (stronger L2 weight penalty, more dropout, etc.) or collect more data."
   },
   {
     "objectID": "index.html#seven-optimisation-takeaways-2",
@@ -354,7 +354,7 @@
     "href": "index.html#an-example-cnn-architecture-resnet-18",
     "title": "Deep learning for computer vision",
     "section": "An example CNN architecture: ResNet-18",
-    "text": "An example CNN architecture: ResNet-18\n\n\n\nFigure from  LearnOpenCV"
+    "text": "An example CNN architecture: ResNet-18\n\nFigure from  LearnOpenCV"
   },
   {
     "objectID": "index.html#transfer-learning",

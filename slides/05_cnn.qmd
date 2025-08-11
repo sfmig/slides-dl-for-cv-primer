@@ -317,13 +317,16 @@ POOL layer will perform a downsampling operation along the spatial dimensions (w
 
 ## An example CNN architecture: ResNet-18
 
-<div style="text-align: center; width: 100%; margin-top: -25%;">
-![](img/cnn/resnet-18.png){width=100%, style="transform: rotate(-90deg);"}
-<div style="font-size: 0.3em; color: var(--link-color); margin-top: -17px;">
+<div style="text-align: right; font-size: 0.3em; color: var(--link-color); margin-top: 0px;">
 Figure from <a href="https://learnopencv.com/fully-convolutional-image-classification-on-arbitrary-sized-image/" target="_blank">
 LearnOpenCV</a>
 </div>
+
+<div style="text-align: center; width: 100%; margin-top: -35%;">
+![](img/cnn/resnet-18.png){width=100%, style="transform: rotate(-90deg);"}
 </div>
+
+
 
 
 ## Transfer learning
